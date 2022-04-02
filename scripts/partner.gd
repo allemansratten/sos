@@ -6,6 +6,7 @@ const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 # frame every 3/4 a second
 const SPEED_TIMESTEP = 0.75
 const STEP_SIZE = 64
+onready var tween = get_node("StepTween")
 
 var speed = STEP_SIZE
 var dir_x = 0
@@ -16,6 +17,7 @@ var is_being_hit = false
 var colors = []
 var goal
 var patience = 2.0
+var step_delay = 0
 
 var delta_acc = 0
 var next_step_x = 0
@@ -24,7 +26,7 @@ var old_step_x = 0
 var old_step_y = 0
 
 
-func init(x, y, d_x=0, d_y=0):
+func init(x, y, d_x=0, d_y=0, delay=0):
 	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %d" % [x, y, d_x, d_y, speed])
 	position.x = x
 	old_step_x = x
@@ -35,7 +37,8 @@ func init(x, y, d_x=0, d_y=0):
 	next_step_y = y
 
 	dir_x = d_x
-	dir_y = d_y
+	dir_y = d_y	
+	step_delay = delay
 
 
 func random_color_choice(n_colors=2):
@@ -75,12 +78,9 @@ func _ready():
 
 func _process(delta):
 	delta_acc += delta
-	if delta_acc >= SPEED_TIMESTEP:
-		delta_acc -= SPEED_TIMESTEP
+	if delta_acc >= SPEED_TIMESTEP + step_delay:
+		delta_acc -= SPEED_TIMESTEP + step_delay
 		_process_timestep()
-
-	position.x = interpolate(old_step_x, next_step_x, delta_acc)
-	position.y = interpolate(old_step_y, next_step_y, delta_acc)
 
 	# process patience
 	patience -= delta
@@ -91,16 +91,15 @@ func _process(delta):
 		pass
 
 
-func interpolate(old_pos, new_pos, delta):
-	var normalised_delta = delta / SPEED_TIMESTEP
-	return old_pos + (new_pos - old_pos) * normalised_delta
-
-
 func _process_timestep():
-	old_step_x = next_step_x
-	old_step_y = next_step_y
 	next_step_x = next_step_x + dir_x * speed
 	next_step_y = next_step_y + dir_y * speed
+	tween.interpolate_property(self, "position",
+		Vector2(old_step_x, old_step_y), Vector2(next_step_x, next_step_y), SPEED_TIMESTEP,
+		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
+	tween.start()
+	old_step_x = next_step_x
+	old_step_y = next_step_y
 
 
 func check_color_intersect(other_colors):

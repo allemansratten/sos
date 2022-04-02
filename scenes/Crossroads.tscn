@@ -4,9 +4,9 @@
 [ext_resource path="res://scenes/Crossroads.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 32 )
+extents = Vector2( 16, 16 )
 
-[node name="Crossroads" type="Area2D"]
+[node name="Crossroads" type="Area2D" groups=["crossroads"]]
 position = Vector2( 32, 32 )
 script = ExtResource( 2 )
 

@@ -36,3 +36,7 @@ script = ExtResource( 2 )
 [node name="PartnerDriver" type="Node2D" parent="."]
 script = ExtResource( 3 )
 partner_scene = ExtResource( 5 )
+
+[node name="MapCamera" type="Camera2D" parent="."]
+position = Vector2( -32, -32 )
+anchor_mode = 0

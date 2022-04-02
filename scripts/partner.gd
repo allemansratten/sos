@@ -37,7 +37,7 @@ func init(x, y, dir: Vector2, delay=0):
 	partner_type = PartnerType.new()
 	partner_type.init(self, "random")
 
-	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f, type: %s" % [x, y, dir[0], dir[1], speed, partner_type.name])
+	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f, crossroad_type: %s" % [x, y, dir[0], dir[1], speed, partner_type.crossroad_strategy.get_name()])
 
 	position.x = x
 	old_step_x = x

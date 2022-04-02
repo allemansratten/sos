@@ -7,7 +7,6 @@ const cross_strategies = {
 }
 
 var partner
-var name: String
 var crossroad_strategy
 
 static func get_random(dict):
@@ -22,7 +21,6 @@ func init(p, crossroad_strat: String="vanilla"):
 	else:
 		assert(crossroad_strat in cross_strategies, "Unknown crossroad strategy %s" % [crossroad_strat])
 		crossroad_strategy = cross_strategies[crossroad_strat].new()
-	name = crossroad_strategy.get_name()
 
 
 func collide_with_crossroads(crossroads):

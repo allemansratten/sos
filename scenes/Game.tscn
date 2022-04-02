@@ -37,18 +37,50 @@ anchor_mode = 0
 [node name="AllCrossroads" type="Node" parent="."]
 
 [node name="Crossroads" parent="AllCrossroads" instance=ExtResource( 1 )]
-position = Vector2( 320, 128 )
+position = Vector2( 256, 576 )
 
 [node name="Crossroads2" parent="AllCrossroads" instance=ExtResource( 1 )]
-position = Vector2( 640, 128 )
+position = Vector2( 768, 320 )
 
 [node name="Crossroads3" parent="AllCrossroads" instance=ExtResource( 1 )]
-position = Vector2( 512, 384 )
+position = Vector2( 512, 320 )
 
 [node name="FixedCrossroads" parent="AllCrossroads" instance=ExtResource( 7 )]
-position = Vector2( 320, 384 )
+position = Vector2( 256, 320 )
 directions_mask = [ false, true, true, false ]
 
 [node name="FixedCrossroads2" parent="AllCrossroads" instance=ExtResource( 7 )]
-position = Vector2( 0, 384 )
+position = Vector2( 0, 128 )
+directions_mask = [ true, true, true, false ]
+
+[node name="FixedCrossroads3" parent="AllCrossroads" instance=ExtResource( 7 )]
+position = Vector2( 0, 0 )
 directions_mask = [ false, true, true, false ]
+
+[node name="FixedCrossroads4" parent="AllCrossroads" instance=ExtResource( 7 )]
+position = Vector2( 0, 576 )
+directions_mask = [ true, true, false, false ]
+
+[node name="FixedCrossroads5" parent="AllCrossroads" instance=ExtResource( 7 )]
+position = Vector2( 512, 128 )
+directions_mask = [ false, false, true, true ]
+
+[node name="FixedCrossroads6" parent="AllCrossroads" instance=ExtResource( 7 )]
+position = Vector2( 768, 0 )
+directions_mask = [ false, true, true, true ]
+
+[node name="FixedCrossroads7" parent="AllCrossroads" instance=ExtResource( 7 )]
+position = Vector2( 960, 0 )
+directions_mask = [ false, false, true, true ]
+
+[node name="FixedCrossroads8" parent="AllCrossroads" instance=ExtResource( 7 )]
+position = Vector2( 960, 320 )
+directions_mask = [ true, false, true, true ]
+
+[node name="FixedCrossroads9" parent="AllCrossroads" instance=ExtResource( 7 )]
+position = Vector2( 960, 576 )
+directions_mask = [ true, false, false, true ]
+
+[node name="FixedCrossroads10" parent="AllCrossroads" instance=ExtResource( 7 )]
+position = Vector2( 704, 576 )
+directions_mask = [ true, true, false, true ]

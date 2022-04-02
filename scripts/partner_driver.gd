@@ -23,7 +23,7 @@ func spawn_partner():
 		partner.position.y = 64*4
 	elif partner_i == 2:
 		partner.dir_y = -1
-		partner.position.x = 64*5
+		partner.position.x = 64*4
 		partner.position.y = 64*8
 	else:
 		partner.position.y = 64*(1+randi()%4)

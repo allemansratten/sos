@@ -1,3 +1,4 @@
+tool # spusti kod i v editoru
 extends Area2D
 
 export(PackedScene) var arrow_scene
@@ -29,6 +30,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
+#	pozor: pousti se i v editoru kvuli `tool`
 #	pass
 
 func get_output_direction(in_direction):

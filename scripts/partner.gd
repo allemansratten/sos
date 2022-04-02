@@ -12,7 +12,7 @@ const GOAL_RESCHEDULE = 10
 const PATIENCE_RESCHEDULE = 60
 onready var step_tween = get_node("StepTween")
 onready var satisfied_tween = get_node("SatisfiedTween")
-onready var goal_label = get_node("GoalLabel")
+onready var goal_label = get_node("Tooltip/GoalLabel")
 
 var speed = SPEED_TIMESTEP
 var direction = Vector2(0, 0)
@@ -42,7 +42,6 @@ func init(x, y, dir: Vector2, delay=0):
 	position.x = x
 	old_step_x = x
 	next_step_x = x
-
 	position.y = y
 	old_step_y = y
 	next_step_y = y
@@ -65,6 +64,7 @@ func random_goal_choice():
 	goal = ALL_GOALS[randi() % ALL_GOALS.size()]
 	goal_label.text = goal
 	patience = PATIENCE_RESCHEDULE
+	
 
 func schedule_random_goal_choice():
 	satisfied_tween.interpolate_property(self, "rotation_degrees",
@@ -74,6 +74,7 @@ func schedule_random_goal_choice():
 	
 	delta_goal_acc = GOAL_RESCHEDULE
 	goal = "..."
+	goal_label.text = goal
 	patience = PATIENCE_RESCHEDULE
 
 func die(reason):
@@ -109,10 +110,8 @@ func _process(delta):
 		die("patience")
 
 	# process goal rescheduling
-	if goal == "...":
-		goal_label.text = goal
-	else:
-		goal_label.text = goal + " (" + str(int(patience)) + "s)"
+	if goal != "...":
+		goal_label.text = "%s (%ds)" % [goal, patience]
 	delta_goal_acc -= delta
 	if (goal == "...") and (delta_goal_acc <= 0):
 		random_goal_choice()
@@ -136,20 +135,24 @@ func check_color_intersect(other_colors):
 	return false
 
 
+func collide_with_partner(partner):
+	# Colliding with another partner
+	if is_being_hit:
+		return
+	# establish dominance
+	partner.is_being_hit = true
+
+	if check_color_intersect(partner.colors):
+		die("encounter")
+		partner.die("encounter")
+
+	# return dominance
+	partner.is_being_hit = true
+
+
 func area_entered(other):
 	if other.is_in_group("partners"):
-		# Colliding with another partner
-		if is_being_hit:
-			return
-		# establish dominance
-		other.is_being_hit = true
-
-		if check_color_intersect(other.colors):
-			die("encounter")
-			other.die("encounter")
-
-		# return dominance
-		other.is_being_hit = true
+		collide_with_partner(other)
 	elif other.is_in_group("crossroads"):
 		partner_type.collide_with_crossroads(other)
 	elif other.is_in_group("places"):

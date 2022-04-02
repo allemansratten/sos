@@ -1,38 +1,29 @@
 class_name PartnerType
 
+const CrossroadStrategies = preload("res://scripts/crossroad_strategies.gd")
+const cross_strategies = {
+	"vanilla": CrossroadStrategies.VanillaCrossroadStrategy,
+	"unreliable": CrossroadStrategies.UnreliableCrossroadStrategy
+}
 
-static func random_partner_type():
-	randomize()  # for some reason necessary even if it's in GameScene as well
+var partner
+var name: String
+var crossroad_strategy
 
-	var types = [VanillaPartnerType, UnreliablePartnerType]
-	var instance = types[randi() % 2].new()
-
-	return instance
-
-
-class VanillaPartnerType:
-	
-	var partner
-	var name
-	
-	func init(p):
-		partner = p
-		name = "vanilla"
-	
-	func collide_with_crossroads(crossroads):
-		partner.direction = crossroads.get_output_direction(partner.direction)
-		pass
+static func get_random(dict):
+	var keys = dict.keys()
+	return dict[keys[randi() % keys.size()]]
 
 
-class UnreliablePartnerType extends VanillaPartnerType:
+func init(p, crossroad_strat: String="vanilla"):
+	partner = p
+	if crossroad_strat == "random":
+		crossroad_strategy = get_random(cross_strategies).new()
+	else:
+		assert(crossroad_strat in cross_strategies, "Unknown crossroad strategy %s" % [crossroad_strat])
+		crossroad_strategy = cross_strategies[crossroad_strat].new()
+	name = crossroad_strategy.get_name()
 
-	func init(p):
-		.init(p)
-		name = "unreliable"
-	
-	func collide_with_crossroads(crossroads):
-		# Pretends they're coming from a random direction
-		var dirs = [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]
-		var dir = dirs[randi() % 4]
 
-		partner.direction = crossroads.get_output_direction(dir)
+func collide_with_crossroads(crossroads):
+	partner.direction = crossroad_strategy.collide(crossroads, partner.direction)

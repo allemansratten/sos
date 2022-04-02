@@ -34,8 +34,8 @@ var old_step_y = 0
 var partner_type
 
 func init(x, y, dir: Vector2, delay=0):
-	partner_type = PartnerType.random_partner_type()
-	partner_type.init(self)
+	partner_type = PartnerType.new()
+	partner_type.init(self, "random")
 
 	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f, type: %s" % [x, y, dir[0], dir[1], speed, partner_type.name])
 

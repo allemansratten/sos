@@ -18,29 +18,15 @@ script = ExtResource( 5 )
 [node name="Map" parent="." instance=ExtResource( 4 )]
 position = Vector2( -32, -32 )
 
-[node name="PartnerDriver" type="Node2D" parent="."]
-script = ExtResource( 3 )
-partner_scene = ExtResource( 6 )
-
-[node name="NextPartnerLabel" type="Label" parent="."]
-margin_left = 24.0
-margin_top = 32.0
-margin_right = 64.0
-margin_bottom = 46.0
-custom_fonts/font = SubResource( 1 )
-text = "Next partner:"
-
-[node name="MapCamera" type="Camera2D" parent="."]
-offset = Vector2( -32, -32 )
-anchor_mode = 0
-
 [node name="AllCrossroads" type="Node" parent="."]
 
 [node name="Crossroads" parent="AllCrossroads" instance=ExtResource( 1 )]
 position = Vector2( 256, 576 )
+directions_mask = [ true, true, false, true ]
 
 [node name="Crossroads2" parent="AllCrossroads" instance=ExtResource( 1 )]
 position = Vector2( 768, 320 )
+directions_mask = [ true, true, false, true ]
 
 [node name="Crossroads3" parent="AllCrossroads" instance=ExtResource( 1 )]
 position = Vector2( 512, 320 )
@@ -84,3 +70,19 @@ directions_mask = [ true, false, false, true ]
 [node name="FixedCrossroads10" parent="AllCrossroads" instance=ExtResource( 7 )]
 position = Vector2( 704, 576 )
 directions_mask = [ true, true, false, true ]
+
+[node name="PartnerDriver" type="Node2D" parent="."]
+script = ExtResource( 3 )
+partner_scene = ExtResource( 6 )
+
+[node name="NextPartnerLabel" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 32.0
+margin_right = 64.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 1 )
+text = "Next partner:"
+
+[node name="MapCamera" type="Camera2D" parent="."]
+offset = Vector2( -32, -32 )
+anchor_mode = 0

@@ -1,24 +1,25 @@
 extends Node2D
 
-const ALL_COLORS = ["red", "green", "blue", "pink", "yellow", "blankytněmodrájakobarvavýchodobrněnskéhopotokaránopolehounkémdešti"]
+const ALL_COLORS = ["red", "green", "blue", "pink", "yellow"]
 const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 
-# frame every half a second
-const SPEED_TIMESTEP = 0.5
-var speed = 20
+# frame every 3/4 a second
+const SPEED_TIMESTEP = 0.75
+var speed = 96
+var dir_x = 0
+var dir_y = 0
 
 var colors = []
 var goal
 var patience = 2.0
 
-
 func random_color_choice(n_colors=2):
-	var colors_tmp = ALL_COLORS
+	# force duplicate
+	var colors_tmp = ALL_COLORS + []
 	# clear up previous colors
 	colors = []
 	for i in range(n_colors):
 		var color_i = randi() % colors_tmp.size()
-		print(color_i)
 		colors.append(colors_tmp.pop_at(color_i))
 
 func random_goal_choice():
@@ -26,10 +27,9 @@ func random_goal_choice():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	random_color_choice(2)
+	random_color_choice(4)
 	random_goal_choice()
 	prints(colors, goal)
-	
 	
 var delta_acc = 0
 
@@ -45,7 +45,29 @@ func _process(delta):
 		# TODO: this will break when the parent is not the node with game_over function
 		get_parent().game_over("patience")
 	else:
-		print(patience)
+		pass
 		
 func _process_timestep():
-	position.x += speed
+	position.x += dir_x * speed
+	position.y += dir_y * speed
+
+func check_color_intersect(other_colors):
+	for c in colors:
+		if c in other_colors:
+			print(c)
+			return true
+	return false
+
+var is_being_hit = false
+func area_entered(other):
+	if is_being_hit:
+		return
+	# establish dominance
+	other.is_being_hit = true
+	
+	if check_color_intersect(other.colors):
+		print("COLOR HIT oh no")
+		get_parent().game_over("color hit")
+	
+	# return dominance
+	other.is_being_hit = true

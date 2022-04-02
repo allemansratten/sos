@@ -81,5 +81,9 @@ script = ExtResource( 8 )
 
 [node name="HUD" parent="." instance=ExtResource( 9 )]
 
-[node name="Place" parent="." instance=ExtResource( 2 )]
+[node name="AllPlaces" type="Node2D" parent="."]
 position = Vector2( 0, 448 )
+
+[node name="LibraryPlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 0, 0 )
+place = "library"

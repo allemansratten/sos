@@ -8,6 +8,7 @@ extents = Vector2( 32, 32 )
 
 [node name="Partner" type="Area2D" groups=["partners"]]
 position = Vector2( 32, 32 )
+z_index = 10
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -20,5 +21,12 @@ scale = Vector2( 0.25, 0.25 )
 shape = SubResource( 1 )
 
 [node name="StepTween" type="Tween" parent="."]
+
+[node name="GoalLabel" type="Label" parent="."]
+margin_left = -28.0
+margin_top = 13.0
+margin_right = 29.0
+margin_bottom = 27.0
+text = "knihovna"
 
 [connection signal="area_entered" from="." to="." method="area_entered"]

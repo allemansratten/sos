@@ -18,11 +18,11 @@ func spawn_partner():
 	var partner = partner_scene.instance()
 	partner_i += 1
 	if partner_i == 1:
-		partner.init(64*1, 64*4, -1, 0)
+		partner.init(64*1, 64*4, 1, 0)
 	elif partner_i == 2:
-		partner.init(64*5, 64*8, 0, 1)
+		partner.init(64*4, 64*7, 0, 1)
 	else:
-		partner.init(64*1, 64*(1+randi()%4), -1, 0)
+		partner.init(64*1, 64*(1+randi()%4), 1, 0)
 	add_child(partner)
 
 

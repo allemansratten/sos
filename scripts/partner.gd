@@ -25,7 +25,7 @@ var old_step_y = 0
 
 
 func init(x, y, d_x=0, d_y=0):
-	print_debug("Spawning partner at [%d, %d], dir [%d, %d]" % [x, y, d_x, d_y])
+	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %d" % [x, y, d_x, d_y, speed])
 	position.x = x
 	old_step_x = x
 	next_step_x = x
@@ -93,16 +93,16 @@ func _process(delta):
 
 func interpolate(old_pos, new_pos, delta):
 	var normalised_delta = delta / SPEED_TIMESTEP
-	return old_pos + (old_pos - new_pos) * normalised_delta
+	return old_pos + (new_pos - old_pos) * normalised_delta
 
 
 func _process_timestep():
 #	position.x += dir_x * speed
 #	position.y += dir_y * speed
-	old_step_x = position.x
-	old_step_y = position.y
-	next_step_x = position.x + dir_x * speed
-	next_step_y = position.y + dir_y * speed
+	old_step_x = next_step_x
+	old_step_y = next_step_y
+	next_step_x = next_step_x + dir_x * speed
+	next_step_y = next_step_y + dir_y * speed
 
 
 func check_color_intersect(other_colors):
@@ -131,6 +131,7 @@ func area_entered(other):
 	elif other.is_in_group("crossroads"):
 		collide_with_crossroads(other)
 
+
 func get_direction():
 	if dir_y == -1:
 		return 0
@@ -143,9 +144,11 @@ func get_direction():
 
 	assert(false)
 
+
 func set_direction(direction):
 	dir_x = [0, 1, 0, -1][direction]
 	dir_y = [-1, 0, 1, 0][direction]
+
 
 func collide_with_crossroads(crossroads):
 	var in_direction = get_direction()

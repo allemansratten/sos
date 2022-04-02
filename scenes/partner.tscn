@@ -4,9 +4,9 @@
 [ext_resource path="res://resources/donkey.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 64, 64 )
+extents = Vector2( 32, 32 )
 
-[node name="Partner" type="Area2D"]
+[node name="Partner" type="Area2D" groups=["partners"]]
 position = Vector2( 32, 32 )
 script = ExtResource( 1 )
 

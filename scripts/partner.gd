@@ -72,16 +72,25 @@ func check_color_intersect(other_colors):
 
 var is_being_hit = false
 func area_entered(other):
-	if is_being_hit:
-		return
-	# establish dominance
-	other.is_being_hit = true
-	
-	if check_color_intersect(other.colors):
-		print("COLOR HIT oh no")
-		die()
-		other.die()
-		get_parent().game_over("color hit")
-	
-	# return dominance
-	other.is_being_hit = true
+	if other.is_in_group("partners"):
+		# Colliding with another partner
+		if is_being_hit:
+			return
+		# establish dominance
+		other.is_being_hit = true
+		
+		if check_color_intersect(other.colors):
+#			print("COLOR HIT oh no")
+			die()
+			other.die()
+			get_parent().game_over("color hit")
+		
+		# return dominance
+		other.is_being_hit = true
+	elif other.is_in_group("crossroads"):
+		set_direction(other.direction)
+		
+
+func set_direction(direction):
+	dir_x = [0, 1, 0, -1][direction]
+	dir_y = [-1, 0, 1, 0][direction]

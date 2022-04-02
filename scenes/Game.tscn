@@ -95,3 +95,4 @@ script = ExtResource( 8 )
 
 [node name="Place" parent="AllPlaces" instance=ExtResource( 9 )]
 position = Vector2( 256, 128 )
+place = "library"

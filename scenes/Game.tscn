@@ -31,10 +31,10 @@ Vector2( 1, 0 ): true
 position = Vector2( 768, 320 )
 
 [node name="Crossroads3" parent="AllCrossroads" instance=ExtResource( 1 )]
-position = Vector2( 512, 320 )
+position = Vector2( 576, 464 )
 
 [node name="FixedCrossroads" parent="AllCrossroads" instance=ExtResource( 7 )]
-position = Vector2( 256, 320 )
+position = Vector2( 320, 256 )
 directions_mask = {
 Vector2( -1, 0 ): false,
 Vector2( 0, -1 ): false,
@@ -43,7 +43,7 @@ Vector2( 1, 0 ): true
 }
 
 [node name="FixedCrossroads2" parent="AllCrossroads" instance=ExtResource( 7 )]
-position = Vector2( 0, 128 )
+position = Vector2( 0, 256 )
 directions_mask = {
 Vector2( -1, 0 ): false,
 Vector2( 0, -1 ): true,
@@ -79,7 +79,7 @@ Vector2( 1, 0 ): false
 }
 
 [node name="FixedCrossroads6" parent="AllCrossroads" instance=ExtResource( 7 )]
-position = Vector2( 768, 0 )
+position = Vector2( 640, 0 )
 directions_mask = {
 Vector2( -1, 0 ): true,
 Vector2( 0, -1 ): false,
@@ -97,7 +97,7 @@ Vector2( 1, 0 ): false
 }
 
 [node name="FixedCrossroads8" parent="AllCrossroads" instance=ExtResource( 7 )]
-position = Vector2( 960, 320 )
+position = Vector2( 960, 384 )
 directions_mask = {
 Vector2( -1, 0 ): false,
 Vector2( 0, -1 ): true,
@@ -106,7 +106,7 @@ Vector2( 1, 0 ): false
 }
 
 [node name="FixedCrossroads9" parent="AllCrossroads" instance=ExtResource( 7 )]
-position = Vector2( 960, 576 )
+position = Vector2( 960, 192 )
 directions_mask = {
 Vector2( -1, 0 ): true,
 Vector2( 0, -1 ): true,
@@ -115,7 +115,7 @@ Vector2( 1, 0 ): false
 }
 
 [node name="FixedCrossroads10" parent="AllCrossroads" instance=ExtResource( 7 )]
-position = Vector2( 704, 576 )
+position = Vector2( 576, 576 )
 directions_mask = {
 Vector2( -1, 0 ): true,
 Vector2( 0, -1 ): true,

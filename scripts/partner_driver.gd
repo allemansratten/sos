@@ -29,11 +29,11 @@ func spawn_partner():
 func game_over(reason):
 	# this relays the game_over call from partner
 	get_parent().game_over(reason)
-	
+
 func _process(delta):
 	spawn_time -= delta
 	if spawn_time <= 0:
 		spawn_time = SPAWN_DELAY
 		spawn_partner()
-	
-	next_partner_label.text = "Next parent in " + str(int(spawn_time)) + "s"
+
+	next_partner_label.text = "Next partner in " + str(int(spawn_time)) + "s"

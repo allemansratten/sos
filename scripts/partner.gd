@@ -29,11 +29,11 @@ func init(x, y, d_x=0, d_y=0):
 	position.x = x
 	old_step_x = x
 	next_step_x = x
-	
+
 	position.y = y
 	old_step_y = y
 	next_step_y = y
-	
+
 	dir_x = d_x
 	dir_y = d_y
 
@@ -56,12 +56,12 @@ func die():
 	modulate = Color("#904949")
 
 
-func make_flag(colors):
-	for c_i in range(len(colors)):
+func make_flag(flag_colors):
+	for c_i in range(len(flag_colors)):
 		var flag = ColorRect.new()
 		flag.rect_position.x = -STEP_SIZE/2 + c_i*10
 		flag.rect_position.y = -STEP_SIZE/2
-		flag.color = ColorN(colors[c_i], 1)
+		flag.color = ColorN(flag_colors[c_i], 1)
 		flag.rect_size.x = 10
 		flag.rect_size.y = 10
 
@@ -78,10 +78,10 @@ func _process(delta):
 	if delta_acc >= SPEED_TIMESTEP:
 		delta_acc -= SPEED_TIMESTEP
 		_process_timestep()
-	
+
 	position.x = interpolate(old_step_x, next_step_x, delta_acc)
 	position.y = interpolate(old_step_y, next_step_y, delta_acc)
-	
+
 	# process patience
 	patience -= delta
 	if patience <= 0:
@@ -119,20 +119,35 @@ func area_entered(other):
 			return
 		# establish dominance
 		other.is_being_hit = true
-		
+
 		if check_color_intersect(other.colors):
 #			print("COLOR HIT oh no")
 			die()
 			other.die()
 			get_parent().game_over("color hit")
-		
+
 		# return dominance
 		other.is_being_hit = true
 	elif other.is_in_group("crossroads"):
-		set_direction(other.direction)
+		collide_with_crossroads(other)
 
+func get_direction():
+	if dir_y == -1:
+		return 0
+	if dir_x == 1:
+		return 1
+	if dir_y == 1:
+		return 2
+	if dir_x == -1:
+		return 3
+
+	assert(false)
 
 func set_direction(direction):
-	#TODO: make this use Observer
-	dir_x = [0, -1, 0, 1][direction]
-	dir_y = [1, 0, -1, 0][direction]
+	dir_x = [0, 1, 0, -1][direction]
+	dir_y = [-1, 0, 1, 0][direction]
+
+func collide_with_crossroads(crossroads):
+	var in_direction = get_direction()
+	var out_direction = crossroads.get_output_direction(in_direction)
+	set_direction(out_direction)

@@ -29,8 +29,8 @@ var old_step_x = 0
 var old_step_y = 0
 
 
-func init(x, y, d_x=0, d_y=0, delay=0):
-	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f" % [x, y, d_x, d_y, speed])
+func init(x, y, dir: Vector2, delay=0):
+	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f" % [x, y, dir[0], dir[1], speed])
 	position.x = x
 	old_step_x = x
 	next_step_x = x
@@ -39,11 +39,8 @@ func init(x, y, d_x=0, d_y=0, delay=0):
 	old_step_y = y
 	next_step_y = y
 
-	direction = Vector2(d_x, d_y)
+	direction = dir
 	step_delay = delay
-
-	# Hack to rotate the sprite
-#	set_direction(get_direction())
 
 
 func random_color_choice(n_colors=2):
@@ -147,27 +144,6 @@ func area_entered(other):
 	elif other.is_in_group("places"):
 		other.collide(self)
 
-#func get_direction():
-#	if direction == Vector2.UP:
-#		return 0
-#	if direction == Vector2.RIGHT:
-#		return 1
-#	if direction == Vector2.DOWN:
-#		return 2
-#	if direction == Vector2.LEFT:
-#		return 3
-#
-#	assert(false)
-#
-#
-#func set_direction(dir):
-#	direction[0] = [0, 1, 0, -1][dir]
-#	direction[1] = [-1, 0, 1, 0][dir]
-#	rotation = (dir - 1) * 0.5 * PI
-
 
 func collide_with_crossroads(crossroads):
-#	var in_direction = get_direction()
-#	var out_direction = crossroads.get_output_direction(in_direction)
-#	set_direction(out_direction)
 	direction = crossroads.get_output_direction(direction)

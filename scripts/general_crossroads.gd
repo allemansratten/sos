@@ -12,18 +12,14 @@ export var directions_mask = {
 
 
 func rotate_vector_clockwise(vec: Vector2, steps=1):
-	return vec.rotated((PI/2) * steps )
+	return vec.rotated((PI/2) * steps ).round()
 
 
 func render_arrows():
-	print_debug(directions_mask)
 	for dir in directions_mask:
 		if directions_mask[dir]:
 			var arrow = arrow_scene.instance()
-			arrow.rotate(dir.angle())
-#			arrow.move_local_x(32)
-#			arrow.move_local_y(32)
-			#arrow.translate(Vector2(32, 32))
+			arrow.rotate(dir.angle() + PI/2)
 			add_child(arrow)
 
 func check_mask():
@@ -37,7 +33,6 @@ func check_mask():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	check_mask()
-	print_debug(directions_mask)
 
-func get_output_direction(in_direction):
+func get_output_direction(_in_direction: Vector2):
 	assert(false, "Must be implemented in child")

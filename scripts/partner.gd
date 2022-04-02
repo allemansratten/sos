@@ -97,8 +97,6 @@ func interpolate(old_pos, new_pos, delta):
 
 
 func _process_timestep():
-#	position.x += dir_x * speed
-#	position.y += dir_y * speed
 	old_step_x = next_step_x
 	old_step_y = next_step_y
 	next_step_x = next_step_x + dir_x * speed

@@ -16,11 +16,11 @@ func spawn_partner():
 	partner_i += 1
 	if partner_i == 1:
 		partner.dir_x = 1
-		partner.position.x = 96*1
+		partner.position.x = 96*2
 	elif partner_i == 2:
 		partner.dir_y = -1
 		partner.position.x = 96*5
-		partner.position.y = 96*4
+		partner.position.y = 96*3
 		
 	add_child(partner)
 	

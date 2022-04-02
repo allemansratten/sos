@@ -25,11 +25,22 @@ func random_color_choice(n_colors=2):
 func random_goal_choice():
 	goal = ALL_GOALS[randi() % ALL_GOALS.size()]
 
+func die():
+	modulate = Color("#904949")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	random_color_choice(4)
+	random_color_choice(2)
 	random_goal_choice()
-	prints(colors, goal)
+	
+	for c_i in range(len(colors)):
+		var flag = ColorRect.new()
+		flag.rect_position.x = -48 + c_i*10
+		flag.rect_position.y = -48
+		flag.color = ColorN(colors[c_i], 1)
+		flag.rect_size.x = 10
+		flag.rect_size.y = 10
+		add_child(flag)
 	
 var delta_acc = 0
 
@@ -54,7 +65,6 @@ func _process_timestep():
 func check_color_intersect(other_colors):
 	for c in colors:
 		if c in other_colors:
-			print(c)
 			return true
 	return false
 
@@ -67,6 +77,8 @@ func area_entered(other):
 	
 	if check_color_intersect(other.colors):
 		print("COLOR HIT oh no")
+		die()
+		other.die()
 		get_parent().game_over("color hit")
 	
 	# return dominance

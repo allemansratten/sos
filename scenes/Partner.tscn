@@ -1,18 +1,19 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/partner.gd" type="Script" id=1]
-[ext_resource path="res://resources/donkey.png" type="Texture" id=2]
+[ext_resource path="res://resources/sprite.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
 [node name="Partner" type="Area2D" groups=["partners"]]
 position = Vector2( 32, 32 )
+z_index = 10
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -1.90735e-06, -1.90735e-06 )
-scale = Vector2( 0.666667, 0.666667 )
+scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -20,5 +21,14 @@ scale = Vector2( 0.25, 0.25 )
 shape = SubResource( 1 )
 
 [node name="StepTween" type="Tween" parent="."]
+
+[node name="SatisfiedTween" type="Tween" parent="."]
+
+[node name="GoalLabel" type="Label" parent="."]
+margin_left = -28.0
+margin_top = 13.0
+margin_right = 29.0
+margin_bottom = 27.0
+text = "knihovna"
 
 [connection signal="area_entered" from="." to="." method="area_entered"]

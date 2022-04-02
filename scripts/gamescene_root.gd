@@ -1,14 +1,9 @@
 extends Node
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	# randomize seeds generators
 	$MapCamera.make_current()
+	# randomize seeds generators
 	randomize()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,8 +12,15 @@ func _ready():
 
 var game_over_happened = false
 
-func game_over(reason):
+func game_over(reason, location):
 	if game_over_happened:
 		return
 	game_over_happened = true
+	
 	print("GAME OVER BECAUSE OF: [", reason, "]")
+	# pause game but camera should be whitelisted
+	get_tree().paused = true
+	
+	if typeof(location) == TYPE_VECTOR2:
+		$MapCamera.zoom_in(location)
+	

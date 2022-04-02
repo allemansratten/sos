@@ -8,6 +8,7 @@
 extents = Vector2( 32, 32 )
 
 [node name="FixedCrossroads" type="Area2D" groups=["crossroads", "fixed_crossroads"]]
+modulate = Color( 0.662745, 0.662745, 0.662745, 1 )
 position = Vector2( 128, 128 )
 script = ExtResource( 1 )
 arrow_scene = ExtResource( 2 )

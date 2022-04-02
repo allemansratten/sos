@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Partner",
+"language": "GDScript",
+"path": "res://scripts/partner.gd"
+}, {
+"base": "Reference",
+"class": "PartnerType",
+"language": "GDScript",
+"path": "res://scripts/partner_type.gd"
+} ]
+_global_script_class_icons={
+"Partner": "",
+"PartnerType": ""
+}
+
 [application]
 
 config/name="LD50"

@@ -18,11 +18,11 @@ func spawn_partner():
 	var partner = partner_scene.instance()
 	partner_i += 1
 	if partner_i == 1:
-		partner.init(64*3, 64*2, 1, 0)
+		partner.init(64*3, 64*2, 1, 0, 0.2)
 	elif partner_i == 2:
-		partner.init(64*4, 64*7, 0, 1)
+		partner.init(64*4, 64*7, 0, 1, 2)
 	else:
-		partner.init(64*0, 64*(1+randi()%10), 0, 1)
+		partner.init(64*0, 64*(1+randi()%10), 0, 1, 0.5)
 	add_child(partner)
 
 
@@ -36,4 +36,4 @@ func _process(delta):
 		spawn_time = SPAWN_DELAY
 		spawn_partner()
 
-	next_partner_label.text = "Next partner in " + str(int(spawn_time)) + "s"
+	next_partner_label.text = "Next partner in %ds" % [spawn_time]

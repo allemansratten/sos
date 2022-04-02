@@ -1,16 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://scenes/Crossroads.gd" type="Script" id=2]
-[ext_resource path="res://scenes/CrossroadsArrow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://resources/place_spot.png" type="Texture" id=1]
+[ext_resource path="res://scripts/place.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[node name="Crossroads" type="Area2D" groups=["crossroads"]]
+[node name="Place" type="Area2D" groups=["places"]]
 position = Vector2( 32, 32 )
 script = ExtResource( 2 )
-arrow_scene = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.5, 0.5 )
@@ -20,4 +18,5 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )

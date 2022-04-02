@@ -5,7 +5,9 @@ const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 
 # frame every 3/4 a second
 const SPEED_TIMESTEP = 0.75
-var speed = 96
+const STEP_SIZE = 64
+
+var speed = STEP_SIZE
 var dir_x = 0
 var dir_y = 0
 
@@ -35,8 +37,8 @@ func _ready():
 	
 	for c_i in range(len(colors)):
 		var flag = ColorRect.new()
-		flag.rect_position.x = -48 + c_i*10
-		flag.rect_position.y = -48
+		flag.rect_position.x = -STEP_SIZE/2 + c_i*10
+		flag.rect_position.y = -STEP_SIZE/2
 		flag.color = ColorN(colors[c_i], 1)
 		flag.rect_size.x = 10
 		flag.rect_size.y = 10

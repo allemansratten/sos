@@ -36,4 +36,5 @@ func _process(delta):
 		spawn_time = SPAWN_DELAY
 		spawn_partner()
 
-	next_partner_label.text = "Next partner in %ds" % [spawn_time]
+	get_parent().get_node("HUD").update_next_partner_label(spawn_time)
+	#next_partner_label.text = "Next partner in %ds" % [spawn_time]

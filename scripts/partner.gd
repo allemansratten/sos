@@ -88,9 +88,25 @@ func area_entered(other):
 		# return dominance
 		other.is_being_hit = true
 	elif other.is_in_group("crossroads"):
-		set_direction(other.direction)
-		
+		collide_with_crossroads(other)
+
+func get_direction():
+	if dir_y == -1:
+		return 0
+	if dir_x == 1:
+		return 1
+	if dir_y == 1:
+		return 2
+	if dir_x == -1:
+		return 3
+	
+	assert(false)
 
 func set_direction(direction):
 	dir_x = [0, 1, 0, -1][direction]
 	dir_y = [-1, 0, 1, 0][direction]
+
+func collide_with_crossroads(crossroads):
+	var in_direction = get_direction()
+	var out_direction = crossroads.get_output_direction(in_direction)
+	set_direction(out_direction)

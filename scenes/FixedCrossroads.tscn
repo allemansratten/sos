@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/FixedCrossroads.gd" type="Script" id=1]
+[ext_resource path="res://scenes/CrossroadsArrow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[node name="FixedCrossroads" type="Area2D" groups=["crossroads", "fixed_crossroads"]]
+position = Vector2( 128, 128 )
+script = ExtResource( 1 )
+arrow_scene = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="PreviewSprite" type="Sprite" parent="."]
+modulate = Color( 0.752941, 0.152941, 0.152941, 1 )
+texture = ExtResource( 3 )

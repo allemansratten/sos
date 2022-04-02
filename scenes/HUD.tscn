@@ -18,3 +18,12 @@ margin_bottom = 46.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Next partner:"
+
+[node name="PartnerCount" type="Label" parent="."]
+margin_left = 776.0
+margin_top = 32.0
+margin_right = 948.0
+margin_bottom = 68.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "X partners"

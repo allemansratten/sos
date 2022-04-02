@@ -10,7 +10,8 @@ const SPEED_TIMESTEP = 1
 const STEP_SIZE = 64
 const GOAL_RESCHEDULE = 10
 const PATIENCE_RESCHEDULE = 60
-onready var tween = get_node("StepTween")
+onready var step_tween = get_node("StepTween")
+onready var satisfied_tween = get_node("SatisfiedTween")
 onready var goal_label = get_node("GoalLabel")
 
 var speed = SPEED_TIMESTEP
@@ -32,11 +33,12 @@ var old_step_y = 0
 
 var partner_type
 
-func init(x, y, d_x=0, d_y=0, delay=0):
+func init(x, y, dir: Vector2, delay=0):
 	partner_type = PartnerType.random_partner_type()
 	partner_type.init(self)
 
-	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f, type: %s" % [x, y, d_x, d_y, speed, partner_type.name])
+	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f, type: %s" % [x, y, dir[0], dir[1], speed, partner_type.name])
+
 	position.x = x
 	old_step_x = x
 	next_step_x = x
@@ -45,11 +47,8 @@ func init(x, y, d_x=0, d_y=0, delay=0):
 	old_step_y = y
 	next_step_y = y
 
-	direction = Vector2(d_x, d_y)
+	direction = dir
 	step_delay = delay
-
-	# Hack to rotate the sprite
-#	set_direction(get_direction())
 
 
 func random_color_choice(n_colors=2):
@@ -68,6 +67,11 @@ func random_goal_choice():
 	patience = PATIENCE_RESCHEDULE
 
 func schedule_random_goal_choice():
+	satisfied_tween.interpolate_property(self, "rotation_degrees",
+		0, 360, 0.75,
+		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
+	satisfied_tween.start()
+	
 	delta_goal_acc = GOAL_RESCHEDULE
 	goal = "..."
 	patience = PATIENCE_RESCHEDULE
@@ -93,7 +97,6 @@ func _ready():
 	random_goal_choice()
 	make_flag(colors)
 
-
 func _process(delta):
 	delta_acc += delta
 	if delta_acc >= SPEED_TIMESTEP + step_delay:
@@ -118,10 +121,10 @@ func _process(delta):
 func _process_timestep():
 	next_step_x = next_step_x + direction[0] * STEP_SIZE
 	next_step_y = next_step_y + direction[1] * STEP_SIZE
-	tween.interpolate_property(self, "position",
+	step_tween.interpolate_property(self, "position",
 		Vector2(old_step_x, old_step_y), Vector2(next_step_x, next_step_y), SPEED_TIMESTEP,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
-	tween.start()
+	step_tween.start()
 	old_step_x = next_step_x
 	old_step_y = next_step_y
 
@@ -142,7 +145,6 @@ func area_entered(other):
 		other.is_being_hit = true
 
 		if check_color_intersect(other.colors):
-#			print("COLOR HIT oh no")
 			die("encounter")
 			other.die("encounter")
 
@@ -152,21 +154,3 @@ func area_entered(other):
 		partner_type.collide_with_crossroads(other)
 	elif other.is_in_group("places"):
 		other.collide(self)
-
-#func get_direction():
-#	if direction == Vector2.UP:
-#		return 0
-#	if direction == Vector2.RIGHT:
-#		return 1
-#	if direction == Vector2.DOWN:
-#		return 2
-#	if direction == Vector2.LEFT:
-#		return 3
-#
-#	assert(false)
-#
-#
-#func set_direction(dir):
-#	direction[0] = [0, 1, 0, -1][dir]
-#	direction[1] = [-1, 0, 1, 0][dir]
-#	rotation = (dir - 1) * 0.5 * PI

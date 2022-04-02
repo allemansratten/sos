@@ -1,36 +1,42 @@
 extends "res://scripts/general_crossroads.gd"
 
-# 0 az 3, v poradi [12, 3, 6, 9]
-var direction = 0
+var direction = Vector2(0, -1)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	._ready()
 	
 
-func set_direction(to: int):
-	assert(0 <= to && to <= 3)
+func set_direction(to: Vector2):
 	assert(directions_mask[to], "Invalid direction %s, mask is %s" % [to, directions_mask])
 	direction = to
-	$Sprite.rotation = direction * 2 * PI / 4.0
+	$Sprite.rotation = direction.angle() + PI/2
+
 
 func on_click():
-	var d = (direction + 1) % 4
-	while not directions_mask[d]:
-		d = (d + 1) % 4
+	var d = direction
+	for __ in directions_mask:
+		d = rotate_vector_clockwise(d, 1).round()
+		print_debug(d.round())
+		if directions_mask[d.round()]:
+			set_direction(d.round())
+			return
+	assert(false, "No crossroad mask open")
 
-	set_direction(d)
 
-func _input_event(viewport, event, shape_idx):
+func _input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton \
 	and event.button_index == BUTTON_LEFT \
 	and event.pressed:
 		self.on_click()
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
-func get_output_direction(in_direction):
+
+func get_output_direction(_in_direction: Vector2):
 	# in_direction is used in FixedCrossroads
 	return direction

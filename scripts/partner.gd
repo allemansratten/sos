@@ -12,9 +12,8 @@ onready var step_tween = get_node("StepTween")
 onready var satisfied_tween = get_node("SatisfiedTween")
 onready var goal_label = get_node("GoalLabel")
 
-var speed = STEP_SIZE
-var dir_x = 0
-var dir_y = 0
+var speed = SPEED_TIMESTEP
+var direction = Vector2(0, 0)
 
 var is_being_hit = false
 
@@ -32,7 +31,7 @@ var old_step_y = 0
 
 
 func init(x, y, d_x=0, d_y=0, delay=0):
-	print("Spawning partner at [%d, %d], dir [%d, %d], speed: %d" % [x, y, d_x, d_y, speed])
+	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f" % [x, y, d_x, d_y, speed])
 	position.x = x
 	old_step_x = x
 	next_step_x = x
@@ -41,12 +40,11 @@ func init(x, y, d_x=0, d_y=0, delay=0):
 	old_step_y = y
 	next_step_y = y
 
-	dir_x = d_x
-	dir_y = d_y	
+	direction = Vector2(d_x, d_y)
 	step_delay = delay
 
 	# Hack to rotate the sprite
-	set_direction(get_direction())
+#	set_direction(get_direction())
 
 
 func random_color_choice(n_colors=2):
@@ -66,7 +64,7 @@ func random_goal_choice():
 
 func schedule_random_goal_choice():
 	satisfied_tween.interpolate_property(self, "rotation_degrees",
-		0, 360, 1,
+		0, 360, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
 	satisfied_tween.start()
 	
@@ -105,7 +103,7 @@ func _process(delta):
 	patience -= delta
 	if patience <= 0:
 		die("patience")
-		
+
 	# process goal rescheduling
 	if goal == "...":
 		goal_label.text = goal
@@ -117,8 +115,8 @@ func _process(delta):
 
 
 func _process_timestep():
-	next_step_x = next_step_x + dir_x * speed
-	next_step_y = next_step_y + dir_y * speed
+	next_step_x = next_step_x + direction[0] * STEP_SIZE
+	next_step_y = next_step_y + direction[1] * STEP_SIZE
 	step_tween.interpolate_property(self, "position",
 		Vector2(old_step_x, old_step_y), Vector2(next_step_x, next_step_y), SPEED_TIMESTEP,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
@@ -153,22 +151,26 @@ func area_entered(other):
 	elif other.is_in_group("places"):
 		other.collide(self)
 
-func get_direction():
-	if dir_y == -1:
-		return 0
-	if dir_x == 1:
-		return 1
-	if dir_y == 1:
-		return 2
-	if dir_x == -1:
-		return 3
-
-func set_direction(direction):
-	dir_x = [0, 1, 0, -1][direction]
-	dir_y = [-1, 0, 1, 0][direction]
-	rotation = (direction - 1) * 0.5 * PI
+#func get_direction():
+#	if direction == Vector2.UP:
+#		return 0
+#	if direction == Vector2.RIGHT:
+#		return 1
+#	if direction == Vector2.DOWN:
+#		return 2
+#	if direction == Vector2.LEFT:
+#		return 3
+#
+#	assert(false)
+#
+#
+#func set_direction(dir):
+#	direction[0] = [0, 1, 0, -1][dir]
+#	direction[1] = [-1, 0, 1, 0][dir]
+#	rotation = (dir - 1) * 0.5 * PI
 
 func collide_with_crossroads(crossroads):
-	var in_direction = get_direction()
-	var out_direction = crossroads.get_output_direction(in_direction)
-	set_direction(out_direction)
+#	var in_direction = get_direction()
+#	var out_direction = crossroads.get_output_direction(in_direction)
+#	set_direction(out_direction)
+	direction = crossroads.get_output_direction(direction)

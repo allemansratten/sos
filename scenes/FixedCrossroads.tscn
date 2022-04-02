@@ -12,6 +12,7 @@ modulate = Color( 0.662745, 0.662745, 0.662745, 1 )
 position = Vector2( 128, 128 )
 script = ExtResource( 1 )
 arrow_scene = ExtResource( 2 )
+directions_mask = [ true, true, true, true ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Partner
+
 const ALL_COLORS = ["red", "green", "blue", "pink", "yellow"]
 const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 
@@ -29,9 +31,14 @@ var next_step_y = 0
 var old_step_x = 0
 var old_step_y = 0
 
+var partner_type
 
 func init(x, y, dir: Vector2, delay=0):
-	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f" % [x, y, dir[0], dir[1], speed])
+	partner_type = PartnerType.random_partner_type()
+	partner_type.init(self)
+
+	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f, type: %s" % [x, y, dir[0], dir[1], speed, partner_type.name])
+
 	position.x = x
 	old_step_x = x
 	next_step_x = x
@@ -144,10 +151,6 @@ func area_entered(other):
 		# return dominance
 		other.is_being_hit = true
 	elif other.is_in_group("crossroads"):
-		collide_with_crossroads(other)
+		partner_type.collide_with_crossroads(other)
 	elif other.is_in_group("places"):
 		other.collide(self)
-
-
-func collide_with_crossroads(crossroads):
-	direction = crossroads.get_output_direction(direction)

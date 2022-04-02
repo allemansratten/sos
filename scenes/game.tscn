@@ -18,3 +18,7 @@ partner_scene = ExtResource( 5 )
 
 [node name="Crossroads" parent="." instance=ExtResource( 7 )]
 position = Vector2( 256, 64 )
+
+[node name="MapCamera" type="Camera2D" parent="."]
+position = Vector2( -32, -32 )
+anchor_mode = 0

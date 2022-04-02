@@ -8,7 +8,8 @@ const SPEED_TIMESTEP = 1
 const STEP_SIZE = 64
 const GOAL_RESCHEDULE = 10
 const PATIENCE_RESCHEDULE = 60
-onready var tween = get_node("StepTween")
+onready var step_tween = get_node("StepTween")
+onready var satisfied_tween = get_node("SatisfiedTween")
 onready var goal_label = get_node("GoalLabel")
 
 var speed = STEP_SIZE
@@ -64,6 +65,11 @@ func random_goal_choice():
 	patience = PATIENCE_RESCHEDULE
 
 func schedule_random_goal_choice():
+	satisfied_tween.interpolate_property(self, "rotation_degrees",
+		0, 360, 1,
+		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
+	satisfied_tween.start()
+	
 	delta_goal_acc = GOAL_RESCHEDULE
 	goal = "..."
 	patience = PATIENCE_RESCHEDULE
@@ -89,7 +95,6 @@ func _ready():
 	random_goal_choice()
 	make_flag(colors)
 
-
 func _process(delta):
 	delta_acc += delta
 	if delta_acc >= SPEED_TIMESTEP + step_delay:
@@ -114,10 +119,10 @@ func _process(delta):
 func _process_timestep():
 	next_step_x = next_step_x + dir_x * speed
 	next_step_y = next_step_y + dir_y * speed
-	tween.interpolate_property(self, "position",
+	step_tween.interpolate_property(self, "position",
 		Vector2(old_step_x, old_step_y), Vector2(next_step_x, next_step_y), SPEED_TIMESTEP,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
-	tween.start()
+	step_tween.start()
 	old_step_x = next_step_x
 	old_step_y = next_step_y
 
@@ -138,7 +143,6 @@ func area_entered(other):
 		other.is_being_hit = true
 
 		if check_color_intersect(other.colors):
-#			print("COLOR HIT oh no")
 			die("encounter")
 			other.die("encounter")
 
@@ -159,14 +163,10 @@ func get_direction():
 	if dir_x == -1:
 		return 3
 
-	assert(false)
-
-
 func set_direction(direction):
 	dir_x = [0, 1, 0, -1][direction]
 	dir_y = [-1, 0, 1, 0][direction]
 	rotation = (direction - 1) * 0.5 * PI
-
 
 func collide_with_crossroads(crossroads):
 	var in_direction = get_direction()

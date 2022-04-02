@@ -22,6 +22,8 @@ shape = SubResource( 1 )
 
 [node name="StepTween" type="Tween" parent="."]
 
+[node name="SatisfiedTween" type="Tween" parent="."]
+
 [node name="GoalLabel" type="Label" parent="."]
 margin_left = -28.0
 margin_top = 13.0

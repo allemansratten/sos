@@ -6,6 +6,8 @@ const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 # frame every  second
 const SPEED_TIMESTEP = 1
 const STEP_SIZE = 64
+const GOAL_RESCHEDULE = 10
+const PATIENCE_RESCHEDULE = 60
 onready var tween = get_node("StepTween")
 onready var goal_label = get_node("GoalLabel")
 
@@ -17,7 +19,7 @@ var is_being_hit = false
 
 var colors = []
 var goal
-var patience = 2.0
+var patience = PATIENCE_RESCHEDULE
 var step_delay = 0
 
 var delta_acc = 0
@@ -59,7 +61,12 @@ func random_color_choice(n_colors=2):
 func random_goal_choice():
 	goal = ALL_GOALS[randi() % ALL_GOALS.size()]
 	goal_label.text = goal
+	patience = PATIENCE_RESCHEDULE
 
+func schedule_random_goal_choice():
+	delta_goal_acc = GOAL_RESCHEDULE
+	goal = "..."
+	patience = PATIENCE_RESCHEDULE
 
 func die():
 	modulate = Color("#904949")
@@ -94,8 +101,15 @@ func _process(delta):
 	if patience <= 0:
 		# TODO: this will break when the parent is not the node with game_over function
 		get_parent().game_over("patience")
+		
+	# process goal rescheduling
+	if goal == "...":
+		goal_label.text = goal
 	else:
-		pass
+		goal_label.text = goal + " (" + str(int(patience)) + "s)"
+	delta_goal_acc -= delta
+	if (goal == "...") and (delta_goal_acc <= 0):
+		random_goal_choice()
 
 
 func _process_timestep():

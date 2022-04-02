@@ -1,19 +1,18 @@
 extends Node
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export(PackedScene) var partner_scene
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	spawn_partner()
 
 func spawn_partner():
-	# TODO
-	pass
+	print("spawning")
+	var partner = partner_scene.instance()
+	add_child(partner)
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func game_over(reason):
+	# this relays the game_over call from partner
+	get_parent().game_over(reason)
+	

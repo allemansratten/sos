@@ -27,6 +27,7 @@ func spawn_partner():
 		partner.position.y = 64*8
 	else:
 		partner.position.y = 64*(1+randi()%4)
+		partner.position.x = 0
 		partner.dir_x = 1
 		
 	add_child(partner)
@@ -41,4 +42,4 @@ func _process(delta):
 		spawn_time = SPAWN_DELAY
 		spawn_partner()
 	
-	next_partner_label.text = "Next parent in " + str(int(spawn_time)) + "s"
+	next_partner_label.text = "Next partner in " + str(int(spawn_time)) + "s"

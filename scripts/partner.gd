@@ -128,7 +128,8 @@ func area_entered(other):
 		other.is_being_hit = true
 	elif other.is_in_group("crossroads"):
 		collide_with_crossroads(other)
-
+	elif other.is_in_group("places"):
+		other.collide(self)
 
 func get_direction():
 	if dir_y == -1:

@@ -4,12 +4,15 @@
 [ext_resource path="res://resources/donkey.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 48, 48 )
+extents = Vector2( 64, 64 )
 
 [node name="Partner" type="Area2D"]
+position = Vector2( 32, 32 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1.90735e-06, -1.90735e-06 )
+scale = Vector2( 0.666667, 0.666667 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

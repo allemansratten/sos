@@ -31,7 +31,7 @@ var old_step_y = 0
 
 
 func init(x, y, d_x=0, d_y=0, delay=0):
-	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %d" % [x, y, d_x, d_y, speed])
+	print("Spawning partner at [%d, %d], dir [%d, %d], speed: %d" % [x, y, d_x, d_y, speed])
 	position.x = x
 	old_step_x = x
 	next_step_x = x
@@ -68,9 +68,9 @@ func schedule_random_goal_choice():
 	goal = "..."
 	patience = PATIENCE_RESCHEDULE
 
-func die():
+func die(reason):
 	modulate = Color("#904949")
-
+	get_parent().game_over(reason, position-Vector2(64*3, 0))
 
 func make_flag(flag_colors):
 	for c_i in range(len(flag_colors)):
@@ -99,8 +99,7 @@ func _process(delta):
 	# process patience
 	patience -= delta
 	if patience <= 0:
-		# TODO: this will break when the parent is not the node with game_over function
-		get_parent().game_over("patience")
+		die("patience")
 		
 	# process goal rescheduling
 	if goal == "...":
@@ -140,9 +139,8 @@ func area_entered(other):
 
 		if check_color_intersect(other.colors):
 #			print("COLOR HIT oh no")
-			die()
-			other.die()
-			get_parent().game_over("color hit")
+			die("encounter")
+			other.die("encounter")
 
 		# return dominance
 		other.is_being_hit = true

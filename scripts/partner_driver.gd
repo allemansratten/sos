@@ -2,7 +2,8 @@ extends Node
 
 export(PackedScene) var partner_scene
 #const Partner = preload("res://scenes/Partner.tscn")
-onready var next_partner_label = get_node("/root/GameScene/NextPartnerLabel")
+onready var next_partner_label = get_node("/root/GameScene/HUD/NextPartnerLabel")
+onready var total_partner_label = get_node("/root/GameScene/HUD/PartnerCount")
 
 const SPAWN_DELAY = 6
 var spawn_time = SPAWN_DELAY
@@ -24,7 +25,7 @@ func spawn_partner():
 	else:
 		partner.init(64*0, 64*(1+randi()%10), 0, 1, 0.5)
 	add_child(partner)
-
+	total_partner_label.text = str(partner_i) + " partners"
 
 func game_over(reason):
 	# this relays the game_over call from partner

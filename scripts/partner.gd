@@ -3,10 +3,13 @@ extends Node2D
 const ALL_COLORS = ["red", "green", "blue", "pink", "yellow"]
 const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 
-# frame every 3/4 a second
-const SPEED_TIMESTEP = 0.75
+# frame every  second
+const SPEED_TIMESTEP = 1
 const STEP_SIZE = 64
+const GOAL_RESCHEDULE = 10
+const PATIENCE_RESCHEDULE = 60
 onready var tween = get_node("StepTween")
+onready var goal_label = get_node("GoalLabel")
 
 var speed = SPEED_TIMESTEP
 var direction = Vector2(0, 0)
@@ -15,10 +18,11 @@ var is_being_hit = false
 
 var colors = []
 var goal
-var patience = 2.0
+var patience = PATIENCE_RESCHEDULE
 var step_delay = 0
 
 var delta_acc = 0
+var delta_goal_acc = 0
 var next_step_x = 0
 var next_step_y = 0
 var old_step_x = 0
@@ -54,7 +58,13 @@ func random_color_choice(n_colors=2):
 
 func random_goal_choice():
 	goal = ALL_GOALS[randi() % ALL_GOALS.size()]
+	goal_label.text = goal
+	patience = PATIENCE_RESCHEDULE
 
+func schedule_random_goal_choice():
+	delta_goal_acc = GOAL_RESCHEDULE
+	goal = "..."
+	patience = PATIENCE_RESCHEDULE
 
 func die():
 	modulate = Color("#904949")
@@ -68,13 +78,14 @@ func make_flag(flag_colors):
 		flag.color = ColorN(flag_colors[c_i], 1)
 		flag.rect_size.x = 10
 		flag.rect_size.y = 10
+		add_child(flag)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	random_color_choice(2)
 	random_goal_choice()
-	add_child(make_flag(colors))
+	make_flag(colors)
 
 
 func _process(delta):
@@ -88,8 +99,15 @@ func _process(delta):
 	if patience <= 0:
 		# TODO: this will break when the parent is not the node with game_over function
 		get_parent().game_over("patience")
+		
+	# process goal rescheduling
+	if goal == "...":
+		goal_label.text = goal
 	else:
-		pass
+		goal_label.text = goal + " (" + str(int(patience)) + "s)"
+	delta_goal_acc -= delta
+	if (goal == "...") and (delta_goal_acc <= 0):
+		random_goal_choice()
 
 
 func _process_timestep():
@@ -128,7 +146,8 @@ func area_entered(other):
 		other.is_being_hit = true
 	elif other.is_in_group("crossroads"):
 		collide_with_crossroads(other)
-
+	elif other.is_in_group("places"):
+		other.collide(self)
 
 #func get_direction():
 #	if direction == Vector2.UP:

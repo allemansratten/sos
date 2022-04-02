@@ -1,5 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="CrossroadsArrow" type="Polygon2D"]
-offset = Vector2( -32, -64 )
-polygon = PoolVector2Array( 48, 64, 32, 32, 16, 64 )
+[ext_resource path="res://resources/arrow.png" type="Texture" id=1]
+
+[node name="CrossroadsArrow" type="Sprite"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -7 )
+__meta__ = {
+"_editor_description_": ""
+}

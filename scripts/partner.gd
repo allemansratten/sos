@@ -40,6 +40,9 @@ func init(x, y, d_x=0, d_y=0, delay=0):
 	dir_y = d_y	
 	step_delay = delay
 
+	# Hack to rotate the sprite
+	set_direction(get_direction())
+
 
 func random_color_choice(n_colors=2):
 	# force duplicate
@@ -145,6 +148,7 @@ func get_direction():
 func set_direction(direction):
 	dir_x = [0, 1, 0, -1][direction]
 	dir_y = [-1, 0, 1, 0][direction]
+	rotation = (direction - 1) * 0.5 * PI
 
 
 func collide_with_crossroads(crossroads):

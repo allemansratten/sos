@@ -3,15 +3,17 @@ extends Node
 const catalogue = {
 	"normal": {
 		"step_delay": Vector2(0.2, 0.6),
+		"num_colors": [1, 2]
 	},
-	"slow": {
-		"step_delay": Vector2(1, 2),
-		"speed": Vector2(1.5, 3)
-	},
+#	"slow": {
+#		"step_delay": Vector2(1, 2),
+#		"speed": Vector2(1.5, 3)
+#	},
 	"impatient": {
-		"step_delay": Vector2(0, 0.1),
-		"speed": Vector2(0.8, 1),
-		"patience": Vector2(35, 50)
+		"step_delay": Vector2(0.1, 0.1),
+		#"speed": Vector2(0.8, 1),
+		"patience": Vector2(35, 50),
+		"num_colors": 1
 	}
 }
 
@@ -19,7 +21,12 @@ const catalogue = {
 static func make_instance(template):
 	var instance = {}
 	for item in template:
-		instance[item] = interval_random(template[item])
+		if template[item] is Vector2:
+			instance[item] = interval_random(template[item])
+		elif template[item] is Array:
+			instance[item] = template[item][randi() % len(template[item])]
+		else:
+			instance[item] = template[item]
 	return instance
 
 

@@ -4,21 +4,30 @@ class_name Partner
 
 # https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png
 const ALL_COLORS = ["orangered", "limegreen", "dodgerblue", "whitesmoke", "orange"]
-const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 
 const JUMP_TIME_COEF = 0.25
 const STEP_SIZE = 64
 const FLAG_WIDTH = 48
 const GOAL_RESCHEDULE = 10
-const PATIENCE_RESCHEDULE = 60
+const DEFAULTS = {
+	"patience": 60,
+	"speed": 1.5,
+	"step_delay": 0.2,
+	"goal_delay": 2,
+	"num_colors": 1
+}
+
 onready var hud = get_node("/root/GameScene/HUD")
+onready var root_script = get_node("/root/GameScene")
 
 var partner_name
 
 # frame every second
-var speed = 1
-var step_delay = 0.2
-var patience = PATIENCE_RESCHEDULE
+var speed
+var goal_delay
+var step_delay
+var patience
+var num_colors
 var direction = Vector2(0, 0)
 
 var is_being_hit = false
@@ -38,9 +47,6 @@ var partner_type
 var just_turned = false
 
 func init(name: String, new_loc: Vector2, dir: Vector2, driver, config: Dictionary):
-	partner_type = PartnerType.new()
-	partner_type.init(self, "random")
-
 	partner_name = name
 	partner_driver = driver
 
@@ -53,15 +59,14 @@ func init(name: String, new_loc: Vector2, dir: Vector2, driver, config: Dictiona
 
 
 func unpack_config(config: Dictionary):
-	if "step_delay" in config:
-		step_delay = config["step_delay"]
-	if "speed" in config:
-		speed = config["speed"]
-	if "patience" in config:
-		patience = config["patience"]
+	step_delay = config.get("step_delay", DEFAULTS["step_delay"])
+	speed = config.get("speed", DEFAULTS["speed"])
+	patience = config.get("patience", DEFAULTS["patience"])
+	goal_delay = config.get("goal_delay", DEFAULTS["goal_delay"])
+	num_colors = config.get("num_colors", DEFAULTS["num_colors"])
 
 
-func random_color_choice(n_colors=2):
+func random_color_choice(n_colors):
 	# force duplicate
 	var colors_tmp = ALL_COLORS + []
 	# clear up previous colors
@@ -72,37 +77,47 @@ func random_color_choice(n_colors=2):
 
 
 func random_goal_choice():
-	goal = ALL_GOALS[randi() % ALL_GOALS.size()]
-	patience = PATIENCE_RESCHEDULE
+	goal = root_script.legit_goals[randi() % root_script.legit_goals.size()]
+	$PatienceTimer.start()
 
 
 func schedule_random_goal_choice():
-	$SatisfiedTween.interpolate_property($Sprite, "rotation_degrees",
-		0, 360, 0.75,
+	$PatienceTimer.stop()  # So you don't lose after satisfying
+	$SatisfiedTween.interpolate_property(
+		self, "scale", scale, Vector2.ZERO, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)
 	$SatisfiedTween.start()
-
-	$GoalRescheduleTimer.start(GOAL_RESCHEDULE)
-	goal = null
-	patience = PATIENCE_RESCHEDULE
+	$GoalTimer.start(goal_delay)
+	$CollisionShape2D.set_deferred("disabled", true)
+	$StepTimer.stop()
 
 
 func die(reason):
-	modulate = Color("#904949")
+	#modulate = Color("#904949")
 	if reason != null:
-		get_parent().game_over(reason, partner_driver.get_num_partners(), position)
+		get_parent().game_over(reason, partner_driver.partner_count, position)
 
 
 func make_flag(flag_colors):
-	for c_i in range(len(flag_colors)):
-		var flag = ColorRect.new()
-		flag.rect_position.x = -FLAG_WIDTH/2 + c_i*FLAG_WIDTH/len(flag_colors)
-		flag.rect_position.y = -STEP_SIZE/2+5
-		flag.color = ColorN(flag_colors[c_i], 1)
-		flag.rect_size.x = FLAG_WIDTH/len(flag_colors)
-		flag.rect_size.y = 5
-		add_child(flag)
+	assert(len(flag_colors)==1, "each partner should have exactly one flag")
+	
+	var flag = ColorRect.new()
+	flag.rect_position.x = -STEP_SIZE/2+8
+	flag.rect_position.y = -10
+	flag.color = ColorN(flag_colors[0], 1)
+	flag.rect_size.x = 10
+	flag.rect_size.y = 10
+	add_child(flag)
+	
+	#for c_i in range(len(flag_colors)):
+	#	var flag = ColorRect.new()
+	#	flag.rect_position.x = -FLAG_WIDTH/2 + c_i*FLAG_WIDTH/len(flag_colors)
+	#	flag.rect_position.y = -STEP_SIZE/2+5
+	#	flag.color = ColorN(flag_colors[c_i], 1)
+	#	flag.rect_size.x = FLAG_WIDTH/len(flag_colors)
+	#	flag.rect_size.y = 5
+	#	add_child(flag)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -110,11 +125,12 @@ func _ready():
 	# trick to hide FOUC
 	scale = Vector2.ZERO
 
-	random_color_choice(randi()%5)
+	random_color_choice(1)
 	random_goal_choice()
 	make_flag(colors)
 	
 	$StepTimer.start(speed + step_delay)
+	$PatienceTimer.start(patience)
 
 	sprite_type = randi() % N_SPRITE_TYPES + 1
 	reset_animation()
@@ -133,13 +149,15 @@ func _ready():
 	$SatisfiedTween.start()
 
 
-func _process(delta):
-	# process patience
-	patience -= delta
-	if patience <= 0:
-		die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])
-
-	$PatienceIndicator.rect_scale.x = 1 - patience/PATIENCE_RESCHEDULE
+func _process(_delta):
+	# update patience bar
+	$PatienceIndicator.rect_scale.x = $PatienceTimer.time_left/patience
+	$PatienceIndicator.modulate = Color(
+		1,
+		$PatienceTimer.time_left/patience,
+		$PatienceTimer.time_left/patience,
+		1
+	)
 
 
 func reset_animation():
@@ -201,25 +219,39 @@ func area_entered(other):
 		collide_with_partner(other)
 	elif other.is_in_group("crossroads"):
 		var cur_direction = direction
-		partner_type.collide_with_crossroads(other)
+		direction = other.get_output_direction(direction)
 		if cur_direction != direction:
 			just_turned = true
 	elif other.is_in_group("places"):
 		if other.place == goal:
-			print("satisfied partner's wish to go to ", other.place)
 			$PlaceEnteredAudioStream.play()
 			schedule_random_goal_choice()
 
 
 func mouse_entered():
+#	$StepTimer.stop()
 	hud.update_partner_tracker(self)
+
 
 func highlight_on(visible_val):
 	$HighlightRect.visible = visible_val
-
 
 func _on_GoalRescheduleTimer_timeout():
 	random_goal_choice()
 
 func _on_StepTimer_timeout():
 	_process_timestep()
+
+func _on_PatienceTimer_timeout():
+	die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])	
+
+func _on_GoalTimer_timeout():
+	$SatisfiedTween.interpolate_property(self, "scale",
+		Vector2.ZERO, Vector2.ONE, 0.75,
+		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
+	)
+	$SatisfiedTween.start()
+	$CollisionShape2D.set_disabled(false)
+	$GoalRescheduleTimer.start(GOAL_RESCHEDULE)
+	$StepTimer.start(speed + step_delay)
+	goal = null

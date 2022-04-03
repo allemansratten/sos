@@ -551,7 +551,7 @@ place = "disco"
 position = Vector2( 192, 0 )
 
 [node name="Location2" parent="SpawnableLocations" instance=ExtResource( 10 )]
-position = Vector2( 96, 256 )
+position = Vector2( 64, 256 )
 
 [node name="Location3" parent="SpawnableLocations" instance=ExtResource( 10 )]
 position = Vector2( 768, 192 )

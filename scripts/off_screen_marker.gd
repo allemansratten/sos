@@ -18,7 +18,7 @@ func _process(time_delta):
 
 	var delta = partner.position - screen_center
 
-	if should_be_shown(delta, screen_size):
+	if should_be_shown(delta, screen_size * camera.zoom):
 		show()
 		var marker_pos = get_marker_position(delta, screen_size)
 		set_position(marker_pos)

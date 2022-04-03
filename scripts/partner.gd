@@ -8,6 +8,7 @@ const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 
 # frame every second
 const SPEED_TIMESTEP = 1
+const JUMP_TIME_COEF = 0.5
 const STEP_SIZE = 64
 const FLAG_WIDTH = 48
 const GOAL_RESCHEDULE = 10
@@ -36,6 +37,9 @@ var next_step_x = 0
 var next_step_y = 0
 var old_step_x = 0
 var old_step_y = 0
+
+const N_SPRITE_TYPES = 3
+var sprite_type = 1  # 1 to N_SPRITE_TYPES
 
 var partner_driver
 var partner_type
@@ -110,6 +114,9 @@ func _ready():
 	random_color_choice(randi()%5)
 	random_goal_choice()
 	make_flag(colors)
+
+	sprite_type = randi() % N_SPRITE_TYPES + 1
+	reset_animation()
 	
 	# spawn animation
 	# rotation
@@ -148,12 +155,23 @@ func _process(delta):
 	patience_indicator.rect_scale.x = 1 - patience/PATIENCE_RESCHEDULE
 
 
+func reset_animation():
+	$AnimatedSprite.animation = "sprite%s" % sprite_type
+
+
 func _process_timestep():
 	next_step_x = next_step_x + direction[0] * STEP_SIZE
 	next_step_y = next_step_y + direction[1] * STEP_SIZE
 	step_tween.interpolate_property(self, "position",
-		Vector2(old_step_x, old_step_y), Vector2(next_step_x, next_step_y), SPEED_TIMESTEP,
+		Vector2(old_step_x, old_step_y), Vector2(next_step_x, next_step_y), SPEED_TIMESTEP * JUMP_TIME_COEF,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
+	
+	# Temporary, while the other sprite types are not available
+	if sprite_type == 1:
+		$AnimatedSprite.flip_h = direction[0] < 0
+		$AnimatedSprite.play("sprite%s_walk" % sprite_type)
+		step_tween.interpolate_callback(self, SPEED_TIMESTEP * JUMP_TIME_COEF, "reset_animation")
+
 	step_tween.start()
 	old_step_x = next_step_x
 	old_step_y = next_step_y

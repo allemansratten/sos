@@ -28,11 +28,8 @@ var step_delay = 0
 
 var delta_acc = 0
 var delta_goal_acc = 0
-# TODO: this should be a Vector2
-var next_step_x = 0
-var next_step_y = 0
-var old_step_x = 0
-var old_step_y = 0
+var next_step = Vector2(0, 0)
+var old_step = Vector2(0, 0)
 
 const N_SPRITE_TYPES = 3
 var sprite_type = 1  # 1 to N_SPRITE_TYPES
@@ -47,13 +44,9 @@ func init(name: String, new_loc: Vector2, dir: Vector2, driver, delay=0):
 	partner_name = name
 	partner_driver = driver
 
-	#print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f, crossroad_type: %s" % [x, y, dir[0], dir[1], speed, partner_type.crossroad_strategy.get_name()])
-
 	position = new_loc
-	old_step_x = new_loc.x
-	next_step_x = new_loc.x
-	old_step_y = new_loc.y
-	next_step_y = new_loc.y
+	old_step = position
+	next_step = position
 
 	direction = dir
 	step_delay = delay
@@ -152,10 +145,9 @@ func reset_animation():
 
 
 func _process_timestep():
-	next_step_x = next_step_x + direction[0] * STEP_SIZE
-	next_step_y = next_step_y + direction[1] * STEP_SIZE
+	next_step += direction * STEP_SIZE
 	$StepTween.interpolate_property(self, "position",
-		Vector2(old_step_x, old_step_y), Vector2(next_step_x, next_step_y), speed * JUMP_TIME_COEF,
+		old_step, next_step, speed * JUMP_TIME_COEF,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
 	
 	# Temporary, while the other sprite types are not available
@@ -163,10 +155,8 @@ func _process_timestep():
 		$AnimatedSprite.flip_h = direction[0] < 0
 		$AnimatedSprite.play("sprite%s_walk" % sprite_type)
 		$StepTween.interpolate_callback(self, speed * JUMP_TIME_COEF, "reset_animation")
-
 	$StepTween.start()
-	old_step_x = next_step_x
-	old_step_y = next_step_y
+	old_step = next_step
 
 
 func check_color_intersect(other_colors):

@@ -13,11 +13,6 @@ animations = [ {
 "name": "sprite1",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "sprite2",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": false,
 "name": "sprite1_walk",
@@ -26,6 +21,11 @@ animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "sprite3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "sprite2",
 "speed": 5.0
 } ]
 

@@ -11,7 +11,7 @@ const FLAG_WIDTH = 48
 const GOAL_RESCHEDULE = 10
 const DEFAULTS = {
 	"patience": 60,
-	"speed": 1,
+	"speed": 1.5,
 	"step_delay": 0.2,
 	"goal_delay": 2
 }
@@ -100,14 +100,24 @@ func die(reason):
 
 
 func make_flag(flag_colors):
-	for c_i in range(len(flag_colors)):
-		var flag = ColorRect.new()
-		flag.rect_position.x = -FLAG_WIDTH/2 + c_i*FLAG_WIDTH/len(flag_colors)
-		flag.rect_position.y = -STEP_SIZE/2+5
-		flag.color = ColorN(flag_colors[c_i], 1)
-		flag.rect_size.x = FLAG_WIDTH/len(flag_colors)
-		flag.rect_size.y = 5
-		add_child(flag)
+	assert(len(flag_colors)==1, "each partner should have exactly one flag")
+	
+	var flag = ColorRect.new()
+	flag.rect_position.x = -STEP_SIZE/2+8
+	flag.rect_position.y = -10
+	flag.color = ColorN(flag_colors[0], 1)
+	flag.rect_size.x = 10
+	flag.rect_size.y = 10
+	add_child(flag)
+	
+	#for c_i in range(len(flag_colors)):
+	#	var flag = ColorRect.new()
+	#	flag.rect_position.x = -FLAG_WIDTH/2 + c_i*FLAG_WIDTH/len(flag_colors)
+	#	flag.rect_position.y = -STEP_SIZE/2+5
+	#	flag.color = ColorN(flag_colors[c_i], 1)
+	#	flag.rect_size.x = FLAG_WIDTH/len(flag_colors)
+	#	flag.rect_size.y = 5
+	#	add_child(flag)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -115,7 +125,7 @@ func _ready():
 	# trick to hide FOUC
 	scale = Vector2.ZERO
 
-	random_color_choice(randi()%5)
+	random_color_choice(1)
 	random_goal_choice()
 	make_flag(colors)
 	
@@ -141,7 +151,13 @@ func _ready():
 
 func _process(delta):
 	# update patience bar
-	$PatienceIndicator.rect_scale.x = 1 - $PatienceTimer.time_left/patience
+	$PatienceIndicator.rect_scale.x = $PatienceTimer.time_left/patience
+	$PatienceIndicator.modulate = Color(
+		1,
+		$PatienceTimer.time_left/patience,
+		$PatienceTimer.time_left/patience,
+		1
+	)
 
 
 func reset_animation():

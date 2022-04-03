@@ -56,7 +56,6 @@ enable_bend_2 = false
 
 [node name="Crossroads2" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 320, 0 )
-direction = 1
 enable_up = false
 enable_continue = false
 enable_bend_1 = false
@@ -119,7 +118,7 @@ enable_bend_2 = false
 
 [node name="Crossroads4" parent="AllCrossroads/Movable" groups=["unlock_1"] instance=ExtResource( 7 )]
 position = Vector2( 0, 256 )
-direction = 2
+direction = 6
 locked = true
 enable_left = false
 enable_continue = false
@@ -137,7 +136,6 @@ enable_bend_2 = false
 
 [node name="Crossroads7" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 576, 0 )
-direction = 1
 enable_up = false
 enable_continue = false
 enable_bend_1 = false

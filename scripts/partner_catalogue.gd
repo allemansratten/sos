@@ -10,7 +10,7 @@ const catalogue = {
 #	},
 	"impatient": {
 		"step_delay": Vector2(0.1, 0.1),
-		"speed": Vector2(0.8, 1),
+		#"speed": Vector2(0.8, 1),
 		"patience": Vector2(35, 50),
 	}
 }

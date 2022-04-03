@@ -2,7 +2,7 @@ extends Node
 
 export(PackedScene) var game_over_hud
 
-const GOALS_0 = ["cafe", "disco", "library"]
+const GOALS_0 = ["diner", "cafe", "library", "museum"]
 const GOALS_1 = ["gallery"]
 const GOALS_2 = []
 const GOALS_3 = []

@@ -43,6 +43,7 @@ func _ready():
 	
 	yield(get_tree().create_timer(delay_acc+2), "timeout")
 	
+	$Notification.play()
 	$Instructions.visible = true
 	
 # wtf gdscript doesn't have an array initializer

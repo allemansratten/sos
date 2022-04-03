@@ -109,6 +109,9 @@ func _process(delta):
 func on_click():
 	if locked:
 		return
+
+	$OnClickAudioStream.play()
+
 	enabled_i = (enabled_i + 1) % enabled_arr.size()
 	direction = enabled_arr[enabled_i]
 	render_arrows()

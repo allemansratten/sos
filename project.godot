@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="overly many relationships"
-run/main_scene="res://scenes/Game.tscn"
+run/main_scene="res://scenes/GameLore.tscn"
 config/icon="res://icon.png"
 
 [display]

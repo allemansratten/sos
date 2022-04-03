@@ -18,7 +18,7 @@ func start():
 	spawn_partner()
 	# we need this hack because otherwise they may spawn on the same loc
 	# (because of some ECS thing) -zouharvi
-	yield(get_tree().create_timer(2.0), "timeout")
+	yield(get_tree().create_timer(5.0), "timeout")
 	spawn_partner()
 
 

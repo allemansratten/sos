@@ -13,7 +13,8 @@ const DEFAULTS = {
 	"patience": 60,
 	"speed": 1.5,
 	"step_delay": 0.2,
-	"goal_delay": 2
+	"goal_delay": 2,
+	"num_colors": 1
 }
 
 onready var hud = get_node("/root/GameScene/HUD")
@@ -26,6 +27,7 @@ var speed
 var goal_delay
 var step_delay
 var patience
+var num_colors
 var direction = Vector2(0, 0)
 
 var is_being_hit = false
@@ -64,9 +66,10 @@ func unpack_config(config: Dictionary):
 	speed = config.get("speed", DEFAULTS["speed"])
 	patience = config.get("patience", DEFAULTS["patience"])
 	goal_delay = config.get("goal_delay", DEFAULTS["goal_delay"])
+	num_colors = config.get("num_colors", DEFAULTS["num_colors"])
 
 
-func random_color_choice(n_colors=2):
+func random_color_choice(n_colors):
 	# force duplicate
 	var colors_tmp = ALL_COLORS + []
 	# clear up previous colors

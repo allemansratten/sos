@@ -9,14 +9,14 @@
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "sprite3",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "sprite1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "sprite2",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
@@ -24,9 +24,9 @@ animations = [ {
 "name": "sprite1_walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "sprite2",
+"name": "sprite3",
 "speed": 5.0
 } ]
 

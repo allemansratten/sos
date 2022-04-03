@@ -43,13 +43,6 @@ func _ready():
 	if enable_continue:
 		enabled_arr.append(CrossroadDirection.CONTINUE)
 	render_arrows()
-
-
-func _input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton \
-	and event.button_index == BUTTON_LEFT \
-	and event.pressed:
-		self.on_click()
 		
 func render_arrows():
 	rendered_direction = direction
@@ -115,3 +108,19 @@ func on_click():
 	enabled_i = (enabled_i + 1) % enabled_arr.size()
 	direction = enabled_arr[enabled_i]
 	render_arrows()
+
+
+func mouse_enter():
+	if not locked:
+		$HighlightRect.visible = true
+	
+func mouse_exit():
+	$HighlightRect.visible = false
+
+
+func mouse_input(event):
+	if event is InputEventMouseButton \
+	and event.button_index == BUTTON_LEFT \
+	and event.pressed:
+		self.on_click()
+	pass # Replace with function body.

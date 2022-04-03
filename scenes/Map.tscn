@@ -306,6 +306,7 @@ __meta__ = {
 
 [node name="ForegroundTileMap" type="TileMap" parent="."]
 scale = Vector2( 0.125, 0.125 )
+z_index = 20
 tile_set = SubResource( 3 )
 cell_size = Vector2( 16, 16 )
 format = 1

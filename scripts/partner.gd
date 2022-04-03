@@ -2,6 +2,7 @@ extends Node2D
 
 class_name Partner
 
+# https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png
 const ALL_COLORS = ["orangered", "limegreen", "dodgerblue", "whitesmoke", "orange"]
 const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 
@@ -14,6 +15,7 @@ const PATIENCE_RESCHEDULE = 60
 onready var step_tween = get_node("StepTween")
 onready var satisfied_tween = get_node("SatisfiedTween")
 onready var hud = get_node("/root/GameScene/HUD")
+onready var patience_indicator = get_node("PatienceIndicator")
 
 var partner_name
 
@@ -138,6 +140,8 @@ func _process(delta):
 	delta_goal_acc -= delta
 	if (goal == null) and (delta_goal_acc <= 0):
 		random_goal_choice()
+		
+	patience_indicator.rect_scale.x = 1 - patience/PATIENCE_RESCHEDULE
 
 
 func _process_timestep():

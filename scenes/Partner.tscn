@@ -35,5 +35,11 @@ shape = SubResource( 1 )
 
 [node name="SpawnTween" type="Tween" parent="."]
 
+[node name="PatienceIndicator" type="ColorRect" parent="."]
+margin_left = -24.0
+margin_top = -22.0
+margin_right = 24.0
+margin_bottom = -19.0
+
 [connection signal="area_entered" from="." to="." method="area_entered"]
 [connection signal="mouse_entered" from="." to="." method="mouse_entered"]

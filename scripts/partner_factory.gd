@@ -23,7 +23,7 @@ func make_partner(location, partner_driver):
 	)
 	hud.update_total_partner(1)
 	crossroads.inc_phase()
-	partners_spawned
+	partners_spawned += 1
 	hud.update_total_partner(partners_spawned)
 	hud.send_pickup_line(partner_instance.partner_name)
 	return partner_instance

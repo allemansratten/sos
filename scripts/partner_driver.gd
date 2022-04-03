@@ -13,12 +13,15 @@ func _ready():
 func start():
 	# TODO: this randomize call should be used only once and somewhere up but whatever
 	randomize()
-
 	spawn_partner()
 	# we need this hack because otherwise they may spawn on the same loc
 	# (because of some ECS thing) -zouharvi
 	yield(get_tree().create_timer(1.0), "timeout")
 	spawn_partner()
+
+
+func get_num_partners():
+	return $PartnerFactory.partners_spawned
 
 
 func spawn_partner():

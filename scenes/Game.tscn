@@ -157,7 +157,6 @@ script = ExtResource( 14 )
 [node name="PartnerFactory" type="Node2D" parent="PartnerDriver"]
 script = ExtResource( 13 )
 partner_scene = ExtResource( 6 )
-SPAWN_DELAY = 30
 
 [node name="BabyGenerator" type="Node2D" parent="PartnerDriver/PartnerFactory"]
 script = ExtResource( 15 )

@@ -89,7 +89,7 @@ func schedule_random_goal_choice():
 func die(reason):
 	modulate = Color("#904949")
 	if reason != null:
-		get_parent().game_over(reason, partner_driver.partner_i, position)
+		get_parent().game_over(reason, partner_driver.get_num_partners(), position)
 
 
 func make_flag(flag_colors):

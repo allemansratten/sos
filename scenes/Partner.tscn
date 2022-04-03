@@ -25,5 +25,7 @@ shape = SubResource( 1 )
 
 [node name="SatisfiedTween" type="Tween" parent="."]
 
+[node name="SpawnTween" type="Tween" parent="."]
+
 [connection signal="area_entered" from="." to="." method="area_entered"]
 [connection signal="mouse_entered" from="." to="." method="mouse_entered"]

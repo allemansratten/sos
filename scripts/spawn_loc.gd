@@ -4,7 +4,6 @@ extends Node2D
 var free = 0
 
 func area_entered(other):
-	print("ENTERED", self, free)
 	if other.is_in_group("partner"):
 		free += 1
 

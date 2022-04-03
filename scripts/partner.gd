@@ -72,11 +72,12 @@ func random_goal_choice():
 func schedule_random_goal_choice():
 	satisfied_tween.interpolate_property(self, "rotation_degrees",
 		0, 360, 0.75,
-		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
+		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
+	)
 	satisfied_tween.start()
 	
 	delta_goal_acc = GOAL_RESCHEDULE
-	goal = "..."
+	goal = null
 	patience = PATIENCE_RESCHEDULE
 
 func die(reason):
@@ -86,7 +87,7 @@ func die(reason):
 func make_flag(flag_colors):
 	for c_i in range(len(flag_colors)):
 		var flag = ColorRect.new()
-		flag.rect_position.x = -STEP_SIZE/2 + c_i*10
+		flag.rect_position.x = -STEP_SIZE/2 + c_i*10 + 20
 		flag.rect_position.y = -STEP_SIZE/2
 		flag.color = ColorN(flag_colors[c_i], 1)
 		flag.rect_size.x = 10
@@ -96,9 +97,30 @@ func make_flag(flag_colors):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# trick to hide FOUC
+	scale = Vector2.ZERO
+	
 	random_color_choice(2)
 	random_goal_choice()
 	make_flag(colors)
+	
+	# spawn animation
+	# rotation
+	satisfied_tween.interpolate_property(self, "rotation_degrees",
+		0, 360, 0.75,
+		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
+	)
+	# scale
+	satisfied_tween.interpolate_property(self, "scale",
+		Vector2.ZERO, Vector2.ONE, 0.75,
+		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
+	)
+	# alpha (doesn't really work)
+	#satisfied_tween.interpolate_property(self, "modulate",
+	#	Color(1, 1, 1, 0), Color(1, 1, 1, 1), 0.75,
+	#	Tween.TRANS_CIRC, Tween.EASE_IN_OUT
+	#)
+	satisfied_tween.start()
 
 func _process(delta):
 	delta_acc += delta
@@ -113,7 +135,7 @@ func _process(delta):
 
 	# process goal rescheduling
 	delta_goal_acc -= delta
-	if (goal == "...") and (delta_goal_acc <= 0):
+	if (goal == null) and (delta_goal_acc <= 0):
 		random_goal_choice()
 
 

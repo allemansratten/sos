@@ -7,6 +7,9 @@ func update_total_partner(count):
 	$PartnerCount.text = str(count) + " partners"
 
 func update_partner_tracker(new_partner):
+	# replace partner
+	if partner != null:
+		partner.highlight_on(false)
 	partner = new_partner
 	delta_acc_info = INFO_VISIBILITY_DURATION
 
@@ -20,5 +23,9 @@ func _process(delta):
 		$CharacterInfo.text = "%s wants to go to a %s (%ds)" % [
 			partner.partner_name, partner.goal.to_upper(), partner.patience
 		]
+		partner.highlight_on(true)
 	else:
+		if partner != null:
+			partner.highlight_on(false)
+			partner = null
 		$CharacterInfo.text = ""

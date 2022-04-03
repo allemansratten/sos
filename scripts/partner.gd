@@ -94,7 +94,6 @@ func make_flag(flag_colors):
 		flag.rect_size.y = 10
 		add_child(flag)
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# trick to hide FOUC
@@ -183,3 +182,6 @@ func area_entered(other):
 
 func mouse_entered():
 	hud.update_partner_tracker(self)
+
+func highlight_on(visible_val):
+	$HighlightRect.visible = visible_val

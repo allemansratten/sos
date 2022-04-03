@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/crossroads.gd" type="Script" id=1]
+[ext_resource path="res://resources/click.wav" type="AudioStream" id=2]
 [ext_resource path="res://resources/arrow_tiles_frames.tres" type="SpriteFrames" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
+
+[sub_resource type="AudioStreamRandomPitch" id=2]
+audio_stream = ExtResource( 2 )
 
 [node name="Crossroad" type="Area2D" groups=["crossroads", "fixed_crossroads"]]
 script = ExtResource( 1 )
@@ -23,11 +27,14 @@ z_index = 1
 shape = SubResource( 1 )
 
 [node name="ArrowSprite" type="AnimatedSprite" parent="."]
-rotation = -3.14159
+rotation = 3.14159
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = ExtResource( 3 )
 frame = 1
+
+[node name="OnClickAudioStream" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 2 )
 
 [node name="MouseCollider" type="TextureRect" parent="."]
 margin_left = -32.0

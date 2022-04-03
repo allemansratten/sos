@@ -1,7 +1,12 @@
-func get_random_baby_mut(backup_i):
+extends Node2D
+
+var num_babies = 0
+
+func get_random_baby_mut():
+	num_babies += 1
 	if data.size() == 0:
 		# no more babies
-		return "Partner %d" % backup_i
+		return "Partner %d" % num_babies
 	else:
 		var index = randi() % data.size()
 		return data.pop_at(index)

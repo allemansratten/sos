@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Place.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/partner_driver.gd" type="Script" id=3]
@@ -11,6 +11,9 @@
 [ext_resource path="res://scenes/SpawnableLocation.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scripts/all_crossroads.gd" type="Script" id=11]
 [ext_resource path="res://scenes/HUDGameOver.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scripts/partner_factory.gd" type="Script" id=13]
+[ext_resource path="res://scripts/spawn_timer.gd" type="Script" id=14]
+[ext_resource path="res://scripts/baby_names.gd" type="Script" id=15]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource( 5 )
@@ -64,7 +67,18 @@ enable_bend_2 = false
 
 [node name="PartnerDriver" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="SpawnTimer" type="Timer" parent="PartnerDriver"]
+wait_time = 30.0
+autostart = true
+script = ExtResource( 14 )
+
+[node name="PartnerFactory" type="Node2D" parent="PartnerDriver"]
+script = ExtResource( 13 )
 partner_scene = ExtResource( 6 )
+
+[node name="BabyGenerator" type="Node2D" parent="PartnerDriver/PartnerFactory"]
+script = ExtResource( 15 )
 
 [node name="MapCamera" type="Camera2D" parent="."]
 pause_mode = 2
@@ -111,3 +125,5 @@ position = Vector2( 384, 576 )
 
 [node name="Location3" parent="SpawnableLocations" instance=ExtResource( 10 )]
 position = Vector2( 768, 192 )
+
+[connection signal="timeout" from="PartnerDriver/SpawnTimer" to="PartnerDriver" method="_on_SpawnTimer_timeout"]

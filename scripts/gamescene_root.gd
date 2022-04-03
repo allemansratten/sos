@@ -6,6 +6,7 @@ func _ready():
 	$MapCamera.make_current()
 	# randomize seeds generators
 	randomize()
+	$PartnerDriver.start()
 
 var game_over_happened = false
 

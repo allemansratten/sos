@@ -3,7 +3,7 @@ class_name PartnerType
 const CrossroadStrategies = preload("res://scripts/crossroad_strategies.gd")
 const cross_strategies = {
 	"vanilla": CrossroadStrategies.VanillaCrossroadStrategy,
-	"unreliable": CrossroadStrategies.UnreliableCrossroadStrategy
+#	"unreliable": CrossroadStrategies.UnreliableCrossroadStrategy
 }
 
 var partner

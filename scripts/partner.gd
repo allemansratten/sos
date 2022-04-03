@@ -39,7 +39,7 @@ var just_turned = false
 
 func init(name: String, new_loc: Vector2, dir: Vector2, driver, config: Dictionary):
 	partner_type = PartnerType.new()
-	partner_type.init(self, "random")
+	partner_type.init(self, "vanilla")
 
 	partner_name = name
 	partner_driver = driver

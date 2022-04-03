@@ -35,15 +35,19 @@ func send_pickup_line(partner_name):
 func _process(delta):
 	if partner != null and delta_acc_info >= 0:
 		delta_acc_info -= delta
+		var extra = ""
+		if partner.partner_type.crossroad_strategy.get_name() == "unreliable":
+			extra = "\n- unreliable on crossroads"
 		if partner.goal == null:
-			$CharacterInfo.text = "%s is thinking about where to go" % [
-				partner.partner_name
+			$CharacterInfo.text = "%s is thinking about where to go%s" % [
+				partner.partner_name, extra,
 			]
 		else:
-			$CharacterInfo.text = "%s wants to go to a %s (%ds)" % [
+			$CharacterInfo.text = "%s wants to go to a %s (%ds)%s" % [
 				partner.partner_name,
 				partner.goal.to_upper(),
-				partner.get_node("PatienceTimer").time_left
+				partner.get_node("PatienceTimer").time_left,
+				extra,
 			]
 		partner.highlight_on(true)
 	else:

@@ -22,10 +22,6 @@ func start():
 	spawn_partner()
 
 
-func get_num_partners():
-	return $PartnerFactory.partners_spawned
-
-
 func spawn_partner():
 	var locs_all = spawnable_locations.get_children()
 	var locs_free = Array()

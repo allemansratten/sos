@@ -4,7 +4,6 @@ class_name Partner
 
 # https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png
 const ALL_COLORS = ["orangered", "limegreen", "dodgerblue", "whitesmoke", "orange"]
-const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 
 const JUMP_TIME_COEF = 0.25
 const STEP_SIZE = 64
@@ -12,6 +11,7 @@ const FLAG_WIDTH = 48
 const GOAL_RESCHEDULE = 10
 const PATIENCE_RESCHEDULE = 60
 onready var hud = get_node("/root/GameScene/HUD")
+onready var root_script = get_node("/root/GameScene")
 
 var partner_name
 
@@ -72,7 +72,7 @@ func random_color_choice(n_colors=2):
 
 
 func random_goal_choice():
-	goal = ALL_GOALS[randi() % ALL_GOALS.size()]
+	goal = root_script.legit_goals[randi() % root_script.legit_goals.size()]
 	$PatienceTimer.start()
 
 
@@ -88,9 +88,9 @@ func schedule_random_goal_choice():
 
 
 func die(reason):
-	modulate = Color("#904949")
+	#modulate = Color("#904949")
 	if reason != null:
-		get_parent().game_over(reason, partner_driver.get_num_partners(), position)
+		get_parent().game_over(reason, partner_driver.partner_count, position)
 
 
 func make_flag(flag_colors):

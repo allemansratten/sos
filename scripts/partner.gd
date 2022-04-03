@@ -26,8 +26,6 @@ var is_being_hit = false
 var colors = []
 var goal
 
-var delta_acc = 0
-var delta_goal_acc = 0
 var next_step = Vector2(0, 0)
 var old_step = Vector2(0, 0)
 
@@ -106,6 +104,7 @@ func make_flag(flag_colors):
 		flag.rect_size.y = 5
 		add_child(flag)
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# trick to hide FOUC
@@ -114,6 +113,8 @@ func _ready():
 	random_color_choice(randi()%5)
 	random_goal_choice()
 	make_flag(colors)
+	
+	$StepTimer.start(speed + step_delay)
 
 	sprite_type = randi() % N_SPRITE_TYPES + 1
 	reset_animation()
@@ -129,20 +130,10 @@ func _ready():
 		Vector2.ZERO, Vector2.ONE, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)
-	# alpha (doesn't really work)
-	#$SatisfiedTween.interpolate_property(self, "modulate",
-	#	Color(1, 1, 1, 0), Color(1, 1, 1, 1), 0.75,
-	#	Tween.TRANS_CIRC, Tween.EASE_IN_OUT
-	#)
 	$SatisfiedTween.start()
 
 
 func _process(delta):
-	delta_acc += delta
-	if delta_acc >= speed + step_delay:
-		delta_acc -= speed + step_delay
-		_process_timestep()
-
 	# process patience
 	patience -= delta
 	if patience <= 0:
@@ -158,6 +149,7 @@ func reset_animation():
 func post_jump_callback():
 	reset_animation()
 	$WalkAudioStream.pitch_scale = 1
+
 
 func _process_timestep():
 	next_step += direction * STEP_SIZE
@@ -225,3 +217,6 @@ func highlight_on(visible_val):
 
 func _on_GoalRescheduleTimer_timeout():
 	random_goal_choice()
+
+func _on_StepTimer_timeout():
+	_process_timestep()

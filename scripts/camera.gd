@@ -49,7 +49,9 @@ func zoom_at_point(zoom_change: float, point: Vector2, zoom_time: float):
 	var c0 = global_position  # camera position
 	var v0 = get_viewport().size  # vieport size
 	var new_zoom = clamp_zoom(zoom * zoom_change)  # next zoom value
-	var new_position = global_position + (-0.5*v0 + point)*(zoom - new_zoom)  # next camera position
+
+	# Compensate for the HUD by adding a vertical offset
+	var new_position = point + Vector2(0, 64 * 0.5)
 	
 	zoom_tween.interpolate_property(self, "zoom",
 		zoom, new_zoom, zoom_time,
@@ -57,10 +59,21 @@ func zoom_at_point(zoom_change: float, point: Vector2, zoom_time: float):
 	zoom_tween.start()
 
 	pos_tween.interpolate_property(self, "global_position",
-		global_position, new_position, zoom_time,
+		get_camera_screen_center(), new_position, zoom_time,
 		Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	pos_tween.start()
 
 
+func disable_camera_limits():
+	set_limit(MARGIN_TOP, -1e6)
+	set_limit(MARGIN_BOTTOM, 1e6)
+
+	set_limit(MARGIN_LEFT, -1e6)
+	set_limit(MARGIN_RIGHT, 1e6)
+
+
 func death_zoom_in(new_pos):
+	# Sometimes we need to move the camera beyond the normal limits
+	disable_camera_limits()
+	
 	zoom_at_point(0.5, new_pos, DIE_ZOOM_TIME)

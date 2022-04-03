@@ -85,7 +85,7 @@ func schedule_random_goal_choice():
 
 func die(reason):
 	modulate = Color("#904949")
-	get_parent().game_over(reason, position-Vector2(64*3, 0))
+	get_parent().game_over(reason, position)
 
 func make_flag(flag_colors):
 	

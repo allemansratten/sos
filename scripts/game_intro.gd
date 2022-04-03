@@ -41,9 +41,10 @@ func _ready():
 	add_message("is there something you're not telling me?", 16, false, 0.7)
 	add_message("I wanted to ask you if you were ever\ndishonest with me", 17, false, 0.7)
 	
-	yield(get_tree().create_timer(delay_acc+5), "timeout")
-	get_tree().change_scene("res://scenes/Game.tscn")
-
+	yield(get_tree().create_timer(delay_acc+2), "timeout")
+	
+	$Instructions.visible = true
+	
 # wtf gdscript doesn't have an array initializer
 var msg_counts = [0,0,0,0,0,0,0]
 var msg_counts_newline = [0,0,0,0,0,0,0]
@@ -82,3 +83,7 @@ func add_message(info: String, parent_i, sender_me=false, delay=1):
 	if not sender_me:
 		$Notification.play()
 	
+
+
+func start_button_pressed():
+	get_tree().change_scene("res://scenes/Game.tscn")

@@ -6,7 +6,7 @@ class_name Partner
 const ALL_COLORS = ["orangered", "limegreen", "dodgerblue", "whitesmoke", "orange"]
 const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 
-const JUMP_TIME_COEF = 0.5
+const JUMP_TIME_COEF = 0.25
 const STEP_SIZE = 64
 const FLAG_WIDTH = 48
 const GOAL_RESCHEDULE = 10
@@ -36,6 +36,8 @@ var sprite_type = 1  # 1 to N_SPRITE_TYPES
 
 var partner_driver
 var partner_type
+
+var just_turned = false
 
 func init(name: String, new_loc: Vector2, dir: Vector2, driver, delay=0):
 	partner_type = PartnerType.new()
@@ -106,7 +108,7 @@ func _ready():
 
 	sprite_type = randi() % N_SPRITE_TYPES + 1
 	reset_animation()
-	
+
 	# spawn animation
 	# rotation
 	$SatisfiedTween.interpolate_property(self, "rotation_degrees",
@@ -144,18 +146,30 @@ func reset_animation():
 	$AnimatedSprite.animation = "sprite%s" % sprite_type
 
 
+func post_jump_callback():
+	reset_animation()
+	$WalkAudioStream.pitch_scale = 1
+
 func _process_timestep():
 	next_step += direction * STEP_SIZE
 	$StepTween.interpolate_property(self, "position",
 		old_step, next_step, speed * JUMP_TIME_COEF,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
-	
+
 	# Temporary, while the other sprite types are not available
 	if sprite_type == 1:
 		$AnimatedSprite.flip_h = direction[0] < 0
 		$AnimatedSprite.play("sprite%s_walk" % sprite_type)
-		$StepTween.interpolate_callback(self, speed * JUMP_TIME_COEF, "reset_animation")
+
+	if just_turned:
+		# Make a high-pitched noise on the jump after a turn
+		$WalkAudioStream.pitch_scale = 1.5
+		just_turned = false
+
+	$StepTween.interpolate_callback(self, speed * JUMP_TIME_COEF, "post_jump_callback")
 	$StepTween.start()
+
+	$WalkAudioStream.play()
 	old_step = next_step
 
 
@@ -185,7 +199,10 @@ func area_entered(other):
 	if other.is_in_group("partner"):
 		collide_with_partner(other)
 	elif other.is_in_group("crossroads"):
+		var cur_direction = direction
 		partner_type.collide_with_crossroads(other)
+		if cur_direction != direction:
+			just_turned = true
 	elif other.is_in_group("places"):
 		other.collide(self)
 

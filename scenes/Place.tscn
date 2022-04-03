@@ -7,7 +7,6 @@
 extents = Vector2( 32, 32 )
 
 [node name="Place" type="Area2D" groups=["places"]]
-position = Vector2( 32, 32 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -18,5 +17,5 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.75, 0.75 )
+scale = Vector2( 2, 1.75 )
 texture = ExtResource( 1 )

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/place_spot.png-0769bc57ad3ecd2b8798a1e4b78fad1b.stex"
+path="res://.import/arrow_tiles.png-5262430ebc2fcc031af883c12571cdf8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/place_spot.png"
-dest_files=[ "res://.import/place_spot.png-0769bc57ad3ecd2b8798a1e4b78fad1b.stex" ]
+source_file="res://resources/arrow_tiles.png"
+dest_files=[ "res://.import/arrow_tiles.png-5262430ebc2fcc031af883c12571cdf8.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=false
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

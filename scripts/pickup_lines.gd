@@ -11,4 +11,9 @@ const data = [
 	"Love you, %s",
 	"I miss you, %s <3",
 	"Thank you for being with me, %s",
+	"send nudes %s",
+	"u free tonite %s?",
+	"wanna go for drinks %s?",
+	"Hey %s, I'm in town, wanna meet?",
+	"hi %s, netflix and chill? ;)",
 ]

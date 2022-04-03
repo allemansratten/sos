@@ -11,8 +11,6 @@ class UnreliableCrossroadStrategy:
 		return "unreliable"
 
 	func collide(crossroads, in_direction):
-		# TODO: this is temp
-		return crossroads.get_output_direction(in_direction)
 		# Sometimes pretends they're coming from a random direction
 		var dir
 		if randi() % 10 == 0:

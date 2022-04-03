@@ -1,14 +1,18 @@
-func get_random_baby_mut(backup_i):
+extends Node2D
+
+var num_babies = 0
+
+func get_random_baby_mut():
+	num_babies += 1
 	if data.size() == 0:
 		# no more babies
-		return "Partner %d" % backup_i
+		return "Partner %d" % num_babies
 	else:
 		var index = randi() % data.size()
 		return data.pop_at(index)
 
 # https://babynames.com/blogs/names/100-popular-gender-neutral-baby-names/
 var data = [
-	"AERO",
 	"AINSLEY",
 	"ALEXIS",
 	"AMARI",
@@ -16,14 +20,12 @@ var data = [
 	"ARDEN",
 	"ARI",
 	"ARIEL",
-	"ARMANI",
 	"ARTEMIS",
 	"ASHTON",
 	"AUBREY",
 	"AUGUST",
 	"AVERY",
 	"BECKETT",
-	"BELLAMY",
 	"BLAKE",
 	"BRIAR",
 	"CAMERON",
@@ -33,22 +35,15 @@ var data = [
 	"DAKOTA",
 	"DALLAS",
 	"DARCY",
-	"DENVER",
-	"DIOR",
 	"DREW",
 	"DYLAN",
-	"EASTON",
-	"ECHO",
-	"EDEN",
 	"ELLIOTT",
 	"ELLIS",
-	"EMERSON",
 	"EMERY",
 	"EZRA",
 	"FALLON",
 	"FINLEY",
 	"FRANKIE",
-	"GENESIS",
 	"GREER",
 	"HARLEY",
 	"HARPER",
@@ -58,38 +53,27 @@ var data = [
 	"JAMIE",
 	"JORDAN",
 	"JUDE",
-	"JUSTICE",
 	"KAI",
 	"KAMARI",
 	"KARSYN",
-	"LANDRY",
 	"LAYNE",
-	"LEGACY",
 	"LEIGHTON",
-	"LENNON",
 	"LENNOX",
 	"LOGAN",
-	"LONDON",
-	"LYRIC",
 	"MARLEY",
 	"MILAN",
 	"MORGAN",
 	"MURPHY",
 	"NOAH",
-	"NOVA",
 	"OAKLEY",
 	"PARKER",
 	"PEYTON",
 	"PHOENIX",
 	"QUINN",
-	"RAIN",
-	"RAVEN",
 	"REESE",
-	"REIGN",
 	"REMINGTON",
 	"REMY",
 	"RILEY",
-	"RIVER",
 	"ROBIN",
 	"RORY",
 	"ROWAN",
@@ -106,6 +90,4 @@ var data = [
 	"SUTTON",
 	"TATUM",
 	"TAYLOR",
-	"WINTER",
-	"ZEPHYR",
 ]

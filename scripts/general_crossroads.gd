@@ -2,13 +2,12 @@ tool # spusti kod i v editoru
 extends Area2D
 
 export(PackedScene) var arrow_scene
-const MAX_INT = 9223372036854775807 # this is not builtin
 
 export var directions_mask = {
-	Vector2.DOWN: MAX_INT,
-	Vector2.UP: MAX_INT,
-	Vector2.RIGHT: MAX_INT,
-	Vector2.LEFT: MAX_INT,
+	Vector2.DOWN: true,
+	Vector2.UP: true,
+	Vector2.RIGHT: true,
+	Vector2.LEFT: true,
 }
 
 onready var parent = get_parent()

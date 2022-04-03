@@ -63,8 +63,8 @@ Vector2( 1, 0 ): true
 [node name="FixedCrossroads3" parent="AllCrossroads" instance=ExtResource( 7 )]
 position = Vector2( 0, 0 )
 directions_mask = {
-Vector2( -1, 0 ): 999,
-Vector2( 0, -1 ): 999,
+Vector2( -1, 0 ): false,
+Vector2( 0, -1 ): false,
 Vector2( 0, 1 ): 1,
 Vector2( 1, 0 ): 0
 }

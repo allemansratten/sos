@@ -11,7 +11,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(time_delta):
+func _process(_time_delta):
 	var camera: MapCamera = get_parent().get_parent().get_node("MapCamera")
 	var screen_center = camera.get_camera_screen_center()
 	var screen_size = get_viewport().get_visible_rect().size

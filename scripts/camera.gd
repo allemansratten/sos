@@ -55,8 +55,6 @@ func _input(event):
 
 # https://godotengine.org/qa/25983/camera2d-zoom-position-towards-the-mouse
 func zoom_at_point(zoom_change: float, point: Vector2, zoom_time: float):
-	var c0 = global_position  # camera position
-	var v0 = get_viewport().size  # vieport size
 	var new_zoom = clamp_zoom(zoom * zoom_change)  # next zoom value
 
 	if zoom_time > 0:

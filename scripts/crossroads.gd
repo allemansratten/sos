@@ -94,7 +94,7 @@ func get_output_direction(in_direction: Vector2):
 		printerr("Undefined output direction")
 		return in_direction
 
-func _process(delta):
+func _process(_delta):
 	# hack to make it work in the editor
 	if rendered_direction != direction:
 		render_arrows()

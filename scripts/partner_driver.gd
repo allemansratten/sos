@@ -38,7 +38,7 @@ func spawn_partner():
 	# TODO: here we randomly select left/right but a better solution would be if
 	# the SpawnableLocation had a direction mask
 	var new_loc = locs_free[randi() % locs_free.size()].position
-	var partner = $PartnerFactory.make_partner(new_loc, self)
+	var partner = $PartnerFactory.make_partner(new_loc)
 	add_child(partner)
 
 	root_script.refresh_phase(partner_count)

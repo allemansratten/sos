@@ -6,7 +6,7 @@ export(PackedScene) var partner_scene
 onready var hud = get_node("/root/GameScene/HUD")
 onready var partner_driver = get_node("/root/GameScene/PartnerDriver")
 
-func make_partner(location, partner_driver):
+func make_partner(location):
 	var partner_instance = partner_scene.instance()
 	var partner_config = $PartnerCatalgoue.get_random_partner_config()
 #	var partner_config = $PartnerCatalgoue.get_partner_config("impatient")

@@ -89,7 +89,7 @@ func schedule_random_goal_choice():
 	)
 	$SatisfiedTween.start()
 	$GoalTimer.start(goal_delay)
-	$CollisionShape2D.set_disabled(true)
+	$CollisionShape2D.set_deferred("disabled", true)
 	$StepTimer.stop()
 
 
@@ -149,7 +149,7 @@ func _ready():
 	$SatisfiedTween.start()
 
 
-func _process(delta):
+func _process(_delta):
 	# update patience bar
 	$PatienceIndicator.rect_scale.x = $PatienceTimer.time_left/patience
 	$PatienceIndicator.modulate = Color(

@@ -14,12 +14,14 @@ func _ready():
 
 func make_partner(location, partner_driver):
 	var partner_instance = partner_scene.instance()
+	var partner_config = $PartnerCatalogue.get_random_partner_config()
+	
 	partner_instance.init(
 		$BabyGenerator.get_random_baby_mut(),
 		location,
 		Vector2((randi()%2)*2-1, 0),
 		partner_driver,
-		0.2
+		partner_config["delay"]
 	)
 	hud.update_total_partner(1)
 	crossroads.inc_phase()

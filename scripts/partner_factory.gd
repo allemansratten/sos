@@ -21,7 +21,7 @@ func make_partner(location, partner_driver):
 		location,
 		Vector2((randi()%2)*2-1, 0),
 		partner_driver,
-		partner_config["delay"]
+		partner_config
 	)
 	hud.update_total_partner(1)
 	crossroads.inc_phase()

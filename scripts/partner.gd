@@ -17,14 +17,14 @@ var partner_name
 
 # frame every second
 var speed = 1
+var step_delay = 0.2
+var patience = PATIENCE_RESCHEDULE
 var direction = Vector2(0, 0)
 
 var is_being_hit = false
 
 var colors = []
 var goal
-var patience = PATIENCE_RESCHEDULE
-var step_delay = 0
 
 var delta_acc = 0
 var delta_goal_acc = 0
@@ -39,7 +39,7 @@ var partner_type
 
 var just_turned = false
 
-func init(name: String, new_loc: Vector2, dir: Vector2, driver, delay=0):
+func init(name: String, new_loc: Vector2, dir: Vector2, driver, config: Dictionary):
 	partner_type = PartnerType.new()
 	partner_type.init(self, "random")
 
@@ -49,9 +49,18 @@ func init(name: String, new_loc: Vector2, dir: Vector2, driver, delay=0):
 	position = new_loc
 	old_step = position
 	next_step = position
-
 	direction = dir
-	step_delay = delay
+	
+	unpack_config(config)
+
+
+func unpack_config(config: Dictionary):
+	if "step_delay" in config:
+		step_delay = config["step_delay"]
+	if "speed" in config:
+		speed = config["speed"]
+	if "patience" in config:
+		patience = config["patience"]
 
 
 func random_color_choice(n_colors=2):

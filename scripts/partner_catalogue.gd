@@ -4,14 +4,14 @@ const catalogue = {
 	"normal": {
 		"step_delay": Vector2(0.2, 0.6),
 	},
-	"slow": {
-		"step_delay": Vector2(1, 2),
-		"speed": Vector2(1.5, 3)
-	},
+#	"slow": {
+#		"step_delay": Vector2(1, 2),
+#		"speed": Vector2(1.5, 3)
+#	},
 	"impatient": {
-		"step_delay": Vector2(0, 0.1),
+		"step_delay": Vector2(0.1, 0.1),
 		"speed": Vector2(0.8, 1),
-		"patience": Vector2(35, 50)
+		"patience": Vector2(35, 50),
 	}
 }
 

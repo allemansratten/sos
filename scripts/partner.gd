@@ -9,16 +9,23 @@ const JUMP_TIME_COEF = 0.25
 const STEP_SIZE = 64
 const FLAG_WIDTH = 48
 const GOAL_RESCHEDULE = 10
-const PATIENCE_RESCHEDULE = 60
+const DEFAULTS = {
+	"patience": 60,
+	"speed": 1,
+	"step_delay": 0.2,
+	"goal_delay": 2
+}
+
 onready var hud = get_node("/root/GameScene/HUD")
 onready var root_script = get_node("/root/GameScene")
 
 var partner_name
 
 # frame every second
-var speed = 1
-var step_delay = 0.2
-var patience = PATIENCE_RESCHEDULE
+var speed
+var goal_delay
+var step_delay
+var patience
 var direction = Vector2(0, 0)
 
 var is_being_hit = false
@@ -53,12 +60,10 @@ func init(name: String, new_loc: Vector2, dir: Vector2, driver, config: Dictiona
 
 
 func unpack_config(config: Dictionary):
-	if "step_delay" in config:
-		step_delay = config["step_delay"]
-	if "speed" in config:
-		speed = config["speed"]
-	if "patience" in config:
-		patience = config["patience"]
+	step_delay = config.get("step_delay", DEFAULTS["step_delay"])
+	speed = config.get("speed", DEFAULTS["speed"])
+	patience = config.get("patience", DEFAULTS["patience"])
+	goal_delay = config.get("goal_delay", DEFAULTS["goal_delay"])
 
 
 func random_color_choice(n_colors=2):
@@ -78,13 +83,14 @@ func random_goal_choice():
 
 func schedule_random_goal_choice():
 	$PatienceTimer.stop()  # So you don't lose after satisfying
-	$SatisfiedTween.interpolate_property($Sprite, "rotation_degrees",
-		0, 360, 0.75,
+	$SatisfiedTween.interpolate_property(
+		self, "scale", scale, Vector2.ZERO, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)
 	$SatisfiedTween.start()
-	$GoalRescheduleTimer.start(GOAL_RESCHEDULE)	
-	goal = null
+	$GoalTimer.start(goal_delay)
+	$CollisionShape2D.set_disabled(true)
+	$StepTimer.stop()
 
 
 func die(reason):
@@ -207,7 +213,9 @@ func area_entered(other):
 
 
 func mouse_entered():
+#	$StepTimer.stop()
 	hud.update_partner_tracker(self)
+
 
 func highlight_on(visible_val):
 	$HighlightRect.visible = visible_val
@@ -219,4 +227,15 @@ func _on_StepTimer_timeout():
 	_process_timestep()
 
 func _on_PatienceTimer_timeout():
-	die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])
+	die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])	
+
+func _on_GoalTimer_timeout():
+	$SatisfiedTween.interpolate_property(self, "scale",
+		Vector2.ZERO, Vector2.ONE, 0.75,
+		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
+	)
+	$SatisfiedTween.start()
+	$CollisionShape2D.set_disabled(false)
+	$GoalRescheduleTimer.start(GOAL_RESCHEDULE)
+	$StepTimer.start(speed + step_delay)
+	goal = null

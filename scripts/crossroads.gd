@@ -17,10 +17,9 @@ func set_direction(to: Vector2):
 func on_click():
 	var d = direction
 	for __ in directions_mask:
-		d = rotate_vector_clockwise(d, 1).round()
-		print_debug(d.round())
-		if directions_mask[d.round()]:
-			set_direction(d.round())
+		d = rotate_vector_clockwise(d, 1)
+		if directions_mask[d]:
+			set_direction(d)
 			return
 	assert(false, "No crossroad mask open")
 

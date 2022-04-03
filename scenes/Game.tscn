@@ -517,7 +517,7 @@ current = true
 limit_left = -64
 limit_top = -70
 limit_right = 1550
-limit_bottom = 1300
+limit_bottom = 1400
 script = ExtResource( 8 )
 
 [node name="ZoomTween" type="Tween" parent="MapCamera"]

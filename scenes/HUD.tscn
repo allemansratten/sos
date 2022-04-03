@@ -16,7 +16,13 @@ MessageScene = ExtResource( 3 )
 margin_top = 512.0
 margin_right = 1024.0
 margin_bottom = 640.0
-color = Color( 0.0235294, 0.0235294, 0.0235294, 1 )
+color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
+
+[node name="InfoBackground2" type="ColorRect" parent="."]
+margin_top = 512.0
+margin_right = 1024.0
+margin_bottom = 517.0
+color = Color( 0.286275, 0.286275, 0.286275, 1 )
 
 [node name="CharacterInfo" type="Label" parent="."]
 margin_left = 24.0

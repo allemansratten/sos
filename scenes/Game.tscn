@@ -117,10 +117,11 @@ enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
 
-[node name="Crossroads4" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+[node name="Crossroads4" parent="AllCrossroads/Movable" groups=["unlock_1"] instance=ExtResource( 7 )]
 position = Vector2( 0, 256 )
 direction = 2
 locked = true
+enable_left = false
 enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
@@ -133,7 +134,7 @@ enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
 
-[node name="Crossroads8" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+[node name="Crossroads8" parent="AllCrossroads/Movable" groups=["unlock_2"] instance=ExtResource( 7 )]
 position = Vector2( 960, 0 )
 direction = 3
 locked = true
@@ -142,7 +143,7 @@ enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
 
-[node name="Crossroads9" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+[node name="Crossroads9" parent="AllCrossroads/Movable" groups=["unlock_2"] instance=ExtResource( 7 )]
 position = Vector2( 960, 192 )
 locked = true
 enable_right = false
@@ -165,7 +166,7 @@ enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
 
-[node name="Crossroads12" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+[node name="Crossroads12" parent="AllCrossroads/Movable" groups=["unlock_2"] instance=ExtResource( 7 )]
 position = Vector2( 960, 384 )
 direction = 2
 locked = true
@@ -454,9 +455,11 @@ locked = true
 enable_left = false
 enable_up = false
 enable_continue = false
+enable_bend_2 = false
 
 [node name="Crossroads10" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
 position = Vector2( 1450, 192 )
+locked = true
 enable_right = false
 enable_up = false
 enable_down = false
@@ -515,10 +518,10 @@ script = ExtResource( 16 )
 pause_mode = 2
 position = Vector2( 481, 291 )
 current = true
-limit_left = -128
-limit_top = -128
-limit_right = 1200
-limit_bottom = 1000
+limit_left = -64
+limit_top = -70
+limit_right = 1550
+limit_bottom = 1300
 script = ExtResource( 8 )
 
 [node name="ZoomTween" type="Tween" parent="MapCamera"]
@@ -526,8 +529,6 @@ script = ExtResource( 8 )
 [node name="PosTween" type="Tween" parent="MapCamera"]
 
 [node name="HUD" parent="." instance=ExtResource( 9 )]
-scale = Vector2( 0.01, 1 )
-transform = Transform2D( 0.01, 0, 0, 1, 0, 0 )
 
 [node name="AllPlaces" type="Node2D" parent="."]
 position = Vector2( 0, 448 )
@@ -564,32 +565,102 @@ z_index = 100
 
 [node name="Phase1" type="Node2D" parent="FogOfWar"]
 
-[node name="ColorRect" type="ColorRect" parent="FogOfWar/Phase1"]
-margin_left = 832.0
-margin_top = -32.0
-margin_right = 1504.0
-margin_bottom = 608.0
-color = Color( 0.0941176, 0.0941176, 0.0941176, 0.968627 )
+[node name="Crossroads4" parent="FogOfWar/Phase1" instance=ExtResource( 7 )]
+position = Vector2( 576, 288 )
+direction = 2
+locked = true
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
 
-[node name="Phase2" type="Node2D" parent="FogOfWar"]
+[node name="Node2D" type="Node2D" parent="FogOfWar/Phase1"]
+z_index = 50
 
-[node name="ColorRect2" type="ColorRect" parent="FogOfWar/Phase2"]
+[node name="ColorRect2" type="ColorRect" parent="FogOfWar/Phase1/Node2D"]
 margin_left = -32.0
 margin_top = 320.0
 margin_right = 832.0
 margin_bottom = 896.0
 color = Color( 0.0941176, 0.0941176, 0.0941176, 0.968627 )
 
+[node name="Phase2" type="Node2D" parent="FogOfWar"]
+
+[node name="Crossroads4" parent="FogOfWar/Phase2" instance=ExtResource( 7 )]
+position = Vector2( 832, 192 )
+locked = true
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads5" parent="FogOfWar/Phase2" instance=ExtResource( 7 )]
+position = Vector2( 832, 0 )
+locked = true
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Node2D" type="Node2D" parent="FogOfWar/Phase2"]
+z_index = 50
+
+[node name="ColorRect" type="ColorRect" parent="FogOfWar/Phase2/Node2D"]
+margin_left = 832.0
+margin_top = -32.0
+margin_right = 1504.0
+margin_bottom = 608.0
+color = Color( 0.0941176, 0.0941176, 0.0941176, 0.968627 )
+
 [node name="Phase3" type="Node2D" parent="FogOfWar"]
 
-[node name="ColorRect2" type="ColorRect" parent="FogOfWar/Phase3"]
+[node name="Crossroads4" parent="FogOfWar/Phase3" instance=ExtResource( 7 )]
+position = Vector2( 960, 608 )
+direction = 2
+locked = true
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads5" parent="FogOfWar/Phase3" instance=ExtResource( 7 )]
+position = Vector2( 832, 768 )
+locked = true
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads6" parent="FogOfWar/Phase3" instance=ExtResource( 7 )]
+position = Vector2( 576, 896 )
+direction = 2
+locked = true
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads7" parent="FogOfWar/Phase3" instance=ExtResource( 7 )]
+position = Vector2( 320, 896 )
+direction = 2
+locked = true
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads8" parent="FogOfWar/Phase3" instance=ExtResource( 7 )]
+position = Vector2( 0, 896 )
+direction = 2
+locked = true
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Node2D" type="Node2D" parent="FogOfWar/Phase3"]
+z_index = 100
+
+[node name="ColorRect2" type="ColorRect" parent="FogOfWar/Phase3/Node2D"]
 margin_left = -32.0
 margin_top = 896.0
 margin_right = 832.0
 margin_bottom = 1248.0
 color = Color( 0.0941176, 0.0941176, 0.0941176, 0.968627 )
 
-[node name="ColorRect3" type="ColorRect" parent="FogOfWar/Phase3"]
+[node name="ColorRect3" type="ColorRect" parent="FogOfWar/Phase3/Node2D"]
 margin_left = 832.0
 margin_top = 608.0
 margin_right = 1504.0

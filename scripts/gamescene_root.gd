@@ -29,12 +29,15 @@ func game_over(reason, no_partners, location):
 
 func refresh_phase(partner_count):
 	var to_unlock = []
-	if partner_count == 2:
+	if partner_count == 3:
 		get_node("FogOfWar/Phase1").queue_free()
 		to_unlock = get_tree().get_nodes_in_group("unlock_1")
-	elif partner_count == 10:
+	elif partner_count == 6:
 		get_node("FogOfWar/Phase2").queue_free()
 		to_unlock = get_tree().get_nodes_in_group("unlock_2")
+	elif partner_count == 9:
+		get_node("FogOfWar/Phase3").queue_free()
+		to_unlock = get_tree().get_nodes_in_group("unlock_3")
 		
 	for n in to_unlock:
 		print(n)

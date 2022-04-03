@@ -56,7 +56,7 @@ enable_bend_2 = false
 
 [node name="Crossroads2" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 320, 0 )
-direction = 1
+direction = 3
 enable_up = false
 enable_continue = false
 enable_bend_1 = false
@@ -64,7 +64,7 @@ enable_bend_2 = false
 
 [node name="Crossroads5" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 576, 192 )
-direction = 1
+direction = 2
 enable_left = false
 enable_continue = false
 enable_bend_1 = false
@@ -80,7 +80,6 @@ enable_bend_2 = false
 
 [node name="Crossroads16" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 576, 1024 )
-direction = 1
 enable_right = false
 enable_continue = false
 enable_bend_1 = false
@@ -88,7 +87,7 @@ enable_bend_2 = false
 
 [node name="Crossroads17" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 320, 960 )
-direction = 1
+direction = 2
 enable_right = false
 enable_continue = false
 enable_bend_1 = false
@@ -104,7 +103,6 @@ enable_bend_2 = false
 
 [node name="Crossroads3" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 320, 256 )
-direction = 1
 enable_down = false
 enable_continue = false
 enable_bend_1 = false
@@ -128,7 +126,6 @@ enable_bend_2 = false
 
 [node name="Crossroads7" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 576, 0 )
-direction = 1
 enable_up = false
 enable_continue = false
 enable_bend_1 = false
@@ -160,7 +157,7 @@ enable_bend_2 = false
 
 [node name="Crossroads11" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 1216, 320 )
-direction = 1
+direction = 3
 enable_left = false
 enable_continue = false
 enable_bend_1 = false
@@ -203,7 +200,6 @@ enable_bend_2 = false
 
 [node name="Crossroads20" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 576, 832 )
-direction = 1
 enable_right = false
 enable_continue = false
 enable_bend_1 = false
@@ -555,7 +551,7 @@ place = "disco"
 position = Vector2( 192, 0 )
 
 [node name="Location2" parent="SpawnableLocations" instance=ExtResource( 10 )]
-position = Vector2( 384, 576 )
+position = Vector2( 96, 256 )
 
 [node name="Location3" parent="SpawnableLocations" instance=ExtResource( 10 )]
 position = Vector2( 768, 192 )

@@ -75,7 +75,7 @@ func random_goal_choice():
 	
 
 func schedule_random_goal_choice():
-	satisfied_tween.interpolate_property(self, "rotation_degrees",
+	satisfied_tween.interpolate_property($Sprite, "rotation_degrees",
 		0, 360, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)

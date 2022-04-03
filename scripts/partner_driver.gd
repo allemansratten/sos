@@ -6,7 +6,7 @@ onready var hud = get_node("/root/GameScene/HUD")
 onready var crossroads = get_node("/root/GameScene/AllCrossroads")
 
 export var SPAWN_DELAY = 30
-var spawn_time = SPAWN_DELAY
+var spawn_time
 
 # this is stringly-typed and should be replaced but zouharvi doesnt know better
 onready var baby_generator = load("res://scripts/baby_names.gd").new()
@@ -15,6 +15,9 @@ onready var baby_generator = load("res://scripts/baby_names.gd").new()
 func _ready():
 	# TODO: this randomize call should be used only once and somewhere up but whatever
 	randomize()
+	
+	spawn_time = SPAWN_DELAY
+	
 	spawn_partner()
 	# we need this hack because otherwise they may spawn on the same loc
 	# (because of some ECS thing) -zouharvi

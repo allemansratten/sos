@@ -6,21 +6,17 @@ class_name Partner
 const ALL_COLORS = ["orangered", "limegreen", "dodgerblue", "whitesmoke", "orange"]
 const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 
-# frame every second
-const SPEED_TIMESTEP = 1
 const JUMP_TIME_COEF = 0.5
 const STEP_SIZE = 64
 const FLAG_WIDTH = 48
 const GOAL_RESCHEDULE = 10
 const PATIENCE_RESCHEDULE = 60
-onready var step_tween = get_node("StepTween")
-onready var satisfied_tween = get_node("SatisfiedTween")
 onready var hud = get_node("/root/GameScene/HUD")
-onready var patience_indicator = get_node("PatienceIndicator")
 
 var partner_name
 
-var speed = SPEED_TIMESTEP
+# frame every second
+var speed = 1
 var direction = Vector2(0, 0)
 
 var is_being_hit = false
@@ -47,7 +43,7 @@ var partner_type
 func init(name: String, new_loc: Vector2, dir: Vector2, driver, delay=0):
 	partner_type = PartnerType.new()
 	partner_type.init(self, "random")
-	
+
 	partner_name = name
 	partner_driver = driver
 
@@ -76,27 +72,27 @@ func random_color_choice(n_colors=2):
 func random_goal_choice():
 	goal = ALL_GOALS[randi() % ALL_GOALS.size()]
 	patience = PATIENCE_RESCHEDULE
-	
+
 
 func schedule_random_goal_choice():
-	satisfied_tween.interpolate_property($Sprite, "rotation_degrees",
+	$SatisfiedTween.interpolate_property($Sprite, "rotation_degrees",
 		0, 360, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)
-	satisfied_tween.start()
-	
-#	delta_goal_acc = GOAL_RESCHEDULE
+	$SatisfiedTween.start()
+
 	$GoalRescheduleTimer.start(GOAL_RESCHEDULE)
 	goal = null
 	patience = PATIENCE_RESCHEDULE
+
 
 func die(reason):
 	modulate = Color("#904949")
 	if reason != null:
 		get_parent().game_over(reason, partner_driver.partner_i, position)
 
+
 func make_flag(flag_colors):
-	
 	for c_i in range(len(flag_colors)):
 		var flag = ColorRect.new()
 		flag.rect_position.x = -FLAG_WIDTH/2 + c_i*FLAG_WIDTH/len(flag_colors)
@@ -110,7 +106,7 @@ func make_flag(flag_colors):
 func _ready():
 	# trick to hide FOUC
 	scale = Vector2.ZERO
-	
+
 	random_color_choice(randi()%5)
 	random_goal_choice()
 	make_flag(colors)
@@ -120,26 +116,27 @@ func _ready():
 	
 	# spawn animation
 	# rotation
-	satisfied_tween.interpolate_property(self, "rotation_degrees",
+	$SatisfiedTween.interpolate_property(self, "rotation_degrees",
 		0, 360, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)
 	# scale
-	satisfied_tween.interpolate_property(self, "scale",
+	$SatisfiedTween.interpolate_property(self, "scale",
 		Vector2.ZERO, Vector2.ONE, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)
 	# alpha (doesn't really work)
-	#satisfied_tween.interpolate_property(self, "modulate",
+	#$SatisfiedTween.interpolate_property(self, "modulate",
 	#	Color(1, 1, 1, 0), Color(1, 1, 1, 1), 0.75,
 	#	Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	#)
-	satisfied_tween.start()
+	$SatisfiedTween.start()
+
 
 func _process(delta):
 	delta_acc += delta
-	if delta_acc >= SPEED_TIMESTEP + step_delay:
-		delta_acc -= SPEED_TIMESTEP + step_delay
+	if delta_acc >= speed + step_delay:
+		delta_acc -= speed + step_delay
 		_process_timestep()
 
 	# process patience
@@ -147,12 +144,7 @@ func _process(delta):
 	if patience <= 0:
 		die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])
 
-	# process goal rescheduling
-#	delta_goal_acc -= delta
-#	if (goal == null) and (delta_goal_acc <= 0):
-#		random_goal_choice()
-		
-	patience_indicator.rect_scale.x = 1 - patience/PATIENCE_RESCHEDULE
+	$PatienceIndicator.rect_scale.x = 1 - patience/PATIENCE_RESCHEDULE
 
 
 func reset_animation():
@@ -162,17 +154,17 @@ func reset_animation():
 func _process_timestep():
 	next_step_x = next_step_x + direction[0] * STEP_SIZE
 	next_step_y = next_step_y + direction[1] * STEP_SIZE
-	step_tween.interpolate_property(self, "position",
-		Vector2(old_step_x, old_step_y), Vector2(next_step_x, next_step_y), SPEED_TIMESTEP * JUMP_TIME_COEF,
+	$StepTween.interpolate_property(self, "position",
+		Vector2(old_step_x, old_step_y), Vector2(next_step_x, next_step_y), speed * JUMP_TIME_COEF,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
 	
 	# Temporary, while the other sprite types are not available
 	if sprite_type == 1:
 		$AnimatedSprite.flip_h = direction[0] < 0
 		$AnimatedSprite.play("sprite%s_walk" % sprite_type)
-		step_tween.interpolate_callback(self, SPEED_TIMESTEP * JUMP_TIME_COEF, "reset_animation")
+		$StepTween.interpolate_callback(self, speed * JUMP_TIME_COEF, "reset_animation")
 
-	step_tween.start()
+	$StepTween.start()
 	old_step_x = next_step_x
 	old_step_y = next_step_y
 

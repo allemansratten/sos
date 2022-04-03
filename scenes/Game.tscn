@@ -149,6 +149,7 @@ position = Vector2( -32, -32 )
 anchor_mode = 0
 current = true
 script = ExtResource( 8 )
+valid_region = Rect2( -96, -96, 320, 192 )
 
 [node name="ZoomTween" type="Tween" parent="MapCamera"]
 

@@ -48,6 +48,7 @@ func spawn_partner():
 	)
 	add_child(partner)
 	hud.update_total_partner(partner_i)
+	hud.send_pickup_line(partner.partner_name)
 	
 func game_over(reason, location):
 	# this relays the game_over call from partner

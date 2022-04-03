@@ -146,6 +146,7 @@ Vector2( 1, 0 ): true
 [node name="PartnerDriver" type="Node2D" parent="."]
 script = ExtResource( 3 )
 partner_scene = ExtResource( 6 )
+SPAWN_DELAY = 30
 
 [node name="MapCamera" type="Camera2D" parent="."]
 pause_mode = 2

@@ -152,6 +152,7 @@ limit_top = -128
 limit_right = 1200
 limit_bottom = 1000
 script = ExtResource( 8 )
+valid_region = Rect2( -96, -96, 320, 192 )
 
 [node name="ZoomTween" type="Tween" parent="MapCamera"]
 

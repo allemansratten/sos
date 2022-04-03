@@ -15,7 +15,18 @@ func update_partner_tracker(new_partner):
 
 var partner = null
 var delta_acc_info = 0
+export(PackedScene) var MessageScene
 const INFO_VISIBILITY_DURATION = 5
+const MESSAGE_DURATION = 10
+
+var active_messages = []
+
+func send_pickup_line(partner_name):
+	var message = MessageScene.instance()
+	var info = PickupLines.get_random_pickup_line_immut() % partner_name.capitalize()
+	message.find_node("MessageLabel").text = info
+	$Messages.add_child(message)
+	active_messages.append([message, MESSAGE_DURATION])
 
 func _process(delta):
 	if partner != null and delta_acc_info >= 0:
@@ -34,3 +45,18 @@ func _process(delta):
 			partner.highlight_on(false)
 			partner = null
 		$CharacterInfo.text = ""
+		
+	# reorganize messages
+	var offset_i = 0
+	
+	for msg_i in range(len(active_messages)):
+		active_messages[msg_i-offset_i][1] -= delta
+		if active_messages[msg_i-offset_i][1] <= 0:
+			# remove message
+			active_messages.pop_at(msg_i-offset_i)[0].queue_free()
+			offset_i += 1
+		else:
+			# reposition
+			# once offset_i > 0 all the messages are removed and this is suboptimal
+			active_messages[msg_i-offset_i][0].offset.y = (msg_i-offset_i)*30
+			active_messages[msg_i-offset_i][0].offset.x = $Messages.position.x

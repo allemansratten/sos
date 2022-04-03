@@ -18,15 +18,21 @@ _global_script_classes=[ {
 "class": "PartnerType",
 "language": "GDScript",
 "path": "res://scripts/partner_type.gd"
+}, {
+"base": "Reference",
+"class": "PickupLines",
+"language": "GDScript",
+"path": "res://scripts/pickup_lines.gd"
 } ]
 _global_script_class_icons={
 "Partner": "",
-"PartnerType": ""
+"PartnerType": "",
+"PickupLines": ""
 }
 
 [application]
 
-config/name="LD50"
+config/name="overly many relationships"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
 

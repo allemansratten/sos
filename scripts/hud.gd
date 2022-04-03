@@ -41,7 +41,9 @@ func _process(delta):
 			]
 		else:
 			$CharacterInfo.text = "%s wants to go to a %s (%ds)" % [
-				partner.partner_name, partner.goal.to_upper(), partner.patience
+				partner.partner_name,
+				partner.goal.to_upper(),
+				partner.get_node("PatienceTimer").time_left
 			]
 		partner.highlight_on(true)
 	else:

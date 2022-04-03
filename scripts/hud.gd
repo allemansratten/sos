@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+export(PackedScene) var off_screen_marker_scene
+
+
 func update_next_partner(spawn_time):
 	# The `max` prevents a 0 from appearing for 1 frame
 	$NextPartnerLabel.text = "Next partner in %ds" % [max(ceil(spawn_time), 1)]
@@ -61,3 +64,18 @@ func _process(delta):
 			# once offset_i > 0 all the messages are removed and this is suboptimal
 			active_messages[msg_i-offset_i][0].offset.y = (msg_i-offset_i)*30
 			active_messages[msg_i-offset_i][0].offset.x = $Messages.position.x
+
+	update_off_screen_markers()
+
+
+var off_screen_markers = []
+
+func update_off_screen_markers():
+	var partners = get_tree().get_nodes_in_group("partner")
+
+	while len(off_screen_markers) < len(partners):
+		# Assumes the nodes in the group are in a fixed order - does this make sense?
+		var marker = off_screen_marker_scene.instance()
+		marker.partner = partners[len(off_screen_markers)]
+		off_screen_markers.append(marker)
+		add_child(marker)

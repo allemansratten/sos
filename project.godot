@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Camera2D",
+"class": "MapCamera",
+"language": "GDScript",
+"path": "res://scripts/camera.gd"
+}, {
 "base": "Node2D",
 "class": "Partner",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://scripts/pickup_lines.gd"
 } ]
 _global_script_class_icons={
+"MapCamera": "",
 "Partner": "",
 "PartnerType": "",
 "PickupLines": ""

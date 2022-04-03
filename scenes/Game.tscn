@@ -9,12 +9,30 @@
 [ext_resource path="res://scripts/camera.gd" type="Script" id=8]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/SpawnableLocation.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scripts/all_crossroads.gd" type="Script" id=11]
 [ext_resource path="res://scenes/HUDGameOver.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scripts/partner_factory.gd" type="Script" id=13]
 [ext_resource path="res://scripts/spawn_timer.gd" type="Script" id=14]
 [ext_resource path="res://scripts/baby_names.gd" type="Script" id=15]
 [ext_resource path="res://scripts/partner_catalogue.gd" type="Script" id=16]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+var game_phase = 0
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func get_phase():
+	return game_phase
+
+func inc_phase():
+	game_phase += 1
+	# TODO: set locked = false to unlock
+	get_tree().call_group(\"crossroads\", \"render_arrows\")
+"
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource( 5 )
@@ -24,7 +42,7 @@ game_over_hud = ExtResource( 12 )
 position = Vector2( -32, -32 )
 
 [node name="AllCrossroads" type="Node" parent="."]
-script = ExtResource( 11 )
+script = SubResource( 1 )
 
 [node name="Crossroads" parent="AllCrossroads" instance=ExtResource( 7 )]
 direction = 5

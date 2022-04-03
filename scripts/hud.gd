@@ -1,8 +1,9 @@
 extends CanvasLayer
 
 func update_next_partner(spawn_time):
-	$NextPartnerLabel.text = "Next partner in %ds" % [spawn_time]
-	
+	# The `max` prevents a 0 from appearing for 1 frame
+	$NextPartnerLabel.text = "Next partner in %ds" % [max(ceil(spawn_time), 1)]
+
 func update_total_partner(count):
 	$PartnerCount.text = str(count) + " partners"
 

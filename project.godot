@@ -32,7 +32,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="LD50"
+config/name="overly many relationships"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
 

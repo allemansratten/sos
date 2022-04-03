@@ -9,7 +9,7 @@ onready var hud = get_node("/root/GameScene/HUD")
 var partners_spawned = 0
 
 func _ready():
-	print("PartnerFactory ready")
+	pass
 
 
 func make_partner(location, partner_driver):
@@ -23,7 +23,6 @@ func make_partner(location, partner_driver):
 		partner_driver,
 		partner_config
 	)
-	hud.update_total_partner(1)
 	crossroads.inc_phase()
 	partners_spawned += 1
 	hud.update_total_partner(partners_spawned)

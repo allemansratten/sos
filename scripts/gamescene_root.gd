@@ -22,5 +22,5 @@ func game_over(reason, location):
 	get_tree().paused = true
 	
 	if typeof(location) == TYPE_VECTOR2:
-		$MapCamera.zoom_in(location)
+		$MapCamera.death_zoom_in(location)
 	

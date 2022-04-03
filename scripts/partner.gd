@@ -47,9 +47,6 @@ var partner_type
 var just_turned = false
 
 func init(name: String, new_loc: Vector2, dir: Vector2, driver, config: Dictionary):
-	partner_type = PartnerType.new()
-	partner_type.init(self, "vanilla")
-
 	partner_name = name
 	partner_driver = driver
 
@@ -206,7 +203,7 @@ func area_entered(other):
 		collide_with_partner(other)
 	elif other.is_in_group("crossroads"):
 		var cur_direction = direction
-		partner_type.collide_with_crossroads(other)
+		direction = other.get_output_direction(direction)
 		if cur_direction != direction:
 			just_turned = true
 	elif other.is_in_group("places"):

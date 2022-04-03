@@ -25,11 +25,6 @@ _global_script_classes=[ {
 "path": "res://scripts/partner_factory.gd"
 }, {
 "base": "Reference",
-"class": "PartnerType",
-"language": "GDScript",
-"path": "res://scripts/partner_type.gd"
-}, {
-"base": "Reference",
 "class": "PickupLines",
 "language": "GDScript",
 "path": "res://scripts/pickup_lines.gd"
@@ -38,7 +33,6 @@ _global_script_class_icons={
 "MapCamera": "",
 "Partner": "",
 "PartnerFactory": "",
-"PartnerType": "",
 "PickupLines": ""
 }
 

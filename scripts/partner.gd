@@ -202,7 +202,6 @@ func area_entered(other):
 			just_turned = true
 	elif other.is_in_group("places"):
 		if other.place == goal:
-			print("satisfied partner's wish to go to ", other.place)
 			$PlaceEnteredAudioStream.play()
 			schedule_random_goal_choice()
 

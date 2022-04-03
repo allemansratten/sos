@@ -205,7 +205,6 @@ func area_entered(other):
 		if cur_direction != direction:
 			just_turned = true
 	elif other.is_in_group("places"):
-		other.collide(self)
 		if other.place == goal:
 			print("satisfied partner's wish to go to ", other.place)
 			$PlaceEnteredAudioStream.play()

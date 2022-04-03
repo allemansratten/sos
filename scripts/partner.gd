@@ -12,7 +12,9 @@ const GOAL_RESCHEDULE = 10
 const PATIENCE_RESCHEDULE = 60
 onready var step_tween = get_node("StepTween")
 onready var satisfied_tween = get_node("SatisfiedTween")
-onready var goal_label = get_node("Tooltip/GoalLabel")
+onready var hud = get_node("/root/GameScene/HUD")
+
+var partner_name
 
 var speed = SPEED_TIMESTEP
 var direction = Vector2(0, 0)
@@ -34,9 +36,11 @@ var old_step_y = 0
 
 var partner_type
 
-func init(new_loc: Vector2, dir: Vector2, delay=0):
+func init(name: String, new_loc: Vector2, dir: Vector2, delay=0):
 	partner_type = PartnerType.new()
 	partner_type.init(self, "random")
+	
+	partner_name = name
 
 	#print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f, crossroad_type: %s" % [x, y, dir[0], dir[1], speed, partner_type.crossroad_strategy.get_name()])
 
@@ -62,7 +66,6 @@ func random_color_choice(n_colors=2):
 
 func random_goal_choice():
 	goal = ALL_GOALS[randi() % ALL_GOALS.size()]
-	goal_label.text = goal
 	patience = PATIENCE_RESCHEDULE
 	
 
@@ -74,7 +77,6 @@ func schedule_random_goal_choice():
 	
 	delta_goal_acc = GOAL_RESCHEDULE
 	goal = "..."
-	goal_label.text = goal
 	patience = PATIENCE_RESCHEDULE
 
 func die(reason):
@@ -110,8 +112,6 @@ func _process(delta):
 		die("patience")
 
 	# process goal rescheduling
-	if goal != "...":
-		goal_label.text = "%s (%ds)" % [goal, patience]
 	delta_goal_acc -= delta
 	if (goal == "...") and (delta_goal_acc <= 0):
 		random_goal_choice()
@@ -157,3 +157,7 @@ func area_entered(other):
 		partner_type.collide_with_crossroads(other)
 	elif other.is_in_group("places"):
 		other.collide(self)
+
+
+func mouse_entered():
+	hud.update_partner_tracker(self)

@@ -10,20 +10,35 @@ font_data = ExtResource( 1 )
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 2 )
 
+[node name="InfoBackground" type="ColorRect" parent="."]
+margin_top = 512.0
+margin_right = 1024.0
+margin_bottom = 640.0
+color = Color( 0.0235294, 0.0235294, 0.0235294, 1 )
+
+[node name="CharacterInfo" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 536.0
+margin_right = 1000.0
+margin_bottom = 584.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "loran ipzum"
+
 [node name="NextPartnerLabel" type="Label" parent="."]
 margin_left = 24.0
-margin_top = 32.0
-margin_right = 64.0
-margin_bottom = 46.0
+margin_top = 592.0
+margin_right = 196.0
+margin_bottom = 628.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Next partner:"
 
 [node name="PartnerCount" type="Label" parent="."]
-margin_left = 776.0
-margin_top = 32.0
-margin_right = 948.0
-margin_bottom = 68.0
+margin_left = 832.0
+margin_top = 592.0
+margin_right = 1004.0
+margin_bottom = 628.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "X partners"

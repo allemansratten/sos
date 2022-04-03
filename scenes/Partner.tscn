@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/partner.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprite.png" type="Texture" id=2]
-[ext_resource path="res://scripts/tooltip.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 58 )
@@ -26,17 +25,5 @@ shape = SubResource( 1 )
 
 [node name="SatisfiedTween" type="Tween" parent="."]
 
-[node name="Tooltip" type="Node2D" parent="."]
-visible = false
-script = ExtResource( 3 )
-
-[node name="GoalLabel" type="Label" parent="Tooltip"]
-margin_left = -28.0
-margin_top = 13.0
-margin_right = 29.0
-margin_bottom = 27.0
-text = "knihovna"
-
 [connection signal="area_entered" from="." to="." method="area_entered"]
-[connection signal="mouse_entered" from="." to="Tooltip" method="_on_Partner_mouse_entered"]
-[connection signal="mouse_exited" from="." to="Tooltip" method="_on_Partner_mouse_exited"]
+[connection signal="mouse_entered" from="." to="." method="mouse_entered"]

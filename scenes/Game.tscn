@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/Place.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/partner_driver.gd" type="Script" id=3]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scripts/partner_factory.gd" type="Script" id=13]
 [ext_resource path="res://scripts/spawn_timer.gd" type="Script" id=14]
 [ext_resource path="res://scripts/baby_names.gd" type="Script" id=15]
+[ext_resource path="res://scripts/partner_catalogue.gd" type="Script" id=16]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -506,6 +507,9 @@ partner_scene = ExtResource( 6 )
 
 [node name="BabyGenerator" type="Node2D" parent="PartnerDriver/PartnerFactory"]
 script = ExtResource( 15 )
+
+[node name="PartnerCatalgoue" type="Node2D" parent="PartnerDriver/PartnerFactory"]
+script = ExtResource( 16 )
 
 [node name="MapCamera" type="Camera2D" parent="."]
 pause_mode = 2

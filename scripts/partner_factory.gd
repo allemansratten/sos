@@ -9,7 +9,7 @@ var partners_spawned = 0
 
 func make_partner(location, partner_driver):
 	var partner_instance = partner_scene.instance()
-	var partner_config = $PartnerCatalogue.get_random_partner_config()
+	var partner_config = $PartnerCatalgoue.get_random_partner_config()
 	
 	partner_instance.init(
 		$BabyGenerator.get_random_baby_mut(),

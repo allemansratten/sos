@@ -1,5 +1,7 @@
 extends Camera2D
 
+class_name MapCamera
+
 onready var zoom_tween = get_node("ZoomTween")
 onready var pos_tween = get_node("PosTween")
 

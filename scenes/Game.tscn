@@ -279,6 +279,7 @@ enable_continue = false
 [node name="Crossroads20" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
 position = Vector2( 576, 576 )
 direction = 2
+locked = true
 enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
@@ -411,16 +412,6 @@ enable_up = false
 enable_continue = false
 enable_bend_1 = false
 
-[node name="Crossroads32" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
-position = Vector2( 710, 576 )
-locked = true
-enable_right = false
-enable_up = false
-enable_down = false
-enable_continue = false
-enable_bend_1 = false
-enable_bend_2 = false
-
 [node name="Crossroads33" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
 position = Vector2( 1216, 448 )
 direction = 5
@@ -496,6 +487,16 @@ enable_up = false
 enable_continue = false
 enable_bend_1 = false
 
+[node name="Crossroads32" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 688, 576 )
+locked = true
+enable_right = false
+enable_up = false
+enable_down = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
 [node name="PartnerDriver" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
@@ -533,21 +534,57 @@ script = ExtResource( 8 )
 [node name="AllPlaces" type="Node2D" parent="."]
 position = Vector2( 0, 448 )
 
-[node name="GalleryPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 640, 128 )
-place = "gallery"
-
 [node name="LibraryPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 448, -192 )
+position = Vector2( 464, -192 )
 place = "library"
 
-[node name="CafePlace" parent="AllPlaces" instance=ExtResource( 2 )]
+[node name="DinerPlace" parent="AllPlaces" instance=ExtResource( 2 )]
 position = Vector2( 64, -192 )
-place = "cafe"
+place = "diner"
 
 [node name="DiscoPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 128, 128 )
+position = Vector2( 160, 128 )
 place = "disco"
+
+[node name="PoolPlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 576, 480 )
+place = "pool"
+
+[node name="StadiumPlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 864, 320 )
+place = "stadium"
+
+[node name="RestaurantPlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 704, 320 )
+place = "restaurant"
+
+[node name="FitnessPlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 72, 768 )
+place = "gym"
+
+[node name="MallPlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 192, 512 )
+place = "mall"
+
+[node name="GalleryPlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 664, 128 )
+place = "gallery"
+
+[node name="CafePlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 384, -192 )
+place = "cafe"
+
+[node name="MuseumPlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 768, -256 )
+place = "museum"
+
+[node name="ZenPlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 1376, 384 )
+place = "forest"
+
+[node name="VillaPlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 1312, -256 )
+place = "villa"
 
 [node name="SpawnableLocations" type="Node" parent="."]
 
@@ -555,12 +592,13 @@ place = "disco"
 position = Vector2( 192, 0 )
 
 [node name="Location2" parent="SpawnableLocations" instance=ExtResource( 10 )]
-position = Vector2( 384, 576 )
+position = Vector2( 576, 512 )
 
 [node name="Location3" parent="SpawnableLocations" instance=ExtResource( 10 )]
-position = Vector2( 768, 192 )
+position = Vector2( 960, 88 )
 
 [node name="FogOfWar" type="Node2D" parent="."]
+visible = false
 z_index = 100
 
 [node name="Phase1" type="Node2D" parent="FogOfWar"]

@@ -6,6 +6,8 @@
 [ext_resource path="res://fonts/default_font.tres" type="DynamicFont" id=5]
 
 [node name="HUD" type="CanvasLayer"]
+scale = Vector2( 0.001, 1 )
+transform = Transform2D( 0.001, 0, 0, 1, 0, 0 )
 script = ExtResource( 2 )
 off_screen_marker_scene = ExtResource( 4 )
 MessageScene = ExtResource( 3 )

@@ -15,6 +15,7 @@ arrow_scene = ExtResource( 2 )
 directions_mask = [ true, true, true, true ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_group_": true

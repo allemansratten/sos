@@ -19,7 +19,7 @@ position = Vector2( -32, -32 )
 [node name="AllCrossroads" type="Node" parent="."]
 
 [node name="Crossroads" parent="AllCrossroads" instance=ExtResource( 1 )]
-position = Vector2( 256, 576 )
+position = Vector2( 320, 256 )
 directions_mask = {
 Vector2( -1, 0 ): true,
 Vector2( 0, -1 ): true,
@@ -27,14 +27,20 @@ Vector2( 0, 1 ): false,
 Vector2( 1, 0 ): true
 }
 
-[node name="Crossroads2" parent="AllCrossroads" instance=ExtResource( 1 )]
-position = Vector2( 768, 320 )
-
 [node name="Crossroads3" parent="AllCrossroads" instance=ExtResource( 1 )]
-position = Vector2( 576, 464 )
+position = Vector2( 576, 384 )
+
+[node name="Crossroads4" parent="AllCrossroads" instance=ExtResource( 1 )]
+position = Vector2( 576, 192 )
+directions_mask = {
+Vector2( -1, 0 ): true,
+Vector2( 0, -1 ): true,
+Vector2( 0, 1 ): true,
+Vector2( 1, 0 ): true
+}
 
 [node name="FixedCrossroads" parent="AllCrossroads" instance=ExtResource( 7 )]
-position = Vector2( 320, 256 )
+position = Vector2( 320, 0 )
 directions_mask = {
 Vector2( -1, 0 ): false,
 Vector2( 0, -1 ): false,
@@ -70,7 +76,7 @@ Vector2( 1, 0 ): true
 }
 
 [node name="FixedCrossroads5" parent="AllCrossroads" instance=ExtResource( 7 )]
-position = Vector2( 512, 128 )
+position = Vector2( 576, 256 )
 directions_mask = {
 Vector2( -1, 0 ): true,
 Vector2( 0, -1 ): false,
@@ -78,8 +84,17 @@ Vector2( 0, 1 ): true,
 Vector2( 1, 0 ): false
 }
 
+[node name="FixedCrossroads11" parent="AllCrossroads" instance=ExtResource( 7 )]
+position = Vector2( 704, 576 )
+directions_mask = {
+Vector2( -1, 0 ): true,
+Vector2( 0, -1 ): false,
+Vector2( 0, 1 ): false,
+Vector2( 1, 0 ): false
+}
+
 [node name="FixedCrossroads6" parent="AllCrossroads" instance=ExtResource( 7 )]
-position = Vector2( 640, 0 )
+position = Vector2( 576, 0 )
 directions_mask = {
 Vector2( -1, 0 ): true,
 Vector2( 0, -1 ): false,
@@ -144,9 +159,17 @@ script = ExtResource( 8 )
 position = Vector2( 0, 448 )
 
 [node name="GalleryPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 0, 0 )
+position = Vector2( 640, 128 )
 place = "gallery"
 
 [node name="LibraryPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 256, 0 )
+position = Vector2( 448, -192 )
 place = "library"
+
+[node name="CafePlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 64, -192 )
+place = "cafe"
+
+[node name="DiscoPlace" parent="AllPlaces" instance=ExtResource( 2 )]
+position = Vector2( 128, 128 )
+place = "disco"

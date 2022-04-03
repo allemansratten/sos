@@ -18,7 +18,7 @@ func on_click():
 	var d = direction
 	for __ in directions_mask:
 		d = rotate_vector_clockwise(d, 1)
-		if directions_mask[d]:
+		if dir_is_open(d):
 			set_direction(d)
 			return
 	assert(false, "No crossroad mask open")
@@ -33,6 +33,10 @@ func _input_event(_viewport, event, _shape_idx):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	pass
+
+
+func render_arrows():
 	pass
 
 

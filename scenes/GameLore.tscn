@@ -1,0 +1,114 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/game_intro.gd" type="Script" id=1]
+[ext_resource path="res://scenes/MessageComplex.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://resources/notification.wav" type="AudioStream" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+font_data = ExtResource( 3 )
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource( 1 )
+MessageComplex = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 640.0
+color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
+
+[node name="M1" type="Node2D" parent="."]
+position = Vector2( 64, 128 )
+
+[node name="Sender" type="Label" parent="M1"]
+margin_left = 15.0
+margin_top = -36.0
+margin_right = 73.0
+margin_bottom = -14.0
+custom_fonts/font = SubResource( 1 )
+
+[node name="M2" type="Node2D" parent="."]
+position = Vector2( 576, 128 )
+
+[node name="Sender" type="Label" parent="M2"]
+margin_left = 15.0
+margin_top = -36.0
+margin_right = 73.0
+margin_bottom = -14.0
+custom_fonts/font = SubResource( 1 )
+
+[node name="M3" type="Node2D" parent="."]
+position = Vector2( 64, 320 )
+
+[node name="Sender" type="Label" parent="M3"]
+margin_left = 15.0
+margin_top = -36.0
+margin_right = 73.0
+margin_bottom = -14.0
+custom_fonts/font = SubResource( 1 )
+
+[node name="M4" type="Node2D" parent="."]
+position = Vector2( 576, 320 )
+
+[node name="Sender" type="Label" parent="M4"]
+margin_left = 15.0
+margin_top = -36.0
+margin_right = 73.0
+margin_bottom = -14.0
+custom_fonts/font = SubResource( 1 )
+
+[node name="M5" type="Node2D" parent="."]
+position = Vector2( 384, 256 )
+scale = Vector2( 2, 2 )
+
+[node name="M6" type="Node2D" parent="."]
+position = Vector2( 152, 186 )
+scale = Vector2( 2, 2 )
+
+[node name="M7" type="Node2D" parent="."]
+position = Vector2( 640, 194 )
+scale = Vector2( 2, 2 )
+
+[node name="M8" type="Node2D" parent="."]
+position = Vector2( 192, 384 )
+scale = Vector2( 2, 2 )
+
+[node name="M9" type="Node2D" parent="."]
+position = Vector2( 328, 115 )
+scale = Vector2( 2, 2 )
+
+[node name="M10" type="Node2D" parent="."]
+position = Vector2( 446, 345 )
+scale = Vector2( 2, 2 )
+
+[node name="M11" type="Node2D" parent="."]
+position = Vector2( 192, 64 )
+scale = Vector2( 2, 2 )
+
+[node name="M12" type="Node2D" parent="."]
+position = Vector2( 256, 512 )
+scale = Vector2( 2, 2 )
+
+[node name="M13" type="Node2D" parent="."]
+position = Vector2( 74, 511 )
+scale = Vector2( 2, 2 )
+
+[node name="M14" type="Node2D" parent="."]
+position = Vector2( 64, 0 )
+scale = Vector2( 2, 2 )
+
+[node name="M15" type="Node2D" parent="."]
+position = Vector2( 361, 470 )
+scale = Vector2( 2, 2 )
+
+[node name="M16" type="Node2D" parent="."]
+position = Vector2( 131, 288 )
+scale = Vector2( 2, 2 )
+
+[node name="M17" type="Node2D" parent="."]
+position = Vector2( 272, 234 )
+scale = Vector2( 2, 2 )
+
+[node name="Notification" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )

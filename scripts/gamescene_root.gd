@@ -23,4 +23,3 @@ func game_over(reason, location):
 	
 	if typeof(location) == TYPE_VECTOR2:
 		$MapCamera.death_zoom_in(location)
-	

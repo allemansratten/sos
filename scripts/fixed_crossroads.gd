@@ -11,16 +11,16 @@ func _ready():
 
 
 func get_output_direction(in_direction: Vector2):
-	if directions_mask[in_direction]:  # go straight through		
+	if dir_is_open(in_direction):  # go straight through		
 		return in_direction
 	# Go right
-	elif directions_mask[rotate_vector_clockwise(in_direction, 1)]:
+	elif dir_is_open(rotate_vector_clockwise(in_direction, 1)):
 		return rotate_vector_clockwise(in_direction, 1)
 	# Go left
-	elif directions_mask[rotate_vector_clockwise(in_direction, 3)]:
+	elif dir_is_open(rotate_vector_clockwise(in_direction, 3)):
 		return rotate_vector_clockwise(in_direction, 3)
 	# Go back
 	else:
 		# Otherwise no direction is available
-		assert(directions_mask[rotate_vector_clockwise(in_direction, 2)])
+		assert(dir_is_open(rotate_vector_clockwise(in_direction, 2)))
 		return rotate_vector_clockwise(in_direction, 2)

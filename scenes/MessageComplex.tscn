@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 6.0
+expand_margin_right = 8.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0.776471, 1, 1 )
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 8.0
+expand_margin_right = 6.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[node name="Message" type="Node2D"]
+
+[node name="MessageLeft" type="PanelContainer" parent="."]
+margin_right = 20.0
+margin_bottom = 24.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="LabelLeft" type="Label" parent="MessageLeft"]
+margin_top = 1.0
+margin_right = 20.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 1 )
+text = "xx"
+
+[node name="MessageRight" type="PanelContainer" parent="."]
+margin_right = 20.0
+margin_bottom = 24.0
+grow_horizontal = 0
+custom_styles/panel = SubResource( 3 )
+
+[node name="LabelRight" type="Label" parent="MessageRight"]
+margin_top = 1.0
+margin_right = 20.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 1 )
+text = "xx"

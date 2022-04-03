@@ -13,7 +13,7 @@ func make_partner(location, partner_driver):
 	partner_instance.init(
 		$BabyGenerator.get_random_baby_mut(),
 		location,
-		Vector2((randi()%2)*2-1, 0),
+		Vector2.DOWN,
 		partner_driver,
 		partner_config
 	)

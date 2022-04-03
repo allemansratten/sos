@@ -4,8 +4,7 @@ extends Node
 export(PackedScene) var partner_scene
 
 onready var hud = get_node("/root/GameScene/HUD")
-
-var partners_spawned = 0
+onready var partner_driver = get_node("/root/GameScene/PartnerDriver")
 
 func make_partner(location, partner_driver):
 	var partner_instance = partner_scene.instance()
@@ -18,7 +17,6 @@ func make_partner(location, partner_driver):
 		partner_driver,
 		partner_config
 	)
-	partners_spawned += 1
-	hud.update_total_partner(partners_spawned)
+	hud.update_total_partner(partner_driver.partner_count)
 	hud.send_pickup_line(partner_instance.partner_name)
 	return partner_instance

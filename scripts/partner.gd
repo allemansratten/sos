@@ -73,19 +73,18 @@ func random_color_choice(n_colors=2):
 
 func random_goal_choice():
 	goal = ALL_GOALS[randi() % ALL_GOALS.size()]
-	patience = PATIENCE_RESCHEDULE
+	$PatienceTimer.start()
 
 
 func schedule_random_goal_choice():
+	$PatienceTimer.stop()  # So you don't lose after satisfying
 	$SatisfiedTween.interpolate_property($Sprite, "rotation_degrees",
 		0, 360, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)
 	$SatisfiedTween.start()
-
-	$GoalRescheduleTimer.start(GOAL_RESCHEDULE)
+	$GoalRescheduleTimer.start(GOAL_RESCHEDULE)	
 	goal = null
-	patience = PATIENCE_RESCHEDULE
 
 
 func die(reason):
@@ -115,6 +114,7 @@ func _ready():
 	make_flag(colors)
 	
 	$StepTimer.start(speed + step_delay)
+	$PatienceTimer.start(patience)
 
 	sprite_type = randi() % N_SPRITE_TYPES + 1
 	reset_animation()
@@ -134,12 +134,8 @@ func _ready():
 
 
 func _process(delta):
-	# process patience
-	patience -= delta
-	if patience <= 0:
-		die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])
-
-	$PatienceIndicator.rect_scale.x = 1 - patience/PATIENCE_RESCHEDULE
+	# update patience bar
+	$PatienceIndicator.rect_scale.x = 1 - $PatienceTimer.time_left/patience
 
 
 func reset_animation():
@@ -214,9 +210,11 @@ func mouse_entered():
 func highlight_on(visible_val):
 	$HighlightRect.visible = visible_val
 
-
 func _on_GoalRescheduleTimer_timeout():
 	random_goal_choice()
 
 func _on_StepTimer_timeout():
 	_process_timestep()
+
+func _on_PatienceTimer_timeout():
+	die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])

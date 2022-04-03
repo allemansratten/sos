@@ -89,8 +89,12 @@ one_shot = true
 
 [node name="PatienceTimer" type="Timer" parent="."]
 
+[node name="GoalTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="." to="." method="area_entered"]
 [connection signal="mouse_entered" from="." to="." method="mouse_entered"]
 [connection signal="timeout" from="GoalRescheduleTimer" to="." method="_on_GoalRescheduleTimer_timeout"]
 [connection signal="timeout" from="StepTimer" to="." method="_on_StepTimer_timeout"]
 [connection signal="timeout" from="PatienceTimer" to="." method="_on_PatienceTimer_timeout"]
+[connection signal="timeout" from="GoalTimer" to="." method="_on_GoalTimer_timeout"]

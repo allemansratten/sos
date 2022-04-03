@@ -44,7 +44,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="overly many relationships"
+config/name="Significant Other(s)"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://resources/icon.png"
 

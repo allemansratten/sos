@@ -1,5 +1,7 @@
 extends Camera2D
 
+class_name MapCamera
+
 onready var zoom_tween = get_node("ZoomTween")
 onready var pos_tween = get_node("PosTween")
 
@@ -36,6 +38,10 @@ func _input(event):
 			dragging = true
 		else:
 			dragging = false
+			# this fixes a problem where the camera is dragged beyond the limits - you would
+			# otherwise have to drag it back the same distance for it to start moving again
+			position = get_camera_screen_center()
+
 	elif event is InputEventMouseMotion and dragging:
 		position = zoom * (mouse_start_pos - event.position) + screen_start_position
 	elif event.is_action("camera_zoom_in"):

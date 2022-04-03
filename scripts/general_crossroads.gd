@@ -16,18 +16,39 @@ static func rotate_vector_clockwise(vec: Vector2, steps=1):
 	return vec.rotated((PI/2) * steps ).round()
 
 
+var arrow_sprites = {
+	Vector2.DOWN: null,
+	Vector2.UP: null,
+	Vector2.RIGHT: null,
+	Vector2.LEFT: null,
+}
+
+
 func dir_is_open(dir: Vector2):
 	if directions_mask[dir] is int and directions_mask[dir] <= parent.get_phase():
 		return true
 	return directions_mask[dir] is bool and directions_mask[dir]
 
 
+func make_arrow(dir: Vector2):
+	var arrow = arrow_scene.instance()
+	arrow.rotate(dir.angle() + PI/2)
+	return arrow
+	
+
+func set_arrow(dir: Vector2, visible: bool):
+	if visible and arrow_sprites[dir] == null:
+		arrow_sprites[dir] = make_arrow(dir)
+		add_child(arrow_sprites[dir])
+	elif visible and arrow_sprites[dir] != null:
+		arrow_sprites[dir].show()
+	elif not visible and arrow_sprites[dir] != null:
+		arrow_sprites[dir].hide()
+
+
 func render_arrows():
 	for dir in directions_mask:
-		if dir_is_open(dir):
-			var arrow = arrow_scene.instance()
-			arrow.rotate(dir.angle() + PI/2)
-			add_child(arrow)
+		set_arrow(dir, dir_is_open(dir))
 
 
 func check_mask():

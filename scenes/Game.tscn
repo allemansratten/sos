@@ -36,7 +36,7 @@ position = Vector2( 576, 384 )
 [node name="Crossroads4" parent="AllCrossroads" instance=ExtResource( 1 )]
 position = Vector2( 576, 192 )
 directions_mask = {
-Vector2( -1, 0 ): true,
+Vector2( -1, 0 ): false,
 Vector2( 0, -1 ): true,
 Vector2( 0, 1 ): true,
 Vector2( 1, 0 ): true
@@ -65,7 +65,7 @@ position = Vector2( 0, 0 )
 directions_mask = {
 Vector2( -1, 0 ): false,
 Vector2( 0, -1 ): false,
-Vector2( 0, 1 ): 1,
+Vector2( 0, 1 ): 3,
 Vector2( 1, 0 ): 0
 }
 
@@ -190,9 +190,3 @@ position = Vector2( 384, 576 )
 
 [node name="Location3" parent="SpawnableLocations" instance=ExtResource( 10 )]
 position = Vector2( 768, 192 )
-
-[node name="PhaseTimer" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true
-
-[connection signal="timeout" from="PhaseTimer" to="AllCrossroads" method="_on_PhaseTimer_timeout"]

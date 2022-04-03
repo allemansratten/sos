@@ -3,6 +3,7 @@ extends Node
 export(PackedScene) var partner_scene
 onready var spawnable_locations = get_node("/root/GameScene/SpawnableLocations")
 onready var hud = get_node("/root/GameScene/HUD")
+onready var crossroads = get_node("/root/GameScene/AllCrossroads")
 
 export var SPAWN_DELAY = 30
 var spawn_time = SPAWN_DELAY
@@ -47,6 +48,7 @@ func spawn_partner():
 		0.1
 	)
 	add_child(partner)
+	crossroads.inc_phase()
 	hud.update_total_partner(partner_i)
 	hud.send_pickup_line(partner.partner_name)
 	

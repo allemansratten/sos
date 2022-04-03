@@ -129,8 +129,8 @@ enable_bend_2 = false
 [node name="Crossroads29" parent="AllCrossroads/Movable" groups=["unlock_1"] instance=ExtResource( 7 )]
 position = Vector2( 192, 256 )
 direction = 1
-locked = true
-enable_left = false
+enable_up = false
+enable_down = false
 enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
@@ -317,7 +317,7 @@ enable_continue = false
 enable_bend_1 = false
 
 [node name="Crossroads24" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
-position = Vector2( 960, 1160 )
+position = Vector2( 960, 1152 )
 direction = 6
 locked = true
 enable_left = false
@@ -335,7 +335,7 @@ enable_continue = false
 enable_bend_1 = false
 
 [node name="Crossroads26" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
-position = Vector2( 1088, 1160 )
+position = Vector2( 1088, 1152 )
 direction = 5
 locked = true
 enable_right = false
@@ -386,7 +386,7 @@ enable_up = false
 enable_continue = false
 
 [node name="Crossroads29" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
-position = Vector2( 1418, 832 )
+position = Vector2( 1408, 832 )
 locked = true
 enable_right = false
 enable_up = false
@@ -458,7 +458,7 @@ enable_continue = false
 enable_bend_2 = false
 
 [node name="Crossroads10" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
-position = Vector2( 1450, 192 )
+position = Vector2( 1472, 192 )
 locked = true
 enable_right = false
 enable_up = false
@@ -497,7 +497,7 @@ enable_continue = false
 enable_bend_1 = false
 
 [node name="Crossroads32" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
-position = Vector2( 688, 576 )
+position = Vector2( 704, 576 )
 locked = true
 enable_right = false
 enable_up = false
@@ -544,15 +544,15 @@ script = ExtResource( 8 )
 position = Vector2( 0, 448 )
 
 [node name="LibraryPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 481, -192 )
+position = Vector2( 448, -192 )
 place = "library"
 
 [node name="DinerPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 96, -192 )
+position = Vector2( 128, -192 )
 place = "diner"
 
 [node name="DiscoPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 160, 128 )
+position = Vector2( 128, 128 )
 place = "disco"
 
 [node name="PoolPlace" parent="AllPlaces" instance=ExtResource( 2 )]
@@ -560,7 +560,7 @@ position = Vector2( 576, 480 )
 place = "pool"
 
 [node name="StadiumPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 864, 320 )
+position = Vector2( 832, 320 )
 place = "stadium"
 
 [node name="RestaurantPlace" parent="AllPlaces" instance=ExtResource( 2 )]
@@ -568,7 +568,7 @@ position = Vector2( 704, 320 )
 place = "restaurant"
 
 [node name="FitnessPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 72, 768 )
+position = Vector2( 64, 768 )
 place = "gym"
 
 [node name="MallPlace" parent="AllPlaces" instance=ExtResource( 2 )]
@@ -576,7 +576,7 @@ position = Vector2( 192, 512 )
 place = "mall"
 
 [node name="GalleryPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 664, 128 )
+position = Vector2( 640, 128 )
 place = "gallery"
 
 [node name="CafePlace" parent="AllPlaces" instance=ExtResource( 2 )]
@@ -588,23 +588,23 @@ position = Vector2( 768, -256 )
 place = "museum"
 
 [node name="ZenPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 1376, 384 )
+position = Vector2( 1408, 384 )
 place = "forest"
 
 [node name="VillaPlace" parent="AllPlaces" instance=ExtResource( 2 )]
-position = Vector2( 1312, -256 )
+position = Vector2( 1472, -256 )
 place = "villa"
 
 [node name="SpawnableLocations" type="Node" parent="."]
 
 [node name="Location1" parent="SpawnableLocations" instance=ExtResource( 10 )]
-position = Vector2( 192, 126 )
+position = Vector2( 192, 64 )
 
 [node name="Location2" parent="SpawnableLocations" instance=ExtResource( 10 )]
-position = Vector2( 192, 126 )
+position = Vector2( 192, 62 )
 
 [node name="Location3" parent="SpawnableLocations" instance=ExtResource( 10 )]
-position = Vector2( 192, 126 )
+position = Vector2( 192, 64 )
 
 [node name="FogOfWar" type="Node2D" parent="."]
 z_index = 100

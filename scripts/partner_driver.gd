@@ -4,7 +4,7 @@ export(PackedScene) var partner_scene
 onready var spawnable_locations = get_node("/root/GameScene/SpawnableLocations")
 onready var hud = get_node("/root/GameScene/HUD")
 
-const SPAWN_DELAY = 6
+export var SPAWN_DELAY = 30
 var spawn_time = SPAWN_DELAY
 
 # this is stringly-typed and should be replaced but zouharvi doesnt know better

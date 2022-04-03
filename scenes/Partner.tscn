@@ -41,5 +41,9 @@ margin_top = -22.0
 margin_right = 24.0
 margin_bottom = -19.0
 
+[node name="GoalRescheduleTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="." to="." method="area_entered"]
 [connection signal="mouse_entered" from="." to="." method="mouse_entered"]
+[connection signal="timeout" from="GoalRescheduleTimer" to="." method="_on_GoalRescheduleTimer_timeout"]

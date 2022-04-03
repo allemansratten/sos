@@ -17,6 +17,8 @@ const INFO_VISIBILITY_DURATION = 5
 func _process(delta):
 	if partner != null and delta_acc_info >= 0:
 		delta_acc_info -= delta
-		$CharacterInfo.text = "%s: %s (%ds)" % [partner.partner_name, partner.goal, partner.patience]
+		$CharacterInfo.text = "%s wants to go to a %s (%ds)" % [
+			partner.partner_name, partner.goal.to_upper(), partner.patience
+		]
 	else:
 		$CharacterInfo.text = ""

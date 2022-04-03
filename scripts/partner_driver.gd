@@ -7,6 +7,9 @@ onready var hud = get_node("/root/GameScene/HUD")
 const SPAWN_DELAY = 6
 var spawn_time = SPAWN_DELAY
 
+# this is stringly-typed and should be replaced but zouharvi doesnt know better
+onready var baby_generator = load("res://scripts/baby_names.gd").new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# TODO: this randomize call should be used only once and somewhere up but whatever
@@ -37,7 +40,12 @@ func spawn_partner():
 	# the SpawnableLocation had a direction mask
 	var new_loc = locs_free[randi() % locs_free.size()].position
 	
-	partner.init("honzik %s" % [partner_i], new_loc, Vector2((randi()%2)*2-1, 0), 0.1)
+	partner.init(
+		baby_generator.get_random_baby_mut(partner_i),
+		new_loc,
+		Vector2((randi()%2)*2-1, 0),
+		0.1
+	)
 	add_child(partner)
 	hud.update_total_partner(partner_i)
 	

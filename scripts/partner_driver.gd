@@ -2,8 +2,10 @@ extends Node
 
 onready var spawnable_locations = get_node("/root/GameScene/SpawnableLocations")
 onready var hud = get_node("/root/GameScene/HUD")
+onready var root_script = get_node("/root/GameScene")
 onready var partner_factory = PartnerFactory.new()
 
+var partner_count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,7 +18,7 @@ func start():
 	spawn_partner()
 	# we need this hack because otherwise they may spawn on the same loc
 	# (because of some ECS thing) -zouharvi
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(2.0), "timeout")
 	spawn_partner()
 
 
@@ -36,13 +38,15 @@ func spawn_partner():
 		# TODO: better handling
 		return
 
+	partner_count += 1
 	# TODO: here we randomly select left/right but a better solution would be if
 	# the SpawnableLocation had a direction mask
 	var new_loc = locs_free[randi() % locs_free.size()].position
 	var partner = $PartnerFactory.make_partner(new_loc, self)
 	add_child(partner)
 
-
+	root_script.refresh_phase(partner_count)
+	
 func game_over(reason, no_partners, location):
 	# this relays the game_over call from partner
 	get_parent().game_over(reason, no_partners, location)

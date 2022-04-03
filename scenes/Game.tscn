@@ -57,7 +57,7 @@ enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
 
-[node name="Crossroads4" parent="AllCrossroads" instance=ExtResource( 7 )]
+[node name="Crossroads4" parent="AllCrossroads" groups=["unlock_1"] instance=ExtResource( 7 )]
 position = Vector2( 0, 256 )
 direction = 2
 locked = true
@@ -121,10 +121,10 @@ place = "disco"
 [node name="SpawnableLocations" type="Node" parent="."]
 
 [node name="Location1" parent="SpawnableLocations" instance=ExtResource( 10 )]
-position = Vector2( 192, 0 )
+position = Vector2( 480, 256 )
 
 [node name="Location2" parent="SpawnableLocations" instance=ExtResource( 10 )]
-position = Vector2( 384, 576 )
+position = Vector2( 96, 256 )
 
 [node name="Location3" parent="SpawnableLocations" instance=ExtResource( 10 )]
 position = Vector2( 704, 192 )

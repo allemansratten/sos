@@ -126,7 +126,7 @@ enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
 
-[node name="Crossroads29" parent="AllCrossroads/Movable" groups=["unlock_1"] instance=ExtResource( 7 )]
+[node name="Crossroads29" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 192, 256 )
 direction = 1
 locked = true

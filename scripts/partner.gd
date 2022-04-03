@@ -6,7 +6,7 @@ class_name Partner
 const ALL_COLORS = ["orangered", "limegreen", "dodgerblue", "whitesmoke", "orange"]
 const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 
-# frame every  second
+# frame every second
 const SPEED_TIMESTEP = 1
 const STEP_SIZE = 64
 const FLAG_WIDTH = 48
@@ -81,7 +81,8 @@ func schedule_random_goal_choice():
 	)
 	satisfied_tween.start()
 	
-	delta_goal_acc = GOAL_RESCHEDULE
+#	delta_goal_acc = GOAL_RESCHEDULE
+	$GoalRescheduleTimer.start(GOAL_RESCHEDULE)
 	goal = null
 	patience = PATIENCE_RESCHEDULE
 
@@ -140,9 +141,9 @@ func _process(delta):
 		die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])
 
 	# process goal rescheduling
-	delta_goal_acc -= delta
-	if (goal == null) and (delta_goal_acc <= 0):
-		random_goal_choice()
+#	delta_goal_acc -= delta
+#	if (goal == null) and (delta_goal_acc <= 0):
+#		random_goal_choice()
 		
 	patience_indicator.rect_scale.x = 1 - patience/PATIENCE_RESCHEDULE
 
@@ -194,3 +195,7 @@ func mouse_entered():
 
 func highlight_on(visible_val):
 	$HighlightRect.visible = visible_val
+
+
+func _on_GoalRescheduleTimer_timeout():
+	random_goal_choice()

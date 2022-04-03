@@ -36,8 +36,6 @@ func _process(delta):
 	if partner != null and delta_acc_info >= 0:
 		delta_acc_info -= delta
 		var extra = ""
-		if partner.partner_type.crossroad_strategy.get_name() == "unreliable":
-			extra = "\n- unreliable on crossroads"
 		if partner.goal == null:
 			$CharacterInfo.text = "%s is thinking about where to go%s" % [
 				partner.partner_name, extra,

@@ -151,7 +151,7 @@ func collide_with_partner(partner):
 
 
 func area_entered(other):
-	if other.is_in_group("partners"):
+	if other.is_in_group("partner"):
 		collide_with_partner(other)
 	elif other.is_in_group("crossroads"):
 		partner_type.collide_with_crossroads(other)

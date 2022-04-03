@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Crossroads.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Place.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/FixedCrossroads.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scripts/camera.gd" type="Script" id=8]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/SpawnableLocation.tscn" type="PackedScene" id=10]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource( 5 )
@@ -176,11 +177,11 @@ place = "disco"
 
 [node name="SpawnableLocations" type="Node" parent="."]
 
-[node name="Location1" type="Node2D" parent="SpawnableLocations"]
+[node name="Location1" parent="SpawnableLocations" instance=ExtResource( 10 )]
+position = Vector2( 192, 0 )
+
+[node name="Location2" parent="SpawnableLocations" instance=ExtResource( 10 )]
+position = Vector2( 384, 576 )
+
+[node name="Location3" parent="SpawnableLocations" instance=ExtResource( 10 )]
 position = Vector2( 768, 192 )
-
-[node name="Location2" type="Node2D" parent="SpawnableLocations"]
-position = Vector2( 320, 576 )
-
-[node name="Location3" type="Node2D" parent="SpawnableLocations"]
-position = Vector2( 128, 0 )

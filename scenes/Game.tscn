@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Place.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/partner_driver.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Map.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/gamescene_root.gd" type="Script" id=5]
 [ext_resource path="res://scenes/Partner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Crossroad.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scripts/camera.gd" type="Script" id=8]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/SpawnableLocation.tscn" type="PackedScene" id=10]
@@ -13,12 +14,483 @@
 [ext_resource path="res://scripts/spawn_timer.gd" type="Script" id=14]
 [ext_resource path="res://scripts/baby_names.gd" type="Script" id=15]
 
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+var game_phase = 0
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func get_phase():
+	return game_phase
+
+func inc_phase():
+	game_phase += 1
+	# TODO: set locked = false to unlock
+	get_tree().call_group(\"crossroads\", \"render_arrows\")
+"
+
 [node name="GameScene" type="Node2D"]
 script = ExtResource( 5 )
 game_over_hud = ExtResource( 12 )
 
 [node name="Map" parent="." instance=ExtResource( 4 )]
 position = Vector2( -32, -32 )
+
+[node name="AllCrossroads" type="Node" parent="."]
+script = SubResource( 1 )
+
+[node name="Movable" type="Node" parent="AllCrossroads"]
+
+[node name="Crossroads27" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 1152, 448 )
+direction = 1
+enable_up = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads2" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 320, 0 )
+direction = 1
+enable_up = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads5" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 576, 192 )
+direction = 1
+enable_left = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads15" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 576, 768 )
+direction = 1
+enable_left = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads16" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 576, 1024 )
+direction = 1
+enable_right = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads17" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 320, 960 )
+direction = 1
+enable_right = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads18" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 320, 768 )
+direction = 1
+enable_right = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads3" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 320, 256 )
+direction = 1
+enable_down = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads6" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 576, 256 )
+enable_right = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads4" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 0, 256 )
+direction = 2
+locked = true
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads7" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 576, 0 )
+direction = 1
+enable_up = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads8" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 960, 0 )
+direction = 3
+locked = true
+enable_up = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads9" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 960, 192 )
+locked = true
+enable_right = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads10" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 1216, 192 )
+direction = 1
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads11" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 1216, 320 )
+direction = 1
+enable_left = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads12" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 960, 384 )
+direction = 2
+locked = true
+enable_right = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads13" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 960, 448 )
+direction = 2
+locked = true
+enable_left = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads14" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 576, 384 )
+direction = 1
+enable_left = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads19" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 0, 576 )
+direction = 1
+locked = true
+enable_left = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads20" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 576, 832 )
+direction = 1
+enable_right = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads21" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 320, 832 )
+direction = 1
+enable_left = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads22" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 320, 1024 )
+direction = 1
+enable_left = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads23" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 0, 960 )
+direction = 1
+enable_left = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads24" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 0, 768 )
+direction = 1
+enable_left = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads25" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 320, 576 )
+direction = 1
+locked = true
+enable_up = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads26" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 960, 768 )
+direction = 2
+locked = true
+enable_down = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads28" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+position = Vector2( 1280, 832 )
+direction = 1
+enable_down = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Static" type="Node" parent="AllCrossroads"]
+
+[node name="Crossroads" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+direction = 5
+locked = true
+enable_left = false
+enable_up = false
+enable_continue = false
+
+[node name="Crossroads20" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 576, 576 )
+direction = 2
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads21" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 320, 1216 )
+direction = 5
+enable_right = false
+enable_down = false
+enable_continue = false
+enable_bend_2 = false
+
+[node name="Crossroads22" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 0, 1216 )
+direction = 6
+enable_left = false
+enable_down = false
+enable_bend_1 = false
+
+[node name="Crossroads23" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 576, 1088 )
+direction = 6
+enable_left = false
+enable_down = false
+enable_continue = false
+enable_bend_1 = false
+
+[node name="Crossroads24" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 960, 1160 )
+direction = 6
+locked = true
+enable_left = false
+enable_down = false
+enable_continue = false
+enable_bend_1 = false
+
+[node name="Crossroads25" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 960, 1088 )
+direction = 6
+locked = true
+enable_right = false
+enable_up = false
+enable_continue = false
+enable_bend_1 = false
+
+[node name="Crossroads26" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1088, 1160 )
+direction = 5
+locked = true
+enable_right = false
+enable_down = false
+enable_continue = false
+enable_bend_2 = false
+
+[node name="Crossroads2" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1088, 1088 )
+direction = 5
+locked = true
+enable_left = false
+enable_up = false
+enable_continue = false
+
+[node name="Crossroads3" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1152, 896 )
+direction = 5
+locked = true
+enable_left = false
+enable_up = false
+enable_continue = false
+
+[node name="Crossroads27" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1152, 1088 )
+direction = 5
+locked = true
+enable_right = false
+enable_down = false
+enable_continue = false
+enable_bend_2 = false
+
+[node name="Crossroads28" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1216, 896 )
+direction = 5
+locked = true
+enable_right = false
+enable_down = false
+enable_continue = false
+enable_bend_2 = false
+
+[node name="Crossroads4" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1216, 832 )
+direction = 5
+locked = true
+enable_left = false
+enable_up = false
+enable_continue = false
+
+[node name="Crossroads29" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1418, 832 )
+locked = true
+enable_right = false
+enable_up = false
+enable_down = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads5" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1280, 640 )
+direction = 5
+locked = true
+enable_left = false
+enable_up = false
+enable_continue = false
+
+[node name="Crossroads30" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1344, 640 )
+direction = 5
+locked = true
+enable_right = false
+enable_down = false
+enable_continue = false
+enable_bend_2 = false
+
+[node name="Crossroads31" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1344, 320 )
+direction = 6
+locked = true
+enable_right = false
+enable_up = false
+enable_continue = false
+enable_bend_1 = false
+
+[node name="Crossroads32" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 710, 576 )
+locked = true
+enable_right = false
+enable_up = false
+enable_down = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads33" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1216, 448 )
+direction = 5
+locked = true
+enable_right = false
+enable_down = false
+enable_continue = false
+enable_bend_2 = false
+
+[node name="Crossroads34" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1152, 704 )
+direction = 5
+locked = true
+enable_right = false
+enable_down = false
+enable_continue = false
+enable_bend_2 = false
+
+[node name="Crossroads35" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1088, 768 )
+direction = 5
+locked = true
+enable_right = false
+enable_down = false
+enable_continue = false
+enable_bend_2 = false
+
+[node name="Crossroads6" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1088, 704 )
+direction = 5
+locked = true
+enable_left = false
+enable_up = false
+enable_continue = false
+
+[node name="Crossroads10" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1450, 192 )
+enable_right = false
+enable_up = false
+enable_down = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads36" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1088, 192 )
+direction = 6
+locked = true
+enable_left = false
+enable_down = false
+enable_continue = false
+enable_bend_1 = false
+
+[node name="Crossroads8" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1088, 112 )
+direction = 3
+locked = true
+enable_left = false
+enable_right = false
+enable_up = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads37" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
+position = Vector2( 1216, 0 )
+direction = 6
+locked = true
+enable_right = false
+enable_up = false
+enable_continue = false
+enable_bend_1 = false
 
 [node name="PartnerDriver" type="Node2D" parent="."]
 script = ExtResource( 3 )
@@ -82,5 +554,42 @@ position = Vector2( 384, 576 )
 
 [node name="Location3" parent="SpawnableLocations" instance=ExtResource( 10 )]
 position = Vector2( 768, 192 )
+
+[node name="FogOfWar" type="Node2D" parent="."]
+z_index = 100
+
+[node name="Phase1" type="Node2D" parent="FogOfWar"]
+
+[node name="ColorRect" type="ColorRect" parent="FogOfWar/Phase1"]
+margin_left = 832.0
+margin_top = -32.0
+margin_right = 1504.0
+margin_bottom = 608.0
+color = Color( 0.0941176, 0.0941176, 0.0941176, 0.968627 )
+
+[node name="Phase2" type="Node2D" parent="FogOfWar"]
+
+[node name="ColorRect2" type="ColorRect" parent="FogOfWar/Phase2"]
+margin_left = -32.0
+margin_top = 320.0
+margin_right = 832.0
+margin_bottom = 896.0
+color = Color( 0.0941176, 0.0941176, 0.0941176, 0.968627 )
+
+[node name="Phase3" type="Node2D" parent="FogOfWar"]
+
+[node name="ColorRect2" type="ColorRect" parent="FogOfWar/Phase3"]
+margin_left = -32.0
+margin_top = 896.0
+margin_right = 832.0
+margin_bottom = 1248.0
+color = Color( 0.0941176, 0.0941176, 0.0941176, 0.968627 )
+
+[node name="ColorRect3" type="ColorRect" parent="FogOfWar/Phase3"]
+margin_left = 832.0
+margin_top = 608.0
+margin_right = 1504.0
+margin_bottom = 1248.0
+color = Color( 0.0941176, 0.0941176, 0.0941176, 0.968627 )
 
 [connection signal="timeout" from="PartnerDriver/SpawnTimer" to="PartnerDriver" method="_on_SpawnTimer_timeout"]

@@ -13,6 +13,9 @@ func _ready():
 func start():
 	# TODO: this randomize call should be used only once and somewhere up but whatever
 	randomize()
+
+	spawn_time = SPAWN_DELAY
+
 	spawn_partner()
 	# we need this hack because otherwise they may spawn on the same loc
 	# (because of some ECS thing) -zouharvi
@@ -26,12 +29,12 @@ func spawn_partner():
 	for loc in locs_all:
 		if loc.is_free():
 			locs_free.append(loc)
-	
+
 	if locs_free.size() == 0:
 		# no free places to spawn, skip
 		# TODO: better handling
 		return
-	
+
 	# TODO: here we randomly select left/right but a better solution would be if
 	# the SpawnableLocation had a direction mask
 	var new_loc = locs_free[randi() % locs_free.size()].position

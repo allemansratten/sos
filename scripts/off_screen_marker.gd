@@ -37,10 +37,13 @@ func should_be_shown(delta, screen_size):
 func get_marker_position(delta, screen_size):
 	var screen_size_padded = screen_size - Vector2(padding, padding)
 
-	var slope = delta.y / delta.x;
-	
-	if abs(slope) < 1e-6:
-		slope = 1e-6
+	var slope
+	if delta.x == 0:
+		slope = 1e9
+	elif delta.y == 0:
+		slope = 1e-9
+	else:
+		slope = delta.y / delta.x;
 
 	rotation = delta.angle()
 

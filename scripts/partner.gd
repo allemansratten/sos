@@ -39,7 +39,7 @@ var partner_type
 func init(name: String, new_loc: Vector2, dir: Vector2, driver, delay=0):
 	partner_type = PartnerType.new()
 	partner_type.init(self, "random")
-	
+
 	partner_name = name
 	partner_driver = driver
 
@@ -68,15 +68,15 @@ func random_color_choice(n_colors=2):
 func random_goal_choice():
 	goal = ALL_GOALS[randi() % ALL_GOALS.size()]
 	patience = PATIENCE_RESCHEDULE
-	
+
 
 func schedule_random_goal_choice():
-	$SatisfiedTween.interpolate_property(self, "rotation_degrees",
+	$SatisfiedTween.interpolate_property($Sprite, "rotation_degrees",
 		0, 360, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)
 	$SatisfiedTween.start()
-	
+
 	$GoalRescheduleTimer.start(GOAL_RESCHEDULE)
 	goal = null
 	patience = PATIENCE_RESCHEDULE
@@ -88,7 +88,7 @@ func die(reason):
 		get_parent().game_over(reason, partner_driver.partner_i, position)
 
 
-func make_flag(flag_colors):	
+func make_flag(flag_colors):
 	for c_i in range(len(flag_colors)):
 		var flag = ColorRect.new()
 		flag.rect_position.x = -FLAG_WIDTH/2 + c_i*FLAG_WIDTH/len(flag_colors)
@@ -102,11 +102,11 @@ func make_flag(flag_colors):
 func _ready():
 	# trick to hide FOUC
 	scale = Vector2.ZERO
-	
+
 	random_color_choice(randi()%5)
 	random_goal_choice()
 	make_flag(colors)
-	
+
 	# spawn animation
 	# rotation
 	$SatisfiedTween.interpolate_property(self, "rotation_degrees",
@@ -136,7 +136,7 @@ func _process(delta):
 	patience -= delta
 	if patience <= 0:
 		die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])
-	
+
 	$PatienceIndicator.rect_scale.x = 1 - patience/PATIENCE_RESCHEDULE
 
 

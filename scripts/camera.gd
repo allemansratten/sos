@@ -16,6 +16,7 @@ const DIE_ZOOM_TIME = 3
 const ZOOM_STEP = 1.3
 const MIN_ZOOM = Vector2.ONE * 0.5
 const MAX_ZOOM = Vector2.ONE * 2
+const MAC_ZOOM_STRENGTH = 0.1
 
 
 static func clamp_zoom(new_zoom):
@@ -48,6 +49,8 @@ func _input(event):
 		zoom_at_point(1/ZOOM_STEP,event.position, 0.2)
 	elif event.is_action("camera_zoom_out"):
 		zoom_at_point(ZOOM_STEP,event.position, 0.2)
+	elif event is InputEventPanGesture:
+		zoom_at_point(pow(2, event.delta.y * MAC_ZOOM_STRENGTH), get_camera_screen_center(), 0.0)
 
 
 # https://godotengine.org/qa/25983/camera2d-zoom-position-towards-the-mouse
@@ -56,18 +59,19 @@ func zoom_at_point(zoom_change: float, point: Vector2, zoom_time: float):
 	var v0 = get_viewport().size  # vieport size
 	var new_zoom = clamp_zoom(zoom * zoom_change)  # next zoom value
 
-	# Compensate for the HUD by adding a vertical offset
-	var new_position = point + Vector2(0, 64 * 0.5)
-	
-	zoom_tween.interpolate_property(self, "zoom",
-		zoom, new_zoom, zoom_time,
-		Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
-	zoom_tween.start()
+	if zoom_time > 0:
+		zoom_tween.interpolate_property(self, "zoom",
+			zoom, new_zoom, zoom_time,
+			Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
+		zoom_tween.start()
 
-	pos_tween.interpolate_property(self, "global_position",
-		get_camera_screen_center(), new_position, zoom_time,
-		Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
-	pos_tween.start()
+		pos_tween.interpolate_property(self, "global_position",
+			get_camera_screen_center(), point, zoom_time,
+			Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
+		pos_tween.start()
+	else:
+		position = point
+		zoom = new_zoom
 
 
 func disable_camera_limits():
@@ -82,4 +86,7 @@ func death_zoom_in(new_pos):
 	# Sometimes we need to move the camera beyond the normal limits
 	disable_camera_limits()
 	
-	zoom_at_point(0.5, new_pos, DIE_ZOOM_TIME)
+	# Compensate for the HUD by adding a vertical offset
+	var shifted = new_pos + Vector2(0, 64 * 0.5)
+	
+	zoom_at_point(0.5, shifted, DIE_ZOOM_TIME)

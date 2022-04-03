@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
+[ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Place.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/partner_driver.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Map.tscn" type="PackedScene" id=4]
@@ -160,5 +161,8 @@ enable_down = false
 enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
+
+[node name="PauseMenu" parent="." instance=ExtResource( 1 )]
+visible = false
 
 [connection signal="timeout" from="PartnerDriver/SpawnTimer" to="PartnerDriver" method="_on_SpawnTimer_timeout"]

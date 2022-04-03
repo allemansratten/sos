@@ -26,6 +26,7 @@ var step_delay = 0
 
 var delta_acc = 0
 var delta_goal_acc = 0
+# TODO: this should be a Vector2
 var next_step_x = 0
 var next_step_y = 0
 var old_step_x = 0
@@ -33,18 +34,17 @@ var old_step_y = 0
 
 var partner_type
 
-func init(x, y, dir: Vector2, delay=0):
+func init(new_loc: Vector2, dir: Vector2, delay=0):
 	partner_type = PartnerType.new()
 	partner_type.init(self, "random")
 
-	print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f, crossroad_type: %s" % [x, y, dir[0], dir[1], speed, partner_type.crossroad_strategy.get_name()])
+	#print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f, crossroad_type: %s" % [x, y, dir[0], dir[1], speed, partner_type.crossroad_strategy.get_name()])
 
-	position.x = x
-	old_step_x = x
-	next_step_x = x
-	position.y = y
-	old_step_y = y
-	next_step_y = y
+	position = new_loc
+	old_step_x = new_loc.x
+	next_step_x = new_loc.x
+	old_step_y = new_loc.y
+	next_step_y = new_loc.y
 
 	direction = dir
 	step_delay = delay

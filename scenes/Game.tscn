@@ -173,3 +173,14 @@ place = "cafe"
 [node name="DiscoPlace" parent="AllPlaces" instance=ExtResource( 2 )]
 position = Vector2( 128, 128 )
 place = "disco"
+
+[node name="SpawnableLocations" type="Node" parent="."]
+
+[node name="Location1" type="Node2D" parent="SpawnableLocations"]
+position = Vector2( 768, 192 )
+
+[node name="Location2" type="Node2D" parent="SpawnableLocations"]
+position = Vector2( 320, 576 )
+
+[node name="Location3" type="Node2D" parent="SpawnableLocations"]
+position = Vector2( 128, 0 )

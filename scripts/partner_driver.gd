@@ -1,6 +1,7 @@
 extends Node
 
 export(PackedScene) var partner_scene
+onready var spawnable_locations = get_node("/root/GameScene/SpawnableLocations")
 onready var next_partner_label = get_node("/root/GameScene/HUD/NextPartnerLabel")
 onready var total_partner_label = get_node("/root/GameScene/HUD/PartnerCount")
 
@@ -9,6 +10,8 @@ var spawn_time = SPAWN_DELAY
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# TODO: this randomize call should be used only once and somewhere up but whatever
+	randomize()
 	spawn_partner()
 	spawn_partner()
 
@@ -17,12 +20,12 @@ var partner_i = 0
 func spawn_partner():
 	var partner = partner_scene.instance()
 	partner_i += 1
-	if partner_i == 1:
-		partner.init(64*5, 64*2, Vector2(1, 0), 0.1)
-	elif partner_i == 2:
-		partner.init(64*4, 64*6, Vector2(0, 1), 1)
-	else:
-		partner.init(64*5, 64*(1+randi()%10), Vector2(1, 0), 0.5)
+	
+	var locs = spawnable_locations.get_children()
+	var new_loc = locs[randi() % locs.size()].position
+	
+	print((randi()%2))
+	partner.init(new_loc, Vector2((randi()%2)*2-1, 0), 0.1)
 	add_child(partner)
 	total_partner_label.text = str(partner_i) + " partners"
 

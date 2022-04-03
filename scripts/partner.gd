@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Partner
 
-const ALL_COLORS = ["red", "green", "blue", "pink", "yellow"]
+const ALL_COLORS = ["orangered", "limegreen", "dodgerblue", "whitesmoke", "orange"]
 const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 
 # frame every  second

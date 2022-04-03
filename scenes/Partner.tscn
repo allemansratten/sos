@@ -15,11 +15,6 @@ animations = [ {
 "name": "sprite1",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "sprite2",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": false,
 "name": "sprite1_walk",
@@ -28,6 +23,11 @@ animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "sprite3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "sprite2",
 "speed": 5.0
 } ]
 
@@ -85,6 +85,9 @@ max_distance = 600.0
 stream = ExtResource( 6 )
 max_distance = 600.0
 
+[node name="StepTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="." to="." method="area_entered"]
 [connection signal="mouse_entered" from="." to="." method="mouse_entered"]
 [connection signal="timeout" from="GoalRescheduleTimer" to="." method="_on_GoalRescheduleTimer_timeout"]
+[connection signal="timeout" from="StepTimer" to="." method="_on_StepTimer_timeout"]

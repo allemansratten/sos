@@ -17,22 +17,17 @@ var partner_name
 
 # frame every second
 var speed = 1
+var step_delay = 0.2
+var patience = PATIENCE_RESCHEDULE
 var direction = Vector2(0, 0)
 
 var is_being_hit = false
 
 var colors = []
 var goal
-var patience = PATIENCE_RESCHEDULE
-var step_delay = 0
 
-var delta_acc = 0
-var delta_goal_acc = 0
-# TODO: this should be a Vector2
-var next_step_x = 0
-var next_step_y = 0
-var old_step_x = 0
-var old_step_y = 0
+var next_step = Vector2(0, 0)
+var old_step = Vector2(0, 0)
 
 const N_SPRITE_TYPES = 3
 var sprite_type = 1  # 1 to N_SPRITE_TYPES
@@ -42,23 +37,28 @@ var partner_type
 
 var just_turned = false
 
-func init(name: String, new_loc: Vector2, dir: Vector2, driver, delay=0):
+func init(name: String, new_loc: Vector2, dir: Vector2, driver, config: Dictionary):
 	partner_type = PartnerType.new()
 	partner_type.init(self, "random")
 
 	partner_name = name
 	partner_driver = driver
 
-	#print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f, crossroad_type: %s" % [x, y, dir[0], dir[1], speed, partner_type.crossroad_strategy.get_name()])
-
 	position = new_loc
-	old_step_x = new_loc.x
-	next_step_x = new_loc.x
-	old_step_y = new_loc.y
-	next_step_y = new_loc.y
-
+	old_step = position
+	next_step = position
 	direction = dir
-	step_delay = delay
+	
+	unpack_config(config)
+
+
+func unpack_config(config: Dictionary):
+	if "step_delay" in config:
+		step_delay = config["step_delay"]
+	if "speed" in config:
+		speed = config["speed"]
+	if "patience" in config:
+		patience = config["patience"]
 
 
 func random_color_choice(n_colors=2):
@@ -104,6 +104,7 @@ func make_flag(flag_colors):
 		flag.rect_size.y = 5
 		add_child(flag)
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# trick to hide FOUC
@@ -112,10 +113,12 @@ func _ready():
 	random_color_choice(randi()%5)
 	random_goal_choice()
 	make_flag(colors)
+	
+	$StepTimer.start(speed + step_delay)
 
 	sprite_type = randi() % N_SPRITE_TYPES + 1
 	reset_animation()
-	
+
 	# spawn animation
 	# rotation
 	$SatisfiedTween.interpolate_property(self, "rotation_degrees",
@@ -127,20 +130,10 @@ func _ready():
 		Vector2.ZERO, Vector2.ONE, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)
-	# alpha (doesn't really work)
-	#$SatisfiedTween.interpolate_property(self, "modulate",
-	#	Color(1, 1, 1, 0), Color(1, 1, 1, 1), 0.75,
-	#	Tween.TRANS_CIRC, Tween.EASE_IN_OUT
-	#)
 	$SatisfiedTween.start()
 
 
 func _process(delta):
-	delta_acc += delta
-	if delta_acc >= speed + step_delay:
-		delta_acc -= speed + step_delay
-		_process_timestep()
-
 	# process patience
 	patience -= delta
 	if patience <= 0:
@@ -157,13 +150,13 @@ func post_jump_callback():
 	reset_animation()
 	$WalkAudioStream.pitch_scale = 1
 
+
 func _process_timestep():
-	next_step_x = next_step_x + direction[0] * STEP_SIZE
-	next_step_y = next_step_y + direction[1] * STEP_SIZE
+	next_step += direction * STEP_SIZE
 	$StepTween.interpolate_property(self, "position",
-		Vector2(old_step_x, old_step_y), Vector2(next_step_x, next_step_y), speed * JUMP_TIME_COEF,
+		old_step, next_step, speed * JUMP_TIME_COEF,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
-	
+
 	# Temporary, while the other sprite types are not available
 	if sprite_type == 1:
 		$AnimatedSprite.flip_h = direction[0] < 0
@@ -178,9 +171,7 @@ func _process_timestep():
 	$StepTween.start()
 
 	$WalkAudioStream.play()
-	
-	old_step_x = next_step_x
-	old_step_y = next_step_y
+	old_step = next_step
 
 
 func check_color_intersect(other_colors):
@@ -230,3 +221,6 @@ func highlight_on(visible_val):
 
 func _on_GoalRescheduleTimer_timeout():
 	random_goal_choice()
+
+func _on_StepTimer_timeout():
+	_process_timestep()

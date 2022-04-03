@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/Place.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/partner_driver.gd" type="Script" id=3]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scripts/partner_factory.gd" type="Script" id=13]
 [ext_resource path="res://scripts/spawn_timer.gd" type="Script" id=14]
 [ext_resource path="res://scripts/baby_names.gd" type="Script" id=15]
+[ext_resource path="res://scripts/partner_catalogue.gd" type="Script" id=16]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource( 5 )
@@ -26,7 +27,6 @@ position = Vector2( -32, -32 )
 script = ExtResource( 11 )
 
 [node name="Crossroads" parent="AllCrossroads" instance=ExtResource( 7 )]
-position = Vector2( 0, 0 )
 direction = 5
 locked = true
 enable_left = false
@@ -80,6 +80,9 @@ partner_scene = ExtResource( 6 )
 [node name="BabyGenerator" type="Node2D" parent="PartnerDriver/PartnerFactory"]
 script = ExtResource( 15 )
 
+[node name="PartnerCatalogue" type="Node2D" parent="PartnerDriver/PartnerFactory"]
+script = ExtResource( 16 )
+
 [node name="MapCamera" type="Camera2D" parent="."]
 pause_mode = 2
 position = Vector2( 481, 291 )
@@ -124,6 +127,38 @@ position = Vector2( 192, 0 )
 position = Vector2( 384, 576 )
 
 [node name="Location3" parent="SpawnableLocations" instance=ExtResource( 10 )]
+position = Vector2( 704, 192 )
+
+[node name="FogOfWar" type="Node2D" parent="."]
+z_index = 100
+
+[node name="Phase1" type="Node2D" parent="FogOfWar"]
+
+[node name="ColorRect" type="ColorRect" parent="FogOfWar/Phase1"]
+margin_left = 800.0
+margin_top = -32.0
+margin_right = 1504.0
+margin_bottom = 416.0
+color = Color( 0.0470588, 0.0470588, 0.0470588, 0.941176 )
+
+[node name="Crossroads6" parent="FogOfWar/Phase1" instance=ExtResource( 7 )]
 position = Vector2( 768, 192 )
+locked = true
+enable_right = false
+enable_up = false
+enable_down = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
+
+[node name="Crossroads7" parent="FogOfWar/Phase1" instance=ExtResource( 7 )]
+position = Vector2( 768, 0 )
+locked = true
+enable_right = false
+enable_up = false
+enable_down = false
+enable_continue = false
+enable_bend_1 = false
+enable_bend_2 = false
 
 [connection signal="timeout" from="PartnerDriver/SpawnTimer" to="PartnerDriver" method="_on_SpawnTimer_timeout"]

@@ -44,15 +44,16 @@ func spawn_partner():
 		baby_generator.get_random_baby_mut(partner_i),
 		new_loc,
 		Vector2((randi()%2)*2-1, 0),
+		self,
 		0.1
 	)
 	add_child(partner)
 	hud.update_total_partner(partner_i)
 	hud.send_pickup_line(partner.partner_name)
 	
-func game_over(reason, location):
+func game_over(reason, no_partners, location):
 	# this relays the game_over call from partner
-	get_parent().game_over(reason, location)
+	get_parent().game_over(reason, no_partners, location)
 
 func _process(delta):
 	spawn_time -= delta

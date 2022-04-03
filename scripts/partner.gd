@@ -37,13 +37,15 @@ var next_step_y = 0
 var old_step_x = 0
 var old_step_y = 0
 
+var partner_driver
 var partner_type
 
-func init(name: String, new_loc: Vector2, dir: Vector2, delay=0):
+func init(name: String, new_loc: Vector2, dir: Vector2, driver, delay=0):
 	partner_type = PartnerType.new()
 	partner_type.init(self, "random")
 	
 	partner_name = name
+	partner_driver = driver
 
 	#print_debug("Spawning partner at [%d, %d], dir [%d, %d], speed: %f, crossroad_type: %s" % [x, y, dir[0], dir[1], speed, partner_type.crossroad_strategy.get_name()])
 
@@ -85,7 +87,8 @@ func schedule_random_goal_choice():
 
 func die(reason):
 	modulate = Color("#904949")
-	get_parent().game_over(reason, position)
+	if reason != null:
+		get_parent().game_over(reason, partner_driver.partner_i, position)
 
 func make_flag(flag_colors):
 	
@@ -134,7 +137,7 @@ func _process(delta):
 	# process patience
 	patience -= delta
 	if patience <= 0:
-		die("patience")
+		die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])
 
 	# process goal rescheduling
 	delta_goal_acc -= delta
@@ -170,8 +173,8 @@ func collide_with_partner(partner):
 	partner.is_being_hit = true
 
 	if check_color_intersect(partner.colors):
-		die("encounter")
-		partner.die("encounter")
+		die("%s met with %s and discovered you were dating both of them" % [partner_name, partner.partner_name])
+		partner.die(null)
 
 	# return dominance
 	partner.is_being_hit = true

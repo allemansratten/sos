@@ -35,7 +35,7 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 4 )
 text = "You managed to date NO_PARTNERS partners until REASON.
 
-You knew from the beginning that leading this life would lead to an inevitable disaster."
+You knew from the beginning that this life would lead to an inevitable disaster."
 align = 1
 valign = 1
 autowrap = true

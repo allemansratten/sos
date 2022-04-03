@@ -8,6 +8,7 @@ const ALL_GOALS = ["cafe", "cinema", "park", "library", "gallery", "disco"]
 # frame every  second
 const SPEED_TIMESTEP = 1
 const STEP_SIZE = 64
+const FLAG_WIDTH = 48
 const GOAL_RESCHEDULE = 10
 const PATIENCE_RESCHEDULE = 60
 onready var step_tween = get_node("StepTween")
@@ -85,13 +86,14 @@ func die(reason):
 	get_parent().game_over(reason, position-Vector2(64*3, 0))
 
 func make_flag(flag_colors):
+	
 	for c_i in range(len(flag_colors)):
 		var flag = ColorRect.new()
-		flag.rect_position.x = -STEP_SIZE/2 + c_i*10 + 20
-		flag.rect_position.y = -STEP_SIZE/2
+		flag.rect_position.x = -FLAG_WIDTH/2 + c_i*FLAG_WIDTH/len(flag_colors)
+		flag.rect_position.y = -STEP_SIZE/2+5
 		flag.color = ColorN(flag_colors[c_i], 1)
-		flag.rect_size.x = 10
-		flag.rect_size.y = 10
+		flag.rect_size.x = FLAG_WIDTH/len(flag_colors)
+		flag.rect_size.y = 5
 		add_child(flag)
 
 # Called when the node enters the scene tree for the first time.
@@ -99,7 +101,7 @@ func _ready():
 	# trick to hide FOUC
 	scale = Vector2.ZERO
 	
-	random_color_choice(2)
+	random_color_choice(randi()%5)
 	random_goal_choice()
 	make_flag(colors)
 	

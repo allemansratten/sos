@@ -46,7 +46,7 @@ var goal
 var next_step = Vector2(0, 0)
 var old_step = Vector2(0, 0)
 
-const N_SPRITE_TYPES = 4
+const N_SPRITE_TYPES = 8
 var sprite_type = 1  # 1 to N_SPRITE_TYPES
 
 var partner_driver

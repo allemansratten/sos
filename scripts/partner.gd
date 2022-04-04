@@ -6,7 +6,7 @@ signal goal_satisfied
 
 
 # https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png
-const ALL_COLORS = ["firebrick", "limegreen", "dodgerblue"]
+const ALL_COLORS = ["firebrick", "darkgreen", "dodgerblue"]
 
 
 const MAX_JUMP_TIME_COEF = 0.8

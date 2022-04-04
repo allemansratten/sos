@@ -1,4 +1,4 @@
-extends Sprite
+extends Node2D
 
 var low_patience = false
 var has_goal = true

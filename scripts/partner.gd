@@ -5,8 +5,6 @@ class_name Partner
 signal low_patience
 signal goal_satisfied
 
-# https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png
-const ALL_COLORS = ["orangered", "darkgreen", "dodgerblue", "orange"]
 
 const MAX_JUMP_TIME_COEF = 0.8
 const DEFAULT_JUMP_TIME = 0.5
@@ -73,13 +71,18 @@ func unpack_config(config: Dictionary):
 
 
 func random_color_choice(n_colors):
+	# ASSERT n_colors = 1
+	colors.append(partner_driver.ALL_COLORS[partner_driver.color_i])
+	partner_driver.color_i = (partner_driver.color_i+1) % partner_driver.ALL_COLORS.size()
+	
+	# WARNING ignore all other colors
 	# force duplicate
-	var colors_tmp = ALL_COLORS + []
+	#var colors_tmp = ALL_COLORS + []
 	# clear up previous colors
-	colors = []
-	for __ in range(n_colors):
-		var color_i = randi() % colors_tmp.size()
-		colors.append(colors_tmp.pop_at(color_i))
+	#colors = []
+	#for __ in range(n_colors):
+	#	var color_i = randi() % colors_tmp.size()
+	#	colors.append(colors_tmp.pop_at(color_i))
 
 
 func random_goal_choice():

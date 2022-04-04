@@ -7,6 +7,10 @@ onready var partner_factory = PartnerFactory.new()
 
 var partner_count = 0
 
+# https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png
+var ALL_COLORS = ["palevioletred", "royalblue", "darkkhaki"]
+var color_i = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -15,6 +19,9 @@ func _ready():
 func start():
 	# TODO: this randomize call should be used only once and somewhere up but whatever
 	randomize()
+	
+	ALL_COLORS.shuffle()
+	
 	spawn_partner()
 	# we need this hack because otherwise they may spawn on the same loc
 	# (because of some ECS thing) -zouharvi

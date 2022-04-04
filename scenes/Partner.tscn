@@ -137,19 +137,22 @@ one_shot = true
 [node name="GoalTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="DesireThoughtSprite" type="Sprite" parent="."]
+[node name="DesireThoughtSprite" type="Node2D" parent="."]
 position = Vector2( 29, -20 )
-scale = Vector2( 1.20716, 0.84 )
 z_index = 101
 z_as_relative = false
-texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
+[node name="Sprite" type="Sprite" parent="DesireThoughtSprite"]
+position = Vector2( -2.5, 1.5 )
+scale = Vector2( 1.79167, 1.4375 )
+texture = ExtResource( 8 )
+
 [node name="Label" type="Label" parent="DesireThoughtSprite"]
-margin_left = -15.7394
-margin_top = -7.14286
-margin_right = 116.261
-margin_bottom = 16.8571
+margin_left = -19.0
+margin_top = -6.0
+margin_right = 121.0
+margin_bottom = 27.0
 rect_scale = Vector2( 0.25, 0.35 )
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0, 0, 0, 1 )

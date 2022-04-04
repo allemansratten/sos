@@ -137,7 +137,7 @@ one_shot = true
 [node name="DesireThoughtSprite" type="Sprite" parent="."]
 position = Vector2( 40.9375, -18.9375 )
 scale = Vector2( 0.908203, 0.466797 )
-z_index = 30
+z_index = 101
 z_as_relative = false
 texture = ExtResource( 8 )
 script = ExtResource( 9 )

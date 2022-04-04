@@ -6,7 +6,7 @@ signal goal_satisfied
 
 
 # https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png
-const ALL_COLORS = ["firebrick", "limegreen", "dodgerblue"]
+const ALL_COLORS = ["firebrick", "darkgreen", "dodgerblue"]
 
 
 const MAX_JUMP_TIME_COEF = 0.8
@@ -24,8 +24,8 @@ const DEFAULTS = {
 
 onready var hud = get_node("/root/GameScene/HUD")
 onready var root_script = get_node("/root/GameScene")
-onready var patience_timer = get_node("PatienceTimer")
 onready var goal_timer = get_node("GoalTimer")
+onready var patience_timer = get_node("PatienceTimer")
 
 var partner_name
 
@@ -46,7 +46,7 @@ var goal
 var next_step = Vector2(0, 0)
 var old_step = Vector2(0, 0)
 
-const N_SPRITE_TYPES = 4
+const N_SPRITE_TYPES = 8
 var sprite_type = 1  # 1 to N_SPRITE_TYPES
 
 var partner_driver
@@ -91,14 +91,13 @@ func random_color_choice(n_colors):
 func random_goal_choice():
 	goal = root_script.legit_goals[randi() % root_script.legit_goals.size()]
 	$DesireThoughtSprite/Label.set_text(goal)
-	$DesireThoughtSprite.show()
 	$PatienceTimer.start()
 
 
 # Called on collision with goal
 func schedule_random_goal_choice():
-	goal = null
 	emit_signal("goal_satisfied")
+	goal = null
 	$SatisfiedTween.interpolate_property(
 		self, "scale", scale, Vector2.ZERO, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
@@ -268,4 +267,3 @@ func _on_GoalTimer_timeout():
 	$CollisionShape2D.set_disabled(false)
 	$GoalRescheduleTimer.start(GOAL_RESCHEDULE)
 	$StepTimer.set_paused(false)
-	goal = null

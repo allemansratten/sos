@@ -159,7 +159,7 @@ enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
 
-[node name="Crossroads9" parent="AllCrossroads/Movable" groups=["unlock_2"] instance=ExtResource( 7 )]
+[node name="Crossroads9" parent="AllCrossroads/Movable" groups=["unlock_1"] instance=ExtResource( 7 )]
 position = Vector2( 960, 192 )
 direction = 2
 locked = true
@@ -184,7 +184,7 @@ enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
 
-[node name="Crossroads12" parent="AllCrossroads/Movable" groups=["unlock_2"] instance=ExtResource( 7 )]
+[node name="Crossroads12" parent="AllCrossroads/Movable" groups=["unlock_1"] instance=ExtResource( 7 )]
 position = Vector2( 960, 384 )
 direction = 2
 locked = true
@@ -193,7 +193,7 @@ enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
 
-[node name="Crossroads13" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+[node name="Crossroads13" parent="AllCrossroads/Movable" groups=["unlock_2"] instance=ExtResource( 7 )]
 position = Vector2( 960, 448 )
 direction = 2
 locked = true

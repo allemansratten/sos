@@ -36,12 +36,15 @@ func _on_UnpauseButton_pressed():
 	toggle_pause()
 
 
+var music_position = 0
 
 func _on_MuteButton_pressed():
 	muted = not muted
 	if muted:
 		$Control.get_node("MuteButton").text = "unmute"
-		player.stream_paused = true
+		music_position = player.get_playback_position()
+		player.stop()
 	else:
 		$Control.get_node("MuteButton").text = "mute"
-		player.stream_paused = false
+		
+		player.play(music_position)

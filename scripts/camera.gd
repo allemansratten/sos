@@ -27,6 +27,9 @@ static func clamp_zoom(new_zoom):
 	return new_zoom
 
 
+func _ready():
+	zoom_at_point(0.7, Vector2(64*4, 64*2), 1)
+
 # https://godotengine.org/qa/24969/how-to-drag-camera-with-mouse
 func _input(event):
 	if locked:

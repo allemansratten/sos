@@ -3,7 +3,7 @@ extends Node2D
 class_name Partner
 
 # https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png
-const ALL_COLORS = ["orangered", "limegreen", "dodgerblue", "whitesmoke", "orange"]
+const ALL_COLORS = ["orangered", "darkgreen", "dodgerblue", "orange"]
 
 const JUMP_TIME_COEF = 0.25
 const STEP_SIZE = 64

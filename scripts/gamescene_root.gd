@@ -37,11 +37,11 @@ func game_over(reason, no_partners, location):
 	add_child(hud)
 
 func get_phase(partner_count):
-	if partner_count >= 9:
+	if partner_count >= 7:
 		return 3
-	elif partner_count >= 6:
+	elif partner_count >= 5:
 		return 2
-	elif partner_count >= 3:
+	elif partner_count >= 2:
 		return 1
 	return 0
 

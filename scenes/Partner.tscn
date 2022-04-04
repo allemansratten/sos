@@ -105,16 +105,18 @@ shape = SubResource( 1 )
 
 [node name="PatienceIndicatorBack" type="ColorRect" parent="."]
 margin_left = -21.0
-margin_top = -22.0
-margin_right = 21.0
-margin_bottom = -18.0
+margin_top = -24.0
+margin_right = 63.0
+margin_bottom = -12.0
+rect_scale = Vector2( 0.5, 0.5 )
 color = Color( 0, 0, 0, 1 )
 
 [node name="PatienceIndicator" type="ColorRect" parent="."]
-margin_left = -20.0
-margin_top = -21.0
-margin_right = 20.0
-margin_bottom = -19.0
+margin_left = -19.0
+margin_top = -22.0
+margin_right = 57.0
+margin_bottom = -18.0
+rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="WalkAudioStream" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 3 )
@@ -136,19 +138,19 @@ one_shot = true
 one_shot = true
 
 [node name="DesireThoughtSprite" type="Sprite" parent="."]
-position = Vector2( 35, -18 )
-scale = Vector2( 0.498438, 0.45 )
+position = Vector2( 29, -20 )
+scale = Vector2( 1.20716, 0.84 )
 z_index = 101
 z_as_relative = false
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="DesireThoughtSprite"]
-margin_left = -60.0
-margin_top = -16.0
-margin_right = 87.0
-margin_bottom = 8.0
-rect_scale = Vector2( 0.6, 0.7 )
+margin_left = -15.7394
+margin_top = -7.14286
+margin_right = 116.261
+margin_bottom = 16.8571
+rect_scale = Vector2( 0.25, 0.35 )
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Goal"
@@ -160,8 +162,8 @@ wait_time = 5.0
 autostart = true
 
 [node name="FlagSprite" type="Sprite" parent="."]
-position = Vector2( -15, -6 )
-scale = Vector2( 0.6875, 0.6875 )
+position = Vector2( -14, -9 )
+scale = Vector2( 1.81473, 1.81473 )
 texture = ExtResource( 10 )
 
 [node name="PlaceDirectionSprite" type="Sprite" parent="."]

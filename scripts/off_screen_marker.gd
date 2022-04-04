@@ -10,9 +10,10 @@ func _ready():
 	pass # Replace with function body.
 
 
+onready var camera: MapCamera = get_parent().get_parent().get_node("MapCamera")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_time_delta):
-	var camera: MapCamera = get_parent().get_parent().get_node("MapCamera")
 	var screen_center = camera.get_camera_screen_center()
 	var screen_size = get_viewport().get_visible_rect().size
 
@@ -25,8 +26,8 @@ func _process(_time_delta):
 	else:
 		hide()
 		
-		
-	if partner.goal == null:
+	# creating goal or goal-less
+	if partner.goal == null or not partner.goal_timer.is_stopped():
 		$Sprite.modulate = Color.white
 	else:
 		$Sprite.modulate = Color(

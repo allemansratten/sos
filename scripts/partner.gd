@@ -66,7 +66,7 @@ func init(name: String, new_loc: Vector2, dir: Vector2, driver, config: Dictiona
 func unpack_config(config: Dictionary):
 	step_delay = config.get("step_delay", DEFAULTS["step_delay"])
 	speed = config.get("speed", DEFAULTS["speed"])
-	patience = config.get("patience", DEFAULTS["patience"]) - 18
+	patience = config.get("patience", DEFAULTS["patience"])
 	goal_delay = config.get("goal_delay", DEFAULTS["goal_delay"])
 	num_colors = config.get("num_colors", DEFAULTS["num_colors"])
 

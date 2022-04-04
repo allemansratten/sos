@@ -154,8 +154,11 @@ func _ready():
 
 func _process(_delta):
 	# update patience bar
-	$PatienceIndicator.rect_size.x = 40*$PatienceTimer.time_left/patience
-	$PatienceIndicatorBack.rect_size.x = 40*$PatienceTimer.time_left/patience+2
+	$PatienceIndicator.rect_size.x = int(40*$PatienceTimer.time_left/patience)
+	if goal == null:
+		$PatienceIndicatorBack.rect_size.x = 0
+	else:
+		$PatienceIndicatorBack.rect_size.x = int(40*$PatienceTimer.time_left/patience+2)
 	$PatienceIndicator.modulate = Color(
 		1,
 		0.2 + 0.8*$PatienceTimer.time_left/patience,
@@ -163,7 +166,7 @@ func _process(_delta):
 		1
 	)
 	if not $PatienceTimer.is_stopped() and $PatienceTimer.time_left < 15:
-		emit_signal("low_patience", goal)
+		emit_signal("low_patience")
 
 
 func reset_animation():

@@ -10,6 +10,7 @@ pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="Control" type="Control" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
 margin_right = 1024.0
@@ -26,7 +27,9 @@ make sure they never meet.
 
 go on dates with partners by directing them
 to the place of their choice.
-hover over them to see where they want to go."
+hover over them to see where they want to go.
+
+drag to move the camera and scroll to zoom it."
 align = 1
 valign = 1
 

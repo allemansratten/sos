@@ -502,7 +502,7 @@ enable_bend_2 = false
 script = ExtResource( 3 )
 
 [node name="SpawnTimer" type="Timer" parent="PartnerDriver"]
-wait_time = 10.0
+wait_time = 40.0
 autostart = true
 script = ExtResource( 14 )
 

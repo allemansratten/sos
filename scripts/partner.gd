@@ -103,9 +103,9 @@ func make_flag(flag_colors):
 	for c_i in range(len(flag_colors)):
 		var flag = ColorRect.new()
 		flag.rect_size.x = 10
-		flag.rect_size.y = 10
-		flag.rect_position.x = -(STEP_SIZE/2) + 8
-		flag.rect_position.y = -16 + (c_i * flag.rect_size.y)
+		flag.rect_size.y = 14
+		flag.rect_position.x = -(STEP_SIZE/2) + 8.2
+		flag.rect_position.y = -19 + (c_i * flag.rect_size.y)
 		flag.color = ColorN(flag_colors[c_i], 1)
 		add_child(flag)
 
@@ -144,8 +144,8 @@ func _process(_delta):
 	$PatienceIndicator.rect_scale.x = $PatienceTimer.time_left/patience
 	$PatienceIndicator.modulate = Color(
 		1,
-		$PatienceTimer.time_left/patience,
-		$PatienceTimer.time_left/patience,
+		0.2 + 0.8*$PatienceTimer.time_left/patience,
+		0.2 + 0.8*$PatienceTimer.time_left/patience,
 		1
 	)
 

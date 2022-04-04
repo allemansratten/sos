@@ -1,5 +1,7 @@
 extends Node
 
+
+# WARNING: don't use any other num_colors than 1 - they won't be displayed -zouharvi
 const catalogue = {
 	"normal": {
 		"step_delay": Vector2(0.2, 0.6),

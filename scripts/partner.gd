@@ -153,7 +153,8 @@ func _ready():
 
 func _process(_delta):
 	# update patience bar
-	$PatienceIndicator.rect_scale.x = $PatienceTimer.time_left/patience
+	$PatienceIndicator.rect_size.x = 40*$PatienceTimer.time_left/patience
+	$PatienceIndicatorBack.rect_size.x = 40*$PatienceTimer.time_left/patience+2
 	$PatienceIndicator.modulate = Color(
 		1,
 		0.2 + 0.8*$PatienceTimer.time_left/patience,

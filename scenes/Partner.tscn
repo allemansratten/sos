@@ -10,8 +10,8 @@
 [ext_resource path="res://resources/thought_bubble.png" type="Texture" id=8]
 [ext_resource path="res://scripts/desire_thought_sprite.gd" type="Script" id=9]
 [ext_resource path="res://resources/flag.png" type="Texture" id=10]
-[ext_resource path="res://scripts/step_timer.gd" type="Script" id=11]
-[ext_resource path="res://scripts/patience_timer.gd" type="Script" id=12]
+[ext_resource path="res://resources/arrow_right.png" type="Texture" id=11]
+[ext_resource path="res://scripts/place_direction_sprite.gd" type="Script" id=12]
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
@@ -88,7 +88,6 @@ margin_bottom = 18.0
 color = Color( 1, 1, 1, 0.231373 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -1.90735e-06, -1.90735e-06 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "sprite4"
@@ -106,16 +105,18 @@ shape = SubResource( 1 )
 
 [node name="PatienceIndicatorBack" type="ColorRect" parent="."]
 margin_left = -21.0
-margin_top = -22.0
-margin_right = 21.0
-margin_bottom = -18.0
+margin_top = -24.0
+margin_right = 63.0
+margin_bottom = -12.0
+rect_scale = Vector2( 0.5, 0.5 )
 color = Color( 0, 0, 0, 1 )
 
 [node name="PatienceIndicator" type="ColorRect" parent="."]
-margin_left = -20.0
-margin_top = -21.0
-margin_right = 20.0
-margin_bottom = -19.0
+margin_left = -19.0
+margin_top = -22.0
+margin_right = 57.0
+margin_bottom = -18.0
+rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="WalkAudioStream" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 3 )
@@ -138,20 +139,23 @@ script = ExtResource( 12 )
 [node name="GoalTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="DesireThoughtSprite" type="Sprite" parent="."]
-position = Vector2( 34.05, -17.7 )
-scale = Vector2( 0.483594, 0.459375 )
+[node name="DesireThoughtSprite" type="Node2D" parent="."]
+position = Vector2( 29, -20 )
 z_index = 101
 z_as_relative = false
-texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
+[node name="Sprite" type="Sprite" parent="DesireThoughtSprite"]
+position = Vector2( -2.5, 1.5 )
+scale = Vector2( 1.79167, 1.4375 )
+texture = ExtResource( 8 )
+
 [node name="Label" type="Label" parent="DesireThoughtSprite"]
-margin_left = -60.0
-margin_top = -16.0
-margin_right = 87.0
-margin_bottom = 8.0
-rect_scale = Vector2( 0.6, 0.7 )
+margin_left = -19.0
+margin_top = -6.0
+margin_right = 121.0
+margin_bottom = 27.0
+rect_scale = Vector2( 0.25, 0.35 )
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Goal"
@@ -163,9 +167,15 @@ wait_time = 5.0
 autostart = true
 
 [node name="FlagSprite" type="Sprite" parent="."]
-position = Vector2( -15, -6 )
-scale = Vector2( 0.6875, 0.6875 )
+position = Vector2( -14, -9 )
+scale = Vector2( 1.81473, 1.81473 )
 texture = ExtResource( 10 )
+
+[node name="PlaceDirectionSprite" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+offset = Vector2( 48, 0 )
+script = ExtResource( 12 )
 
 [connection signal="area_entered" from="." to="." method="area_entered"]
 [connection signal="goal_satisfied" from="." to="PatienceTimer" method="_on_Partner_goal_satisfied"]

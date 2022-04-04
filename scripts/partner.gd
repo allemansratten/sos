@@ -4,8 +4,6 @@ class_name Partner
 
 signal goal_satisfied
 
-# https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png
-const ALL_COLORS = ["orangered", "darkgreen", "dodgerblue", "orange"]
 
 const MAX_JUMP_TIME_COEF = 0.8
 const DEFAULT_JUMP_TIME = 0.5
@@ -59,7 +57,7 @@ func init(name: String, new_loc: Vector2, dir: Vector2, driver, config: Dictiona
 	old_step = position
 	next_step = position
 	direction = dir
-	
+
 	unpack_config(config)
 
 
@@ -72,13 +70,18 @@ func unpack_config(config: Dictionary):
 
 
 func random_color_choice(n_colors):
+	# ASSERT n_colors = 1
+	colors.append(partner_driver.ALL_COLORS[partner_driver.color_i])
+	partner_driver.color_i = (partner_driver.color_i+1) % partner_driver.ALL_COLORS.size()
+
+	# WARNING ignore all other colors
 	# force duplicate
-	var colors_tmp = ALL_COLORS + []
+	#var colors_tmp = ALL_COLORS + []
 	# clear up previous colors
-	colors = []
-	for __ in range(n_colors):
-		var color_i = randi() % colors_tmp.size()
-		colors.append(colors_tmp.pop_at(color_i))
+	#colors = []
+	#for __ in range(n_colors):
+	#	var color_i = randi() % colors_tmp.size()
+	#	colors.append(colors_tmp.pop_at(color_i))
 
 
 func random_goal_choice():
@@ -90,6 +93,7 @@ func random_goal_choice():
 
 # Called on collision with goal
 func schedule_random_goal_choice():
+	goal = null
 	emit_signal("goal_satisfied")
 	$SatisfiedTween.interpolate_property(
 		self, "scale", scale, Vector2.ZERO, 0.75,
@@ -124,11 +128,11 @@ func make_flag(flag_colors):
 func _ready():
 	# trick to hide FOUC
 	scale = Vector2.ZERO
-	
+
 	random_color_choice(num_colors)
 	random_goal_choice()
 	make_flag(colors)
-	
+
 	$StepTimer.init(speed, step_delay)
 	$PatienceTimer.start(patience)
 
@@ -137,7 +141,7 @@ func _ready():
 
 	# spawn animation
 	# rotation
-	$SatisfiedTween.interpolate_property(self, "rotation_degrees",
+	$SatisfiedTween.interpolate_property($AnimatedSprite, "rotation_degrees",
 		0, 360, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)
@@ -151,11 +155,11 @@ func _ready():
 
 func _process(_delta):
 	# update patience bar
-	$PatienceIndicator.rect_size.x = int(40*$PatienceTimer.time_left/patience)
+	$PatienceIndicator.rect_size.x = int(76*$PatienceTimer.time_left/patience)
 	if goal == null:
 		$PatienceIndicatorBack.rect_size.x = 0
 	else:
-		$PatienceIndicatorBack.rect_size.x = int(40*$PatienceTimer.time_left/patience+2)
+		$PatienceIndicatorBack.rect_size.x = int(80*$PatienceTimer.time_left/patience+4)
 	$PatienceIndicator.modulate = Color(
 		1,
 		0.2 + 0.8*$PatienceTimer.time_left/patience,
@@ -183,7 +187,7 @@ func _on_StepTimer_start_step(step_speed):
 		if cur_direction != direction:
 			$WalkAudioStream.pitch_scale = 1.5
 		current_crossroads = null
-	
+
 	# Move as usual
 	next_step += direction * STEP_SIZE
 	$StepTween.interpolate_property(self, "position",
@@ -248,7 +252,7 @@ func _on_GoalRescheduleTimer_timeout():
 
 # Ran out of patience
 func _on_PatienceTimer_timeout():
-	die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])	
+	die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])
 
 # Appear back after entering goal
 func _on_GoalTimer_timeout():

@@ -23,6 +23,9 @@ func game_over(reason, no_partners, location):
 	
 	# pause game but camera should be whitelisted
 	get_tree().paused = true
+
+	$MusicPlayer.stop()
+	$GameOverPlayer.play()
 	
 	if typeof(location) == TYPE_VECTOR2:
 		$MapCamera.death_zoom_in(location)

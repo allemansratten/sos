@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SignificantOthersTheme_v2.mp3-aa13dc5cc43b8940ba27e0ad5d72625c.mp3str"
+
+[deps]
+
+source_file="res://resources/SignificantOthersTheme_v2.mp3"
+dest_files=[ "res://.import/SignificantOthersTheme_v2.mp3-aa13dc5cc43b8940ba27e0ad5d72625c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

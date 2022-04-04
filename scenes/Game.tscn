@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Place.tscn" type="PackedScene" id=2]
@@ -10,12 +10,13 @@
 [ext_resource path="res://scripts/camera.gd" type="Script" id=8]
 [ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/SpawnableLocation.tscn" type="PackedScene" id=10]
-[ext_resource path="res://resources/SignificantOthersTheme_v1.mp3" type="AudioStream" id=11]
+[ext_resource path="res://resources/SignificantOthersGameOver_v1.mp3" type="AudioStream" id=11]
 [ext_resource path="res://scenes/HUDGameOver.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scripts/partner_factory.gd" type="Script" id=13]
 [ext_resource path="res://scripts/spawn_timer.gd" type="Script" id=14]
 [ext_resource path="res://scripts/baby_names.gd" type="Script" id=15]
 [ext_resource path="res://scripts/partner_catalogue.gd" type="Script" id=16]
+[ext_resource path="res://resources/SignificantOthersTheme_v2.mp3" type="AudioStream" id=17]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -690,9 +691,13 @@ color = Color( 0.0941176, 0.0941176, 0.0941176, 0.968627 )
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
 visible = false
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 17 )
+autoplay = true
+
+[node name="GameOverPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 11 )
-autoplay = true
 
 [connection signal="timeout" from="PartnerDriver/SpawnTimer" to="PartnerDriver" method="_on_SpawnTimer_timeout"]

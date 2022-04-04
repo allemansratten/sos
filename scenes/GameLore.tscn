@@ -151,4 +151,15 @@ custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = SubResource( 3 )
 text = "How long until someone finds out?"
 
+[node name="ButtonSkip" type="Button" parent="."]
+margin_left = 947.0
+margin_top = 599.0
+margin_right = 1033.0
+margin_bottom = 634.0
+rect_scale = Vector2( 0.7, 0.7 )
+custom_fonts/font = ExtResource( 6 )
+custom_styles/hover = SubResource( 3 )
+text = "Skip"
+
 [connection signal="focus_entered" from="Instructions/Button" to="." method="start_button_pressed"]
+[connection signal="focus_entered" from="ButtonSkip" to="." method="start_button_pressed"]

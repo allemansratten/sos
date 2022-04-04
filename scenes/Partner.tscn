@@ -157,7 +157,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="FlagSprite" type="Sprite" parent="."]
-position = Vector2( -16, -2 )
+position = Vector2( -15, -6 )
 scale = Vector2( 0.6875, 0.6875 )
 texture = ExtResource( 10 )
 

@@ -2,6 +2,9 @@ extends Node2D
 
 class_name Partner
 
+signal low_patience
+signal goal_satisfied
+
 # https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png
 const ALL_COLORS = ["orangered", "darkgreen", "dodgerblue", "orange"]
 
@@ -79,11 +82,15 @@ func random_color_choice(n_colors):
 
 func random_goal_choice():
 	goal = root_script.legit_goals[randi() % root_script.legit_goals.size()]
+	$DesireThoughtSprite/Label.set_text(goal)
+	$DesireThoughtSprite.show()
 	$PatienceTimer.start()
 
 
+# Called on collision with goal
 func schedule_random_goal_choice():
 	$PatienceTimer.stop()  # So you don't lose after satisfying
+	emit_signal("goal_satisfied")
 	$SatisfiedTween.interpolate_property(
 		self, "scale", scale, Vector2.ZERO, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
@@ -115,7 +122,7 @@ func make_flag(flag_colors):
 func _ready():
 	# trick to hide FOUC
 	scale = Vector2.ZERO
-
+	
 	random_color_choice(num_colors)
 	random_goal_choice()
 	make_flag(colors)
@@ -149,6 +156,8 @@ func _process(_delta):
 		0.2 + 0.8*$PatienceTimer.time_left/patience,
 		1
 	)
+	if not $PatienceTimer.is_stopped() and $PatienceTimer.time_left < 15:
+		emit_signal("low_patience", goal)
 
 
 func reset_animation():
@@ -227,15 +236,19 @@ func mouse_entered():
 func highlight_on(visible_val):
 	$HighlightRect.visible = visible_val
 
+# New goal will be chosen now
 func _on_GoalRescheduleTimer_timeout():
 	random_goal_choice()
 
+# Make next step
 func _on_StepTimer_timeout():
 	_process_timestep()
 
+# Ran out of patience
 func _on_PatienceTimer_timeout():
 	die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])	
 
+# Appear back after entering goal
 func _on_GoalTimer_timeout():
 	$SatisfiedTween.interpolate_property(self, "scale",
 		Vector2.ZERO, Vector2.ONE, 0.75,

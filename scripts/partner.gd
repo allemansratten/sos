@@ -110,14 +110,16 @@ func die(reason):
 
 
 func make_flag(flag_colors):
+	# WARNING: will not work with more flags
 	for c_i in range(len(flag_colors)):
-		var flag = ColorRect.new()
-		flag.rect_size.x = 10
-		flag.rect_size.y = 14
-		flag.rect_position.x = -(STEP_SIZE/2) + 8.2
-		flag.rect_position.y = -19 + (c_i * flag.rect_size.y)
-		flag.color = ColorN(flag_colors[c_i], 1)
-		add_child(flag)
+		$FlagSprite.modulate = ColorN(flag_colors[c_i], 1)
+		#var flag = ColorRect.new()
+		#flag.rect_size.x = 10
+		#flag.rect_size.y = 14
+		#flag.rect_position.x = -(STEP_SIZE/2) + 8.2
+		#flag.rect_position.y = -19 + (c_i * flag.rect_size.y)
+		#flag.color = ColorN(flag_colors[c_i], 1)
+		#add_child(flag)
 
 
 # Called when the node enters the scene tree for the first time.

@@ -17,14 +17,12 @@ func _on_ThoughtTimer_timeout():
 
 # Show angry label when low patience
 func _on_PatienceTimer_low_patience():
-	print_debug("LOW PATIENCE")
 	low_patience = true
 	_on_ThoughtTimer_timeout()
 
 
 # Hide thoughts when goal is satisfied
 func _on_Partner_goal_satisfied():
-	print_debug("GOAL SATISFIED")
 	has_goal = false
 	low_patience = false
 	self.hide()

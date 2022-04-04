@@ -3,9 +3,9 @@ extends Node
 export(PackedScene) var game_over_hud
 
 const GOALS_0 = ["diner", "cafe", "library", "museum"]
-const GOALS_1 = ["gallery"]
-const GOALS_2 = []
-const GOALS_3 = []
+const GOALS_1 = ["gallery", "disco"]
+const GOALS_2 = ["villa", "restaurant", "forest"]
+const GOALS_3 = ["mall", "gym", "pool"]
 var legit_goals = GOALS_0
 
 func _ready():
@@ -37,9 +37,10 @@ func game_over(reason, no_partners, location):
 	add_child(hud)
 
 func get_phase(partner_count):
-	if partner_count >= 7:
+	
+	if partner_count >= 6:
 		return 3
-	elif partner_count >= 5:
+	elif partner_count >= 4:
 		return 2
 	elif partner_count >= 2:
 		return 1

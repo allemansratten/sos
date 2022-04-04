@@ -107,15 +107,6 @@ rect_scale = Vector2( 0.2, 0.2 )
 custom_fonts/font = ExtResource( 4 )
 text = "Gym"
 
-[node name="Label9" type="Label" parent="PlacesLabels"]
-margin_left = 107.0
-margin_top = 101.0
-margin_right = 167.0
-margin_bottom = 120.0
-rect_scale = Vector2( 0.2, 0.2 )
-custom_fonts/font = ExtResource( 4 )
-text = "stadium"
-
 [node name="Label10" type="Label" parent="PlacesLabels"]
 margin_left = 84.0
 margin_top = 81.0

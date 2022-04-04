@@ -6,16 +6,20 @@ signal low_patience
 signal goal_satisfied
 
 
+# https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png
+const ALL_COLORS = ["firebrick", "limegreen", "dodgerblue"]
+
+
 const MAX_JUMP_TIME_COEF = 0.8
 const DEFAULT_JUMP_TIME = 0.5
 const STEP_SIZE = 64
 const FLAG_WIDTH = 48
 const GOAL_RESCHEDULE = 10
 const DEFAULTS = {
-	"patience": 60,
-	"speed": 1.5,
-	"step_delay": 0.2,
-	"goal_delay": 2,
+	"patience": 120,
+	"speed": 1,
+	"step_delay": 0.5,
+	"goal_delay": 4,
 	"num_colors": 1
 }
 

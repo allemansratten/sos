@@ -48,9 +48,10 @@ script = SubResource( 1 )
 
 [node name="Movable" type="Node" parent="AllCrossroads"]
 
-[node name="Crossroads27" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
+[node name="Crossroads27" parent="AllCrossroads/Movable" groups=["unlock_2"] instance=ExtResource( 7 )]
 position = Vector2( 1152, 448 )
 direction = 1
+locked = true
 enable_up = false
 enable_continue = false
 enable_bend_1 = false
@@ -73,15 +74,11 @@ enable_bend_2 = false
 
 [node name="Crossroads15" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 576, 768 )
-direction = 1
-enable_left = false
-enable_continue = false
-enable_bend_1 = false
-enable_bend_2 = false
+direction = 4
 
 [node name="Crossroads16" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 576, 1024 )
-direction = 1
+direction = 2
 enable_right = false
 enable_continue = false
 enable_bend_1 = false
@@ -89,7 +86,7 @@ enable_bend_2 = false
 
 [node name="Crossroads17" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 320, 960 )
-direction = 1
+direction = 2
 enable_right = false
 enable_continue = false
 enable_bend_1 = false
@@ -97,11 +94,7 @@ enable_bend_2 = false
 
 [node name="Crossroads18" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 320, 768 )
-direction = 1
-enable_right = false
-enable_continue = false
-enable_bend_1 = false
-enable_bend_2 = false
+direction = 4
 
 [node name="Crossroads3" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 320, 256 )
@@ -169,7 +162,7 @@ enable_bend_2 = false
 
 [node name="Crossroads11" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 1216, 320 )
-direction = 1
+direction = 2
 enable_left = false
 enable_continue = false
 enable_bend_1 = false
@@ -210,25 +203,9 @@ enable_continue = false
 enable_bend_1 = false
 enable_bend_2 = false
 
-[node name="Crossroads20" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
-position = Vector2( 576, 832 )
-direction = 1
-enable_right = false
-enable_continue = false
-enable_bend_1 = false
-enable_bend_2 = false
-
-[node name="Crossroads21" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
-position = Vector2( 320, 832 )
-direction = 1
-enable_left = false
-enable_continue = false
-enable_bend_1 = false
-enable_bend_2 = false
-
 [node name="Crossroads22" parent="AllCrossroads/Movable" instance=ExtResource( 7 )]
 position = Vector2( 320, 1024 )
-direction = 1
+direction = 2
 enable_left = false
 enable_continue = false
 enable_bend_1 = false
@@ -289,9 +266,6 @@ enable_continue = false
 position = Vector2( 576, 576 )
 direction = 2
 locked = true
-enable_continue = false
-enable_bend_1 = false
-enable_bend_2 = false
 
 [node name="Crossroads21" parent="AllCrossroads/Static" instance=ExtResource( 7 )]
 position = Vector2( 320, 1216 )
@@ -531,7 +505,7 @@ current = true
 limit_left = -64
 limit_top = -70
 limit_right = 1550
-limit_bottom = 1300
+limit_bottom = 1400
 script = ExtResource( 8 )
 
 [node name="ZoomTween" type="Tween" parent="MapCamera"]

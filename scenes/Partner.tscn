@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/partner.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprite1.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://resources/thought_bubble.png" type="Texture" id=8]
 [ext_resource path="res://scripts/desire_thought_sprite.gd" type="Script" id=9]
 [ext_resource path="res://resources/flag.png" type="Texture" id=10]
+[ext_resource path="res://resources/arrow_right.png" type="Texture" id=11]
+[ext_resource path="res://scripts/place_direction_sprite.gd" type="Script" id=12]
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
@@ -86,7 +88,6 @@ margin_bottom = 18.0
 color = Color( 1, 1, 1, 0.231373 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -1.90735e-06, -1.90735e-06 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "sprite4"
@@ -162,6 +163,12 @@ autostart = true
 position = Vector2( -16, -2 )
 scale = Vector2( 0.6875, 0.6875 )
 texture = ExtResource( 10 )
+
+[node name="PlaceDirectionSprite" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+offset = Vector2( 48, 0 )
+script = ExtResource( 12 )
 
 [connection signal="area_entered" from="." to="." method="area_entered"]
 [connection signal="goal_satisfied" from="." to="DesireThoughtSprite" method="_on_Partner_goal_satisfied"]

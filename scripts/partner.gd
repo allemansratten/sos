@@ -91,6 +91,7 @@ func random_goal_choice():
 
 # Called on collision with goal
 func schedule_random_goal_choice():
+	goal = null
 	$PatienceTimer.stop()  # So you don't lose after satisfying
 	emit_signal("goal_satisfied")
 	$SatisfiedTween.interpolate_property(
@@ -139,7 +140,7 @@ func _ready():
 
 	# spawn animation
 	# rotation
-	$SatisfiedTween.interpolate_property(self, "rotation_degrees",
+	$SatisfiedTween.interpolate_property($AnimatedSprite, "rotation_degrees",
 		0, 360, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)

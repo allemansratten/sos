@@ -502,7 +502,7 @@ enable_bend_2 = false
 script = ExtResource( 3 )
 
 [node name="SpawnTimer" type="Timer" parent="PartnerDriver"]
-wait_time = 40.0
+wait_time = 10.0
 autostart = true
 script = ExtResource( 14 )
 
@@ -655,6 +655,7 @@ color = Color( 0.0941176, 0.0941176, 0.0941176, 0.968627 )
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 17 )
+volume_db = -25.0
 autoplay = true
 
 [node name="GameOverPlayer" type="AudioStreamPlayer" parent="."]

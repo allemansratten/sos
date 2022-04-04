@@ -26,10 +26,10 @@ func toggle_pause():
 
 	if now_paused:
 		$Control.show()
-		player.volume_db = -8
+		player.volume_db = -40
 	else:
 		$Control.hide()
-		player.volume_db = 0
+		player.volume_db = -25
 
 
 func _on_UnpauseButton_pressed():

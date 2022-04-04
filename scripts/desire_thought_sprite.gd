@@ -19,6 +19,7 @@ func _on_ThoughtTimer_timeout():
 
 # Show angry label when low patience
 func _on_Partner_low_patience():
+	print("Low paitence caught")
 	low_patience = true
 	_on_ThoughtTimer_timeout()
 

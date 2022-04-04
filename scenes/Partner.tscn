@@ -102,10 +102,17 @@ shape = SubResource( 1 )
 
 [node name="SpawnTween" type="Tween" parent="."]
 
-[node name="PatienceIndicator" type="ColorRect" parent="."]
-margin_left = -24.0
+[node name="PatienceIndicatorBack" type="ColorRect" parent="."]
+margin_left = -21.0
 margin_top = -22.0
-margin_right = 24.0
+margin_right = 21.0
+margin_bottom = -18.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="PatienceIndicator" type="ColorRect" parent="."]
+margin_left = -20.0
+margin_top = -21.0
+margin_right = 20.0
 margin_bottom = -19.0
 
 [node name="WalkAudioStream" type="AudioStreamPlayer2D" parent="."]

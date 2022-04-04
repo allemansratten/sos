@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/partner.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprite1.png" type="Texture" id=2]
@@ -12,22 +12,8 @@
 [ext_resource path="res://resources/flag.png" type="Texture" id=10]
 [ext_resource path="res://resources/arrow_right.png" type="Texture" id=11]
 [ext_resource path="res://scripts/place_direction_sprite.gd" type="Script" id=12]
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 5 )
-region = Rect2( 16, 0, 16, 16 )
+[ext_resource path="res://scripts/step_timer.gd" type="Script" id=13]
+[ext_resource path="res://scripts/patience_timer.gd" type="Script" id=14]
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 4 )
@@ -45,18 +31,24 @@ region = Rect2( 0, 0, 16, 16 )
 atlas = ExtResource( 3 )
 region = Rect2( 16, 0, 16, 16 )
 
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 5 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 16 )
+
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "sprite1",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 6 ), SubResource( 7 ) ],
-"loop": true,
-"name": "sprite2",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "sprite4",
@@ -65,6 +57,16 @@ animations = [ {
 "frames": [ SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "sprite3",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "sprite2",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "sprite1",
 "speed": 5.0
 } ]
 
@@ -131,8 +133,10 @@ max_distance = 600.0
 one_shot = true
 
 [node name="StepTimer" type="Timer" parent="."]
+script = ExtResource( 13 )
 
 [node name="PatienceTimer" type="Timer" parent="."]
+script = ExtResource( 14 )
 
 [node name="GoalTimer" type="Timer" parent="."]
 one_shot = true
@@ -176,12 +180,16 @@ offset = Vector2( 48, 0 )
 script = ExtResource( 12 )
 
 [connection signal="area_entered" from="." to="." method="area_entered"]
+[connection signal="goal_satisfied" from="." to="PatienceTimer" method="_on_Partner_goal_satisfied"]
 [connection signal="goal_satisfied" from="." to="DesireThoughtSprite" method="_on_Partner_goal_satisfied"]
-[connection signal="low_patience" from="." to="DesireThoughtSprite" method="_on_Partner_low_patience"]
 [connection signal="mouse_entered" from="." to="." method="mouse_entered"]
 [connection signal="timeout" from="GoalRescheduleTimer" to="." method="_on_GoalRescheduleTimer_timeout"]
+[connection signal="timeout" from="GoalRescheduleTimer" to="PatienceTimer" method="_on_GoalRescheduleTimer_timeout"]
 [connection signal="timeout" from="GoalRescheduleTimer" to="DesireThoughtSprite" method="_on_GoalRescheduleTimer_timeout"]
+[connection signal="start_step" from="StepTimer" to="." method="_on_StepTimer_start_step"]
 [connection signal="timeout" from="StepTimer" to="." method="_on_StepTimer_timeout"]
+[connection signal="timeout" from="StepTimer" to="StepTimer" method="_on_StepTimer_timeout"]
+[connection signal="low_patience" from="PatienceTimer" to="DesireThoughtSprite" method="_on_PatienceTimer_low_patience"]
 [connection signal="timeout" from="PatienceTimer" to="." method="_on_PatienceTimer_timeout"]
 [connection signal="timeout" from="GoalTimer" to="." method="_on_GoalTimer_timeout"]
 [connection signal="timeout" from="DesireThoughtSprite/ThoughtTimer" to="DesireThoughtSprite" method="_on_ThoughtTimer_timeout"]

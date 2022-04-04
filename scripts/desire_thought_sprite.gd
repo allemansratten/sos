@@ -11,11 +11,12 @@ func _on_ThoughtTimer_timeout():
 	elif self.is_visible_in_tree():
 		self.hide()
 	elif has_goal:
+		self_modulate = Color(1, 1, 1)
 		self.show()
 
 
 # Show angry label when low patience
-func _on_Partner_low_patience():
+func _on_PatienceTimer_low_patience():
 	low_patience = true
 	_on_ThoughtTimer_timeout()
 
@@ -30,4 +31,4 @@ func _on_Partner_goal_satisfied():
 # When new goal is generated, display thought
 func _on_GoalRescheduleTimer_timeout():
 	has_goal = true
-	self.show()
+	_on_ThoughtTimer_timeout()

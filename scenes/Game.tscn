@@ -16,7 +16,7 @@
 [ext_resource path="res://scripts/spawn_timer.gd" type="Script" id=14]
 [ext_resource path="res://scripts/baby_names.gd" type="Script" id=15]
 [ext_resource path="res://scripts/partner_catalogue.gd" type="Script" id=16]
-[ext_resource path="res://resources/SignificantOthersTheme_v2.mp3" type="AudioStream" id=17]
+[ext_resource path="res://resources/SignificantOthersTheme_v3.mp3" type="AudioStream" id=17]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node

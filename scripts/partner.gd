@@ -2,7 +2,6 @@ extends Node2D
 
 class_name Partner
 
-signal low_patience
 signal goal_satisfied
 
 
@@ -37,6 +36,7 @@ var step_delay
 var patience
 var num_colors
 var direction = Vector2(0, 0)
+var current_crossroads
 
 var is_being_hit = false
 
@@ -52,7 +52,6 @@ var sprite_type = 1  # 1 to N_SPRITE_TYPES
 var partner_driver
 var partner_type
 
-var just_turned = false
 
 func init(name: String, new_loc: Vector2, dir: Vector2, driver, config: Dictionary):
 	partner_name = name
@@ -62,7 +61,7 @@ func init(name: String, new_loc: Vector2, dir: Vector2, driver, config: Dictiona
 	old_step = position
 	next_step = position
 	direction = dir
-	
+
 	unpack_config(config)
 
 
@@ -78,7 +77,7 @@ func random_color_choice(n_colors):
 	# ASSERT n_colors = 1
 	colors.append(partner_driver.ALL_COLORS[partner_driver.color_i])
 	partner_driver.color_i = (partner_driver.color_i+1) % partner_driver.ALL_COLORS.size()
-	
+
 	# WARNING ignore all other colors
 	# force duplicate
 	#var colors_tmp = ALL_COLORS + []
@@ -99,16 +98,15 @@ func random_goal_choice():
 # Called on collision with goal
 func schedule_random_goal_choice():
 	goal = null
-	$PatienceTimer.stop()  # So you don't lose after satisfying
 	emit_signal("goal_satisfied")
 	$SatisfiedTween.interpolate_property(
 		self, "scale", scale, Vector2.ZERO, 0.75,
 		Tween.TRANS_CIRC, Tween.EASE_IN_OUT
 	)
 	$SatisfiedTween.start()
-	$GoalTimer.start(goal_delay)
-	$CollisionShape2D.set_deferred("disabled", true)
-	$StepTimer.stop()
+	$GoalTimer.start(goal_delay)  # Schedule next goal generation
+	$CollisionShape2D.set_deferred("disabled", true)  # Disable hitbox on date
+	$StepTimer.set_paused(true)  # Stop walking when on date
 
 
 func die(reason):
@@ -134,12 +132,12 @@ func make_flag(flag_colors):
 func _ready():
 	# trick to hide FOUC
 	scale = Vector2.ZERO
-	
+
 	random_color_choice(num_colors)
 	random_goal_choice()
 	make_flag(colors)
-	
-	$StepTimer.start(speed + step_delay)
+
+	$StepTimer.init(speed, step_delay)
 	$PatienceTimer.start(patience)
 
 	sprite_type = randi() % N_SPRITE_TYPES + 1
@@ -172,8 +170,6 @@ func _process(_delta):
 		0.2 + 0.8*$PatienceTimer.time_left/patience,
 		1
 	)
-	if not $PatienceTimer.is_stopped() and $PatienceTimer.time_left < 15:
-		emit_signal("low_patience")
 
 
 func reset_animation():
@@ -187,25 +183,26 @@ func post_jump_callback():
 	$WalkAudioStream.pitch_scale = 1
 
 
-func _process_timestep():
+func _on_StepTimer_start_step(step_speed):
+	# If at crossroads, get new direction
+	if current_crossroads != null:
+		var cur_direction = direction
+		direction = current_crossroads.get_output_direction(direction)
+		if cur_direction != direction:
+			$WalkAudioStream.pitch_scale = 1.5
+		current_crossroads = null
+
+	# Move as usual
 	next_step += direction * STEP_SIZE
-	
-	var jump_time = min(DEFAULT_JUMP_TIME, speed * MAX_JUMP_TIME_COEF)
-	
 	$StepTween.interpolate_property(self, "position",
-		old_step, next_step, jump_time,
-		Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		old_step, next_step, step_speed,
+		Tween.TRANS_QUAD, Tween.EASE_IN_OUT
+	)
+	$StepTween.interpolate_callback(self, step_speed, "post_jump_callback")
+	$StepTween.start()
 
 	$AnimatedSprite.flip_h = direction[0] < 0
 	$AnimatedSprite.frame = 1
-
-	if just_turned:
-		# Make a high-pitched noise on the jump after a turn
-		$WalkAudioStream.pitch_scale = 1.5
-		just_turned = false
-
-	$StepTween.interpolate_callback(self, jump_time, "post_jump_callback")
-	$StepTween.start()
 
 	$WalkAudioStream.play()
 	old_step = next_step
@@ -237,10 +234,8 @@ func area_entered(other):
 	if other.is_in_group("partner"):
 		collide_with_partner(other)
 	elif other.is_in_group("crossroads"):
-		var cur_direction = direction
-		direction = other.get_output_direction(direction)
-		if cur_direction != direction:
-			just_turned = true
+		# Save reference to crossroad to be used when leaving
+		current_crossroads = other
 	elif other.is_in_group("places"):
 		if other.place == goal:
 			$PlaceEnteredAudioStream.play()
@@ -248,7 +243,6 @@ func area_entered(other):
 
 
 func mouse_entered():
-#	$StepTimer.stop()
 	hud.update_partner_tracker(self)
 
 
@@ -259,13 +253,10 @@ func highlight_on(visible_val):
 func _on_GoalRescheduleTimer_timeout():
 	random_goal_choice()
 
-# Make next step
-func _on_StepTimer_timeout():
-	_process_timestep()
 
 # Ran out of patience
 func _on_PatienceTimer_timeout():
-	die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])	
+	die("%s didn't get to %s in time" % [partner_name, goal.to_upper()])
 
 # Appear back after entering goal
 func _on_GoalTimer_timeout():
@@ -276,5 +267,5 @@ func _on_GoalTimer_timeout():
 	$SatisfiedTween.start()
 	$CollisionShape2D.set_disabled(false)
 	$GoalRescheduleTimer.start(GOAL_RESCHEDULE)
-	$StepTimer.start(speed + step_delay)
+	$StepTimer.set_paused(false)
 	goal = null

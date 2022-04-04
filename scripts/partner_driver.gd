@@ -6,6 +6,7 @@ onready var root_script = get_node("/root/GameScene")
 onready var partner_factory = PartnerFactory.new()
 
 var partner_count = 0
+var color_i = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

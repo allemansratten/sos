@@ -38,7 +38,7 @@ func game_over(reason, no_partners, location):
 
 func get_phase(partner_count):
 	
-	if partner_count >= 6:
+	if partner_count >= 5:
 		return 3
 	elif partner_count >= 4:
 		return 2

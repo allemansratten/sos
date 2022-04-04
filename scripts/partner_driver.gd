@@ -55,10 +55,10 @@ func spawn_partner():
 		$SpawnTimer.wait_time = 50
 		$SpawnTimer.start()
 	elif root_script.get_phase(partner_count) == 2:
-		$SpawnTimer.wait_time = 60
+		$SpawnTimer.wait_time = 75
 		$SpawnTimer.start()
 	elif root_script.get_phase(partner_count) == 3:
-		$SpawnTimer.wait_time = 70
+		$SpawnTimer.wait_time = 100
 		$SpawnTimer.start()
 	
 func game_over(reason, no_partners, location):

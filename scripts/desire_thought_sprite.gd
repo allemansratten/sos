@@ -3,13 +3,10 @@ extends Sprite
 var low_patience = false
 var has_goal = true
 
-func _ready():
-	pass
-
 
 func _on_ThoughtTimer_timeout():
 	if low_patience:
-		self_modulate = Color(1, 0, 0)
+		self_modulate = Color(1, 0.3, 0.3)
 		self.show()
 	elif self.is_visible_in_tree():
 		self.hide()
@@ -19,7 +16,6 @@ func _on_ThoughtTimer_timeout():
 
 # Show angry label when low patience
 func _on_Partner_low_patience():
-	print("Low paitence caught")
 	low_patience = true
 	_on_ThoughtTimer_timeout()
 

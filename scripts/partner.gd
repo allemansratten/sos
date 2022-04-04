@@ -165,7 +165,6 @@ func _process(_delta):
 		1
 	)
 	if not $PatienceTimer.is_stopped() and $PatienceTimer.time_left < 15:
-		print("LOW PATIENCE EMITTED")
 		emit_signal("low_patience")
 
 

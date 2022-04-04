@@ -100,24 +100,14 @@ func die(reason):
 
 
 func make_flag(flag_colors):
-	assert(len(flag_colors)==1, "each partner should have exactly one flag")
-	
-	var flag = ColorRect.new()
-	flag.rect_position.x = -STEP_SIZE/2+8
-	flag.rect_position.y = -10
-	flag.color = ColorN(flag_colors[0], 1)
-	flag.rect_size.x = 10
-	flag.rect_size.y = 10
-	add_child(flag)
-	
-	#for c_i in range(len(flag_colors)):
-	#	var flag = ColorRect.new()
-	#	flag.rect_position.x = -FLAG_WIDTH/2 + c_i*FLAG_WIDTH/len(flag_colors)
-	#	flag.rect_position.y = -STEP_SIZE/2+5
-	#	flag.color = ColorN(flag_colors[c_i], 1)
-	#	flag.rect_size.x = FLAG_WIDTH/len(flag_colors)
-	#	flag.rect_size.y = 5
-	#	add_child(flag)
+	for c_i in range(len(flag_colors)):
+		var flag = ColorRect.new()
+		flag.rect_size.x = 10
+		flag.rect_size.y = 10
+		flag.rect_position.x = -(STEP_SIZE/2) + 8
+		flag.rect_position.y = -16 + (c_i * flag.rect_size.y)
+		flag.color = ColorN(flag_colors[c_i], 1)
+		add_child(flag)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -125,7 +115,7 @@ func _ready():
 	# trick to hide FOUC
 	scale = Vector2.ZERO
 
-	random_color_choice(1)
+	random_color_choice(num_colors)
 	random_goal_choice()
 	make_flag(colors)
 	

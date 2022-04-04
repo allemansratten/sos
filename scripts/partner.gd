@@ -5,7 +5,8 @@ class_name Partner
 # https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png
 const ALL_COLORS = ["orangered", "darkgreen", "dodgerblue", "orange"]
 
-const JUMP_TIME_COEF = 0.25
+const MAX_JUMP_TIME_COEF = 0.8
+const DEFAULT_JUMP_TIME = 0.5
 const STEP_SIZE = 64
 const FLAG_WIDTH = 48
 const GOAL_RESCHEDULE = 10
@@ -40,7 +41,7 @@ var goal
 var next_step = Vector2(0, 0)
 var old_step = Vector2(0, 0)
 
-const N_SPRITE_TYPES = 3
+const N_SPRITE_TYPES = 4
 var sprite_type = 1  # 1 to N_SPRITE_TYPES
 
 var partner_driver
@@ -154,6 +155,8 @@ func _process(_delta):
 
 func reset_animation():
 	$AnimatedSprite.animation = "sprite%s" % sprite_type
+	$AnimatedSprite.playing = false
+	$AnimatedSprite.frame = 0
 
 
 func post_jump_callback():
@@ -163,21 +166,22 @@ func post_jump_callback():
 
 func _process_timestep():
 	next_step += direction * STEP_SIZE
+	
+	var jump_time = min(DEFAULT_JUMP_TIME, speed * MAX_JUMP_TIME_COEF)
+	
 	$StepTween.interpolate_property(self, "position",
-		old_step, next_step, speed * JUMP_TIME_COEF,
-		Tween.TRANS_CIRC, Tween.EASE_IN_OUT)
+		old_step, next_step, jump_time,
+		Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 
-	# Temporary, while the other sprite types are not available
-	if sprite_type == 1:
-		$AnimatedSprite.flip_h = direction[0] < 0
-		$AnimatedSprite.play("sprite%s_walk" % sprite_type)
+	$AnimatedSprite.flip_h = direction[0] < 0
+	$AnimatedSprite.frame = 1
 
 	if just_turned:
 		# Make a high-pitched noise on the jump after a turn
 		$WalkAudioStream.pitch_scale = 1.5
 		just_turned = false
 
-	$StepTween.interpolate_callback(self, speed * JUMP_TIME_COEF, "post_jump_callback")
+	$StepTween.interpolate_callback(self, jump_time, "post_jump_callback")
 	$StepTween.start()
 
 	$WalkAudioStream.play()

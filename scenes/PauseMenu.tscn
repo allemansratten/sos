@@ -10,6 +10,7 @@ pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="Control" type="Control" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
 margin_right = 1024.0

@@ -10,6 +10,8 @@ extends CanvasLayer
 func _ready():
 	$Control.hide()
 
+onready var player = get_node("/root/GameScene/MusicPlayer")
+var muted = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -24,11 +26,22 @@ func toggle_pause():
 
 	if now_paused:
 		$Control.show()
-		get_node("/root/GameScene/MusicPlayer").volume_db = -8
+		player.volume_db = -8
 	else:
 		$Control.hide()
-		get_node("/root/GameScene/MusicPlayer").volume_db = 0
+		player.volume_db = 0
 
 
 func _on_UnpauseButton_pressed():
 	toggle_pause()
+
+
+
+func _on_MuteButton_pressed():
+	muted = not muted
+	if muted:
+		$Control.get_node("MuteButton").text = "unmute"
+		player.stream_paused = true
+	else:
+		$Control.get_node("MuteButton").text = "mute"
+		player.stream_paused = false

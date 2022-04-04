@@ -39,4 +39,14 @@ custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 1 )
 text = "Unpause"
 
+[node name="MuteButton" type="Button" parent="Control"]
+margin_left = 587.0
+margin_top = 528.0
+margin_right = 758.0
+margin_bottom = 576.0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = SubResource( 1 )
+text = "Mute"
+
 [connection signal="pressed" from="Control/UnpauseButton" to="." method="_on_UnpauseButton_pressed"]
+[connection signal="pressed" from="Control/MuteButton" to="." method="_on_MuteButton_pressed"]

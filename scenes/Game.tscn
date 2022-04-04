@@ -689,7 +689,6 @@ margin_bottom = 1248.0
 color = Color( 0.0941176, 0.0941176, 0.0941176, 0.968627 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
-visible = false
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2

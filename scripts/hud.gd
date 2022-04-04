@@ -83,3 +83,7 @@ func update_off_screen_markers():
 		marker.partner = partners[len(off_screen_markers)]
 		off_screen_markers.append(marker)
 		add_child(marker)
+
+func _ready():
+	var pause_button = $PauseButton
+	pause_button.connect("pressed", get_parent().get_node("PauseMenu"), "toggle_pause")

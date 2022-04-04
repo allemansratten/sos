@@ -24,8 +24,10 @@ func toggle_pause():
 
 	if now_paused:
 		$Control.show()
+		get_node("/root/GameScene/MusicPlayer").volume_db = -8
 	else:
 		$Control.hide()
+		get_node("/root/GameScene/MusicPlayer").volume_db = 0
 
 
 func _on_UnpauseButton_pressed():

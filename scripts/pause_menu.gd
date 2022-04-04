@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 
 # Declare member variables here. Examples:
@@ -8,11 +8,25 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$Control.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 func _unhandled_input(event):
-	event.is_action_pressed("pause")
+	if event.is_action_pressed("pause"):
+		toggle_pause()
+
+func toggle_pause():
+	var now_paused = not get_tree().paused
+	get_tree().paused = now_paused
+
+	if now_paused:
+		$Control.show()
+	else:
+		$Control.hide()
+
+
+func _on_UnpauseButton_pressed():
+	toggle_pause()

@@ -53,16 +53,17 @@ func refresh_phase(partner_count):
 		get_node("FogOfWar/Phase1").queue_free()
 		to_unlock = get_tree().get_nodes_in_group("unlock_1")
 		legit_goals += GOALS_1
+		processed_phase += 1
 	elif get_phase(partner_count) == 2 and processed_phase == 1:
 		get_node("FogOfWar/Phase2").queue_free()
 		to_unlock = get_tree().get_nodes_in_group("unlock_2")
 		legit_goals += GOALS_2
+		processed_phase += 1
 	elif get_phase(partner_count) == 3 and processed_phase == 2:
 		get_node("FogOfWar/Phase3").queue_free()
 		to_unlock = get_tree().get_nodes_in_group("unlock_3")
 		legit_goals += GOALS_3
+		processed_phase += 1
 		
-	processed_phase += 1
 	for n in to_unlock:
-		print(n)
 		n.locked = false

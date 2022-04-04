@@ -11,12 +11,12 @@
 [ext_resource path="res://scripts/desire_thought_sprite.gd" type="Script" id=9]
 [ext_resource path="res://resources/flag.png" type="Texture" id=10]
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
@@ -27,6 +27,14 @@ region = Rect2( 0, 0, 16, 16 )
 atlas = ExtResource( 5 )
 region = Rect2( 16, 0, 16, 16 )
 
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 16 )
+
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 16 )
@@ -35,19 +43,11 @@ region = Rect2( 0, 0, 16, 16 )
 atlas = ExtResource( 4 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 3 )
-region = Rect2( 16, 0, 16, 16 )
-
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
-"name": "sprite1",
+"name": "sprite3",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 6 ), SubResource( 7 ) ],
@@ -55,14 +55,14 @@ animations = [ {
 "name": "sprite2",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "sprite1",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "sprite4",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 8 ), SubResource( 9 ) ],
-"loop": true,
-"name": "sprite3",
 "speed": 5.0
 } ]
 
@@ -135,19 +135,19 @@ one_shot = true
 one_shot = true
 
 [node name="DesireThoughtSprite" type="Sprite" parent="."]
-position = Vector2( 40.9375, -18.9375 )
-scale = Vector2( 0.908203, 0.466797 )
+position = Vector2( 35, -18 )
+scale = Vector2( 0.498438, 0.45 )
 z_index = 101
 z_as_relative = false
 texture = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="DesireThoughtSprite"]
-margin_left = -20.8516
-margin_top = -21.5565
-margin_right = 132.148
-margin_bottom = 2.44352
-rect_scale = Vector2( 0.3, 1 )
+margin_left = -60.0
+margin_top = -16.0
+margin_right = 87.0
+margin_bottom = 8.0
+rect_scale = Vector2( 0.6, 0.7 )
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Goal"

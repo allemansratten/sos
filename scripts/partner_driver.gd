@@ -19,10 +19,11 @@ func start():
 	# we need this hack because otherwise they may spawn on the same loc
 	# (because of some ECS thing) -zouharvi
 	yield(get_tree().create_timer(10.0), "timeout")
-	spawn_partner()
+	#spawn_partner()
 
 
 func spawn_partner():
+	
 	var locs_all = spawnable_locations.get_children()
 	var locs_free = Array()
 	for loc in locs_all:
@@ -42,6 +43,16 @@ func spawn_partner():
 	add_child(partner)
 
 	root_script.refresh_phase(partner_count)
+	
+	if root_script.get_phase(partner_count) == 1:
+		$SpawnTimer.wait_time = 50
+		$SpawnTimer.start()
+	elif root_script.get_phase(partner_count) == 2:
+		$SpawnTimer.wait_time = 60
+		$SpawnTimer.start()
+	elif root_script.get_phase(partner_count) == 3:
+		$SpawnTimer.wait_time = 70
+		$SpawnTimer.start()
 	
 func game_over(reason, no_partners, location):
 	# this relays the game_over call from partner

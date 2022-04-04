@@ -45,6 +45,7 @@ func _ready():
 	
 	$Notification.play()
 	$Instructions.visible = true
+	$ButtonSkip.queue_free()
 	
 # wtf gdscript doesn't have an array initializer
 var msg_counts = [0,0,0,0,0,0,0]

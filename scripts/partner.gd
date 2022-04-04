@@ -19,6 +19,7 @@ const DEFAULTS = {
 
 onready var hud = get_node("/root/GameScene/HUD")
 onready var root_script = get_node("/root/GameScene")
+onready var patience_timer = get_node("PatienceTimer")
 
 var partner_name
 

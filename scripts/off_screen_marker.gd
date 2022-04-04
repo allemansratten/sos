@@ -24,6 +24,17 @@ func _process(_time_delta):
 		set_position(marker_pos)
 	else:
 		hide()
+		
+		
+	if partner.goal == null:
+		$Sprite.modulate = Color.white
+	else:
+		$Sprite.modulate = Color(
+			1,
+			0.2 + 0.8*partner.patience_timer.time_left/partner.patience,
+			0.2 + 0.8*partner.patience_timer.time_left/partner.patience,
+			1
+		)
 
 
 func should_be_shown(delta, screen_size):

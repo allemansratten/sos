@@ -114,7 +114,7 @@ enable_bend_2 = false
 
 [node name="Crossroads4" parent="AllCrossroads/Movable" groups=["unlock_1"] instance=ExtResource( 7 )]
 position = Vector2( 0, 256 )
-direction = 6
+direction = 1
 locked = true
 enable_left = false
 enable_continue = false

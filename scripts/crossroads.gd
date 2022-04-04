@@ -42,6 +42,13 @@ func _ready():
 		enabled_arr.append(CrossroadDirection.BEND2)
 	if enable_continue:
 		enabled_arr.append(CrossroadDirection.CONTINUE)
+	
+	# find the current index to resolve #24
+	for i in range(len(enabled_arr)):
+		if enabled_arr[i] == direction:
+			enabled_i = i
+			break
+		
 	render_arrows()
 		
 func render_arrows():

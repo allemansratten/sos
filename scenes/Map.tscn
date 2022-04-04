@@ -40,7 +40,7 @@ margin_left = 12.0
 margin_top = 22.0
 margin_right = 82.0
 margin_bottom = 41.0
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = ExtResource( 4 )
 text = "Diner"
 
@@ -49,7 +49,7 @@ margin_left = 80.75
 margin_top = 58.0
 margin_right = 140.75
 margin_bottom = 77.0
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = ExtResource( 4 )
 text = "gallery"
 
@@ -58,7 +58,7 @@ margin_left = 58.125
 margin_top = 16.0
 margin_right = 114.125
 margin_bottom = 35.0
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = ExtResource( 4 )
 text = "Library"
 
@@ -67,7 +67,7 @@ margin_left = 19.5
 margin_top = 58.25
 margin_right = 59.5
 margin_bottom = 77.25
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = ExtResource( 4 )
 text = "Disco"
 
@@ -76,7 +76,7 @@ margin_left = 79.0
 margin_top = 116.0
 margin_right = 139.0
 margin_bottom = 135.0
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = ExtResource( 4 )
 text = "pool"
 
@@ -85,7 +85,7 @@ margin_left = 95.0
 margin_top = 12.0
 margin_right = 155.0
 margin_bottom = 31.0
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = ExtResource( 4 )
 text = "museum"
 
@@ -94,7 +94,7 @@ margin_left = 11.0
 margin_top = 106.0
 margin_right = 51.0
 margin_bottom = 125.0
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = ExtResource( 4 )
 text = "Mall"
 
@@ -103,7 +103,7 @@ margin_left = 13.0
 margin_top = 134.0
 margin_right = 53.0
 margin_bottom = 153.0
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = ExtResource( 4 )
 text = "Gym"
 
@@ -112,7 +112,7 @@ margin_left = 84.0
 margin_top = 81.0
 margin_right = 172.0
 margin_bottom = 100.0
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = ExtResource( 4 )
 text = "restaurant"
 
@@ -121,7 +121,7 @@ margin_left = 48.0
 margin_top = 23.0
 margin_right = 118.0
 margin_bottom = 42.0
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = ExtResource( 4 )
 text = "cafe"
 
@@ -130,7 +130,7 @@ margin_left = 164.0
 margin_top = 8.0
 margin_right = 224.0
 margin_bottom = 27.0
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = ExtResource( 4 )
 text = "villa"
 
@@ -139,6 +139,6 @@ margin_left = 173.0
 margin_top = 95.0
 margin_right = 233.0
 margin_bottom = 114.0
-rect_scale = Vector2( 0.2, 0.2 )
+rect_scale = Vector2( 0.1, 0.1 )
 custom_fonts/font = ExtResource( 4 )
 text = "forest"

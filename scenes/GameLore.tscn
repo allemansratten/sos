@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/game_intro.gd" type="Script" id=1]
 [ext_resource path="res://scenes/MessageComplex.tscn" type="PackedScene" id=2]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://resources/notification.wav" type="AudioStream" id=4]
-[ext_resource path="res://fonts/karmatic-arcade/ka1.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://fonts/pixelboy.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://fonts/default_font.tres" type="DynamicFont" id=6]
 
 [sub_resource type="DynamicFont" id=1]
@@ -12,7 +12,11 @@ size = 18
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 20
+size = 30
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 30
 font_data = ExtResource( 5 )
 
 [sub_resource type="StyleBoxFlat" id=3]
@@ -147,15 +151,15 @@ margin_left = 228.0
 margin_top = 157.0
 margin_right = 781.0
 margin_bottom = 221.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = SubResource( 4 )
 custom_styles/hover = SubResource( 3 )
 text = "How long until someone finds out?"
 
 [node name="ButtonSkip" type="Button" parent="."]
-margin_left = 947.0
-margin_top = 599.0
-margin_right = 1033.0
-margin_bottom = 634.0
+margin_left = 23.0
+margin_top = 598.0
+margin_right = 109.0
+margin_bottom = 633.0
 rect_scale = Vector2( 0.7, 0.7 )
 custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = SubResource( 3 )

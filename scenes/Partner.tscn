@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scripts/partner.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprite1.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://resources/sprite7.png" type="Texture" id=18]
 [ext_resource path="res://resources/sprite9.png" type="Texture" id=19]
 [ext_resource path="res://resources/sprite10.png" type="Texture" id=20]
+[ext_resource path="res://fonts/pixelboy.ttf" type="DynamicFontData" id=21]
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 20 )
@@ -27,22 +28,6 @@ region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 20 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 5 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
@@ -61,6 +46,22 @@ region = Rect2( 0, 0, 32, 32 )
 atlas = ExtResource( 16 )
 region = Rect2( 32, 0, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 17 )
+region = Rect2( 32, 0, 32, 32 )
+
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 32, 32 )
@@ -77,14 +78,6 @@ region = Rect2( 0, 0, 32, 32 )
 atlas = ExtResource( 18 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 3 )
-region = Rect2( 32, 0, 32, 32 )
-
 [sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 19 )
 region = Rect2( 0, 0, 32, 32 )
@@ -93,12 +86,20 @@ region = Rect2( 0, 0, 32, 32 )
 atlas = ExtResource( 19 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 17 )
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 17 )
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 5 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=2]
@@ -106,16 +107,6 @@ animations = [ {
 "frames": [ SubResource( 20 ), SubResource( 21 ) ],
 "loop": true,
 "name": "sprite10",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
-"loop": true,
-"name": "sprite1",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 6 ), SubResource( 7 ) ],
-"loop": true,
-"name": "sprite2",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 8 ), SubResource( 9 ) ],
@@ -128,6 +119,16 @@ animations = [ {
 "name": "sprite5",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 16 ), SubResource( 17 ) ],
+"loop": true,
+"name": "sprite3",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 18 ), SubResource( 19 ) ],
+"loop": true,
+"name": "sprite8",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 12 ), SubResource( 13 ) ],
 "loop": true,
 "name": "sprite6",
@@ -138,19 +139,19 @@ animations = [ {
 "name": "sprite7",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 16 ), SubResource( 17 ) ],
-"loop": true,
-"name": "sprite3",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 22 ), SubResource( 23 ) ],
 "loop": true,
 "name": "sprite9",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 18 ), SubResource( 19 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
-"name": "sprite8",
+"name": "sprite1",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "sprite2",
 "speed": 5.0
 } ]
 
@@ -159,6 +160,10 @@ extents = Vector2( 32, 58 )
 
 [sub_resource type="AudioStreamRandomPitch" id=3]
 audio_stream = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=24]
+size = 35
+font_data = ExtResource( 21 )
 
 [node name="Partner" type="Area2D" groups=["partner"]]
 position = Vector2( 32, 32 )
@@ -243,6 +248,7 @@ margin_bottom = 27.0
 rect_scale = Vector2( 0.25, 0.35 )
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 24 )
 text = "Goal"
 align = 1
 valign = 1

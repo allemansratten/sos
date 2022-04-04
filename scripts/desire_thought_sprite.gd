@@ -5,12 +5,14 @@ var has_goal = true
 
 
 func _on_ThoughtTimer_timeout():
-	if low_patience:
+	if not has_goal:
+		self.hide();
+	elif low_patience:
 		self_modulate = Color(1, 0.3, 0.3)
 		self.show()
 	elif self.is_visible_in_tree():
 		self.hide()
-	elif has_goal:
+	else:
 		self_modulate = Color(1, 1, 1)
 		self.show()
 

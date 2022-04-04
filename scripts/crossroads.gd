@@ -28,14 +28,14 @@ export(bool) var enable_bend_2 = true
 
 func _ready():
 	# ask vilda why we need this stupid code
-	if enable_right:
-		enabled_arr.append(CrossroadDirection.RIGHT)
-	if enable_left:
-		enabled_arr.append(CrossroadDirection.LEFT)
 	if enable_up:
 		enabled_arr.append(CrossroadDirection.UP)
+	if enable_right:
+		enabled_arr.append(CrossroadDirection.RIGHT)
 	if enable_down:
 		enabled_arr.append(CrossroadDirection.DOWN)
+	if enable_left:
+		enabled_arr.append(CrossroadDirection.LEFT)
 	if enable_bend_1:
 		enabled_arr.append(CrossroadDirection.BEND1)
 	if enable_bend_2:

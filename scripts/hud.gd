@@ -15,6 +15,7 @@ func update_partner_tracker(new_partner):
 	if partner != null:
 		partner.highlight_on(false)
 	partner = new_partner
+	partner.highlight_on(true)
 	delta_acc_info = INFO_VISIBILITY_DURATION
 
 var partner = null

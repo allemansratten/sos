@@ -8,6 +8,7 @@ enum CrossroadDirection {
 export(CrossroadDirection) var direction = CrossroadDirection.LEFT
 var rendered_direction = CrossroadDirection.LEFT
 export(bool) var locked = false
+var rendered_lock = locked
 
 const DIRECTION_TO_DEGREES = {
 	CrossroadDirection.LEFT: 180,
@@ -53,6 +54,8 @@ func _ready():
 		
 func render_arrows():
 	rendered_direction = direction
+	rendered_lock = locked
+	
 	if direction == CrossroadDirection.CONTINUE:
 		$ArrowSprite.frame = 0
 	elif direction == CrossroadDirection.BEND1:
@@ -103,7 +106,7 @@ func get_output_direction(in_direction: Vector2):
 
 func _process(_delta):
 	# hack to make it work in the editor
-	if rendered_direction != direction:
+	if rendered_direction != direction or rendered_lock != locked:
 		render_arrows()
 
 func on_click():

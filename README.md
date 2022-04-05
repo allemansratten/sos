@@ -16,4 +16,4 @@ Note: This game is not meant to be a poly* lifestyle criticism.
 
 Additional help:
 - Ríša @richardhladik (synthesizer solo)
-- Bouča, Gabi, Julia, Roman (playtesting)
+- Bouča, Gabi, Julia, Roman, Káťa (playtesting)
